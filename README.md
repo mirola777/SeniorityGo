@@ -13,11 +13,13 @@
 ### **1. Introducción**
 
 SeniorityGo se trata de un proyecto desarrollado para la materia Proyecto Integrador 2 mediante el uso de los frameworks Django (para el Backend) y Angular (para el Frontend). SeniorityGo busca hacer que la gestión del nivel del Seniority dentro de una organización sea mucho más sencilla. Este proyecto se encuentra desarrollado, mediante la adopción de Scrum, por el equipo de CapyDev.
+
 - Stiven Yepes (Scrum Master)
 - Juan Muñoz (Arquitecto)
 - Isaac Tadina (Tester)
 - José Blanco (Programador)
 - Antonio Carmona (Programador)
+
 El proyecto se encuentra bajo la supervisión de la consultora Softserve, de la mano de León Jaramillo.
 
 *******
