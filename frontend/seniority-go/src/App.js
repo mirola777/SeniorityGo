@@ -1,25 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import React from "react";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [post, setPost] = React.useState(null);
+
+	React.useEffect(() => {
+		axios.get('http://127.0.0.1:8000/api/').then((response) => {
+			setPost(response.data);
+		});
+	}, []);
+
+	if (!post) return null;
+
+	return (
+		<div>
+			<h1>{post}</h1>
+		</div>
+	);
 }
 
 export default App;
