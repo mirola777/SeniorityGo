@@ -1,25 +1,28 @@
+import { ProfileSeniority } from './profileseniority';
+import { Requirement } from './requirement';
+
 export class ProfileSeniorityRequirement {
-    private _profileseniority_id: number;
-    private _requirement_id: number;
+    private _profileseniority: ProfileSeniority;
+    private _requirement: Requirement;
 
-    constructor(profileseniority_id: number, requirement_id: number) {
-        this._profileseniority_id = profileseniority_id;
-        this._requirement_id = requirement_id;
+    constructor(profileseniority: ProfileSeniority, requirement: Requirement) {
+        this._profileseniority = profileseniority;
+        this._requirement = requirement;
     }
 
-    public get profileseniority_id(): number {
-        return this._profileseniority_id;
+    public getProfileSeniority(): ProfileSeniority {
+        return this._profileseniority;
     }
 
-    public set profileseniority_id(value: number) {
-        this._profileseniority_id = value;
+    public setProfileSeniority(profileseniority: ProfileSeniority): void {
+        this._profileseniority = profileseniority;
     }
 
-    public get requirement_id(): number {
-        return this._requirement_id;
+    public getRequirement(): Requirement {
+        return this._requirement;
     }
 
-    public set requirement_id(value: number) {
-        this._requirement_id = value;
+    public setRequirement(requirement: Requirement): void {
+        this._requirement = requirement;
     }
 }

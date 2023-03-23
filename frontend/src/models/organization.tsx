@@ -1,35 +1,47 @@
+import { Profile } from './profile';
+
 export class Organization {
     private _id: number;
     private _name: string;
     private _image: string;
+    private _profiles: Profile[];
 
-    constructor(id: number, name: string, image: string) {
+    constructor(id: number, name: string, image: string, profiles: Profile[]) {
         this._id = id;
         this._name = name;
         this._image = image;
+        this._profiles = profiles;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
-        this._id = value;
+    public setId(id: number): void {
+        this._id = id;
     }
 
-    public get name(): string {
+    public getName(): string {
         return this._name;
     }
 
-    public set name(value: string) {
-        this._name = value;
+    public setName(name: string): void {
+        this._name = name;
     }
 
-    public get image(): string {
+    public getImage(): string {
         return this._image;
     }
 
-    public set image(value: string) {
-        this._image = value;
+    public setImage(image: string): void {
+        this._image = image;
+    }
+
+    public getProfiles(): Profile[] {
+        return this._profiles;
+    }
+
+    public setProfiles(profiles: Profile[]): void {
+        this._profiles = profiles;
     }
 }

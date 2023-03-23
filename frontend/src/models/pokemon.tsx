@@ -11,35 +11,35 @@ export class Pokemon {
         this._small_image = small_image;
     }
 
-    get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    set id(id: number) {
+    public setId(id: number): void {
         this._id = id;
     }
 
-    get name(): string {
+    public getName(): string {
         return this._name;
     }
 
-    set name(name: string) {
+    public setName(name: string): void {
         this._name = name;
     }
 
-    get image(): string {
+    public getImage(): string {
         return this._image;
     }
 
-    set image(image: string) {
+    public setImage(image: string): void {
         this._image = image;
     }
 
-    get small_image(): string {
+    public getSmallImage(): string {
         return this._small_image;
     }
 
-    set small_image(small_image: string) {
+    public setSmallImage(small_image: string): void {
         this._small_image = small_image;
     }
 }

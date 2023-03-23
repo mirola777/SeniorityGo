@@ -9,27 +9,27 @@ export class Seniority {
         this._level = level;
     }
 
-    get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    set id(id: number) {
+    public setId(id: number): void {
         this._id = id;
     }
 
-    get name(): string {
+    public getName(): string {
         return this._name;
     }
 
-    set name(name: string) {
+    public setName(name: string): void {
         this._name = name;
     }
 
-    get level(): number {
+    public getLevel(): number {
         return this._level;
     }
 
-    set level(level: number) {
+    public setLevel(level: number): void {
         this._level = level;
     }
 }

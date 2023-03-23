@@ -1,55 +1,58 @@
+import { Developer } from './developer';
+import { Requirement } from './requirement';
+
 export class DeveloperRequirement {
     private _id: number;
-    private _developer_id: number;
-    private _requirement_id: number;
+    private _developer: Developer;
+    private _requirement: Requirement;
     private _is_completed: boolean;
     private _documents: File[];
 
-    public constructor(id: number, developer_id: number, requirement_id: number, is_completed: boolean, documents: File[]) {
+    public constructor(id: number, developer: Developer, requirement: Requirement, is_completed: boolean, documents: File[]) {
         this._id = id;
-        this._developer_id = developer_id;
-        this._requirement_id = requirement_id;
+        this._developer = developer;
+        this._requirement = requirement;
         this._is_completed = is_completed;
         this._documents = documents;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
-        this._id = value;
+    public setId(id: number): void {
+        this._id = id;
     }
 
-    public get developer_id(): number {
-        return this._developer_id;
+    public getDeveloper(): Developer {
+        return this._developer;
     }
 
-    public set developer_id(value: number) {
-        this._developer_id = value;
+    public setDeveloper(developer: Developer): void {
+        this._developer = developer;
     }
 
-    public get requirement_id(): number {
-        return this._requirement_id;
+    public getRequirement(): Requirement {
+        return this._requirement;
     }
 
-    public set requirement_id(value: number) {
-        this._requirement_id = value;
+    public setRequirement(requirement: Requirement): void {
+        this._requirement = requirement;
     }
 
-    public get is_completed(): boolean {
+    public getIsCompleted(): boolean {
         return this._is_completed;
     }
 
-    public set is_completed(value: boolean) {
-        this._is_completed = value;
+    public setIsCompleted(is_completed: boolean): void {
+        this._is_completed = is_completed;
     }
 
-    public get documents(): File[] {
+    public getDocuments(): File[] {
         return this._documents;
     }
 
-    public set documents(value: File[]) {
-        this._documents = value;
+    public setDocuments(documents: File[]): void {
+        this._documents = documents;
     }
 }

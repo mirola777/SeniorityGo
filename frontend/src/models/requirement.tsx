@@ -13,43 +13,43 @@ export class Requirement {
         this._points = points;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
+    public setId(value: number): void {
         this._id = value;
     }
 
-    public get name(): string {
+    public getName(): string {
         return this._name;
     }
 
-    public set name(value: string) {
+    public setName(value: string): void {
         this._name = value;
     }
 
-    public get description(): string {
+    public getDescription(): string {
         return this._description;
     }
 
-    public set description(value: string) {
+    public setDescription(value: string): void {
         this._description = value;
     }
 
-    public get image(): string {
+    public getImage(): string {
         return this._image;
     }
 
-    public set image(value: string) {
+    public setImage(value: string): void {
         this._image = value;
     }
 
-    public get points(): number {
+    public getPoints(): number {
         return this._points;
     }
 
-    public set points(value: number) {
+    public setPoints(value: number): void {
         this._points = value;
     }
 }

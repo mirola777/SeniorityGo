@@ -1,75 +1,75 @@
 export class User {
     private _id: number;
-    private _firstName: string;
-    private _secondName: string;
-    private _lastName: string;
+    private _first_name: string;
+    private _second_name: string;
+    private _last_name: string;
     private _email: string;
     private _password: string;
-    private _creationDate: Date;
+    private _creation_date: Date;
 
-    constructor(id: number, firstName: string, secondName: string, lastName: string, email: string, password: string, creationDate: Date) {
+    constructor(id: number, first_name: string, second_name: string, last_name: string, email: string, password: string, creation_date: Date) {
         this._id = id;
-        this._firstName = firstName;
-        this._secondName = secondName;
-        this._lastName = lastName;
+        this._first_name = first_name;
+        this._second_name = second_name;
+        this._last_name = last_name;
         this._email = email;
         this._password = password;
-        this._creationDate = creationDate;
+        this._creation_date = creation_date;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
+    public setId(value: number): void {
         this._id = value;
     }
 
-    public get firstName(): string {
-        return this._firstName;
+    public getFirstName(): string {
+        return this._first_name;
     }
 
-    public set firstName(value: string) {
-        this._firstName = value;
+    public setFirstName(first_name: string): void {
+        this._first_name = first_name;
     }
 
-    public get secondName(): string {
-        return this._secondName;
+    public getSecondName(): string {
+        return this._second_name;
     }
 
-    public set secondName(value: string) {
-        this._secondName = value;
+    public setSecondName(second_name: string): void {
+        this._second_name = second_name;
     }
 
-    public get lastName(): string {
-        return this._lastName;
+    public getLastName(): string {
+        return this._last_name;
     }
 
-    public set lastName(value: string) {
-        this._lastName = value;
+    public setLastName(last_name: string): void {
+        this._last_name = last_name;
     }
 
-    public get email(): string {
+    public getEmail(): string {
         return this._email;
     }
 
-    public set email(value: string) {
-        this._email = value;
+    public setEmail(email: string): void {
+        this._email = email;
     }
 
-    public get password(): string {
+    public getPassword(): string {
         return this._password;
     }
 
-    public set password(value: string) {
-        this._password = value;
+    public setPassword(password: string): void {
+        this._password = password;
     }
 
-    public get creationDate(): Date {
-        return this._creationDate;
+    public getCreationDate(): Date {
+        return this._creation_date;
     }
 
-    public set creationDate(value: Date) {
-        this._creationDate = value;
+    public setCreationDate(creation_date: Date): void {
+        this._creation_date = creation_date;
     }
 }

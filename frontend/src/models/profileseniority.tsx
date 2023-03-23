@@ -1,45 +1,49 @@
+import { Seniority } from "./seniority";
+import { Pokemon } from './pokemon';
+import { Profile } from './profile';
+
 export class ProfileSeniority {
     private _id: number;
-    private _seniority_id: number;
-    private _pokemon_id: number;
-    private _profile_id: number;
+    private _seniority: Seniority;
+    private _pokemon: Pokemon;
+    private _profile: Profile;
 
-    constructor(id: number, seniority_id: number, pokemon_id: number, profile_id: number) {
+    constructor(id: number, seniority: Seniority, pokemon: Pokemon, profile: Profile) {
         this._id = id;
-        this._seniority_id = seniority_id;
-        this._pokemon_id = pokemon_id;
-        this._profile_id = profile_id;
+        this._seniority = seniority;
+        this._pokemon = pokemon;
+        this._profile = profile;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
-        this._id = value;
+    public setId(id: number): void {
+        this._id = id;
     }
 
-    public get seniority_id(): number {
-        return this._seniority_id;
+    public getSeniority(): Seniority {
+        return this._seniority;
     }
 
-    public set seniority_id(value: number) {
-        this._seniority_id = value;
+    public setSeniority(seniority: Seniority): void {
+        this._seniority = seniority;
     }
 
-    public get pokemon_id(): number {
-        return this._pokemon_id;
+    public getPokemon(): Pokemon {
+        return this._pokemon;
     }
 
-    public set pokemon_id(value: number) {
-        this._pokemon_id = value;
+    public setPokemon(pokemon: Pokemon): void {
+        this._pokemon = pokemon;
     }
 
-    public get profile_id(): number {
-        return this._profile_id;
+    public getProfile(): Profile {
+        return this._profile;
     }
 
-    public set profile_id(value: number) {
-        this._profile_id = value;
+    public setProfile(profile: Profile): void {
+        this._profile = profile;
     }
 }

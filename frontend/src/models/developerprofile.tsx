@@ -1,65 +1,69 @@
+import { Developer } from './developer';
+import { Profile } from './profile';
+import { Seniority } from './seniority';
+
 export class DeveloperProfile {
     private _id: number;
-    private _developer_id: number;
-    private _profile_id: number;
-    private _seniority_id: number;
+    private _developer: Developer;
+    private _profile: Profile;
+    private _seniority: Seniority;
     private _is_accepted: boolean;
     private _entrance_date: Date;
 
-    constructor(id: number, developer_id: number, profile_id: number, seniority_id: number, is_accepted: boolean, entrance_date: Date) {
+    constructor(id: number, developer: Developer, profile: Profile, seniority: Seniority, is_accepted: boolean, entrance_date: Date) {
         this._id = id;
-        this._developer_id = developer_id;
-        this._profile_id = profile_id;
-        this._seniority_id = seniority_id;
+        this._developer = developer;
+        this._profile = profile;
+        this._seniority = seniority;
         this._is_accepted = is_accepted;
         this._entrance_date = entrance_date;
     }
 
-    public get id(): number {
+    public getId(): number {
         return this._id;
     }
 
-    public set id(value: number) {
+    public setId(value: number): void {
         this._id = value;
     }
 
-    public get developer_id(): number {
-        return this._developer_id;
+    public getDeveloper(): Developer {
+        return this._developer;
     }
 
-    public set developer_id(value: number) {
-        this._developer_id = value;
+    public setDeveloper(developer: Developer): void {
+        this._developer = developer;
     }
 
-    public get profile_id(): number {
-        return this._profile_id;
+    public getProfile(): Profile {
+        return this._profile;
     }
 
-    public set profile_id(value: number) {
-        this._profile_id = value;
+    public setProfile(profile: Profile): void {
+        this._profile = profile;
     }
 
-    public get seniority_id(): number {
-        return this._seniority_id;
+    public getSeniority(): Seniority {
+        return this._seniority;
     }
 
-    public set seniority_id(value: number) {
-        this._seniority_id = value;
+    public setSeniority(seniority: Seniority): void {
+        this._seniority = seniority;
     }
 
-    public get is_accepted(): boolean {
+    public getIsAccepted(): boolean {
         return this._is_accepted;
     }
 
-    public set is_accepted(value: boolean) {
-        this._is_accepted = value;
+    public setIsAccepted(is_accepted: boolean): void {
+        this._is_accepted = is_accepted;
     }
 
-    public get entrance_date(): Date {
+    public getEntranceDate(): Date {
         return this._entrance_date;
     }
 
-    public set entrance_date(value: Date) {
-        this._entrance_date = value;
+    public setEntranceDate(entrance_date: Date): void {
+        this._entrance_date = entrance_date;
     }
 }
