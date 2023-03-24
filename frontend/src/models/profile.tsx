@@ -23,7 +23,7 @@ export class Profile {
         this._id = id;
     }
 
-    public getname(): string {
+    public getName(): string {
         return this._name;
     }
 

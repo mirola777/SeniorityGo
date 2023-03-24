@@ -1,6 +1,12 @@
 from django.urls import path
-from . import views
+from api.views import profile_views, pokemon_views
 
 urlpatterns = [
-    path('', views.send_some_data)
+    # Pokemon urls
+    path("pokemon/all", pokemon_views.getAll),
+    path("pokemon/create", pokemon_views.create),
+    
+    # Profile urls
+    path("profile/all", profile_views.getAll),
+    path("profile/create", profile_views.create),
 ]
