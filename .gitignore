@@ -1,2 +1,3 @@
 data
 backend/venv/
+**/__pycache__/
