@@ -1,5 +1,5 @@
-import { Developer } from './developer';
-import { Requirement } from './requirement';
+import { Developer } from './Developer';
+import { Requirement } from './Requirement';
 
 export class DeveloperRequirement {
     private _id: number;

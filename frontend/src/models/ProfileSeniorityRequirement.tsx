@@ -1,5 +1,5 @@
-import { ProfileSeniority } from './profileseniority';
-import { Requirement } from './requirement';
+import { ProfileSeniority } from './ProfileSeniority';
+import { Requirement } from './Requirement';
 
 export class ProfileSeniorityRequirement {
     private _profileseniority: ProfileSeniority;

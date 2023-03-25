@@ -1,6 +1,6 @@
-import { User } from './user';
-import { Profile } from './profile';
-import { Requirement } from './requirement';
+import { User } from './User';
+import { Profile } from './Profile';
+import { Requirement } from './Requirement';
 
 export class Developer {
     private _birthday: Date;

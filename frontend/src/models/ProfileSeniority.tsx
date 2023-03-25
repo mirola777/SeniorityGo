@@ -1,6 +1,6 @@
-import { Seniority } from "./seniority";
-import { Pokemon } from './pokemon';
-import { Profile } from './profile';
+import { Seniority } from "./Seniority";
+import { Pokemon } from './Pokemon';
+import { Profile } from './Profile';
 
 export class ProfileSeniority {
     private _id: number;

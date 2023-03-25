@@ -1,4 +1,4 @@
-import { Profile } from './profile';
+import { Profile } from './Profile';
 
 export class Organization {
     private _id: number;

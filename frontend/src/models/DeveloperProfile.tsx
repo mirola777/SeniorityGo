@@ -1,6 +1,6 @@
-import { Developer } from './developer';
-import { Profile } from './profile';
-import { Seniority } from './seniority';
+import { Developer } from './Developer';
+import { Profile } from './Profile';
+import { Seniority } from './Seniority';
 
 export class DeveloperProfile {
     private _id: number;
