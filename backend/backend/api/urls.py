@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import profile_views, pokemon_views, organization_views, seniority_views
+from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views
 
 urlpatterns = [
     # Pokemon urls
@@ -26,4 +26,11 @@ urlpatterns = [
     path("organization/get/<int:pk>", organization_views.get),
     path("organization/update/<int:pk>", organization_views.update),
     path("organization/delete/<int:pk>", organization_views.delete),
+    
+    # Requirement urls
+    path("requirement/all", requirement_views.getAll),
+    path("requirement/create", requirement_views.create),
+    path("requirement/get/<int:pk>", requirement_views.get),
+    path("requirement/update/<int:pk>", requirement_views.update),
+    path("requirement/delete/<int:pk>", requirement_views.delete),
 ]

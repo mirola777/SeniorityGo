@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from django.db.models import Count
 from api.models.seniority import Seniority
 from api.serializers.seniority_serializer import SenioritySerializer
 
@@ -77,40 +76,40 @@ def create(request):
 @api_view(['DELETE'])
 def delete(request, pk):
     try:
-        profile = Seniority.objects.get(pk=pk)
+        seniority = Seniority.objects.get(pk=pk)
     except Seniority.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    profile.delete()
+    seniority.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
 def get(request, pk):
     try:
-        profile = Seniority.objects.get(pk=pk)
+        seniority = Seniority.objects.get(pk=pk)
     except Seniority.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = SenioritySerializer(profile)
+    serializer = SenioritySerializer(seniority)
     return Response(serializer.data)
 
 
 @api_view(['PUT'])
 def update(request, pk):
     try:
-        profile = Seniority.objects.get(pk=pk)
+        seniority = Seniority.objects.get(pk=pk)
     except Seniority.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = SenioritySerializer(profile, data=request.data)
+    serializer = SenioritySerializer(seniority, data=request.data)
     if serializer.is_valid():
-        if not _checkLevelIsUnique(serializer, profile.id):
+        if not _checkLevelIsUnique(serializer, seniority.id):
             return Response({
                 'error': 'Seniority level must be unique in the organization'
             })
 
-        if not _checkNameIsUnique(serializer, profile.id):
+        if not _checkNameIsUnique(serializer, seniority.id):
             return Response({
                 'error': 'Seniority name must be unique in the organization'
             })

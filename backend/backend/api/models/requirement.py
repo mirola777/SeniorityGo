@@ -6,3 +6,4 @@ class Requirement(models.Model):
     description = models.TextField()
     image = models.URLField()
     points = models.IntegerField()
+    organization = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='requirements')
