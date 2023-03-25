@@ -1,5 +1,5 @@
-import { DeveloperProfile } from './developerprofile';
-import { ProfileSeniority } from './profileseniority';
+import { DeveloperProfile } from './DeveloperProfile';
+import { ProfileSeniority } from './ProfileSeniority';
 export class Profile {
     private _id: number;
     private _name: string;
