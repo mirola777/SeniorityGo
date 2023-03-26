@@ -36,11 +36,11 @@ def _checkNameIsUnique(serializer, seniority_id=-1):
     Returns:
         bool: True if the name is unique, False otherwise.
     """
-    name = serializer.validated_data['name']
+    seniority = serializer.validated_data['seniority']
     organization_id = serializer.validated_data['organization']
 
     seniority_count = Seniority.objects.exclude(id=seniority_id).filter(
-        organization=organization_id, name=name).count()
+        organization=organization_id, seniority=seniority).count()
 
     return seniority_count == 0
 
