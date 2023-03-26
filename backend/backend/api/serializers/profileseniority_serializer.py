@@ -5,10 +5,11 @@ from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 from api.models.seniority import Seniority
 from api.models.pokemon import Pokemon
+from api.serializers.pokemon_serializer import PokemonSerializer
 
 class ProfileSenioritySerializer(serializers.ModelSerializer):
-    seniority = serializers.PrimaryKeyRelatedField(queryset=Seniority.objects.all())
-    pokemon = serializers.PrimaryKeyRelatedField(queryset=Pokemon.objects.all())
+    seniority = SenioritySerializer()
+    pokemon = PokemonSerializer()
 
     class Meta:
         model = ProfileSeniority
