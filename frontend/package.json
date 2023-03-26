@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/node": "^18.15.9",
     "flowbite-typography": "^1.0.3",
+    "tailwind-scrollbar": "^3.0.0",
     "tailwindcss": "^3.2.7"
   }
 }

@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Profile } from '../../models/Profile';
 
 interface ProfileCardProps {
@@ -6,13 +5,10 @@ interface ProfileCardProps {
 }
 
 function ProfileCard({ profile }: ProfileCardProps) {
-    // Translation component
-    const { t } = useTranslation();
-
     return (
-        <div className="transition ease-in-out  hover:scale-105 hover:bg-indigo-500 duration-150 rounded-2xl max-w-md bg-gradient-to-r from-[#283c86] to-[#45a247] p-1 shadow-xl">
-            <a className="transition block rounded-xl hover:bg-gray-800/80 duration-150 bg-gray-800 p-4 sm:p-6 lg:p-8" href="#">
-                <div className="mt-16">
+        <div className="transition ease-in-out hover:scale-105 hover:bg-indigo-500 duration-150 rounded-2xl max-w-md bg-gradient-to-r from-fuchsia-700 to-blue-600 p-1 shadow-2xl">
+            <a className="transition block rounded-xl hover:bg-gray-800/50 duration-150 bg-gray-800/80 p-4 sm:p-6 lg:p-8" href="#">
+                <div className="my-24 text-center">
                     <h3 className="text-lg font-bold text-gray-200 sm:text-xl">
                         {profile.getName()}
                     </h3>
