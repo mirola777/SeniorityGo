@@ -1,7 +1,8 @@
-function English(){
+function English() {
     return {
         translation: {
-            welcome: "Welcome to React"
+            welcome_to: "Welcome to",
+            app_name: "SeniorityGo"
         },
     };
 }

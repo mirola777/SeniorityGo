@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ProfileCard from '../../components/common/ProfileCard';
 import { Profile } from '../../models/Profile';
 import { getAllProfiles } from '../../services/ProfileService';
 
@@ -16,15 +17,12 @@ function Profiles() {
     });
 
     return (
-        <div>
-            <h1>{t('welcome')}</h1>
-            <ul>
+        <div className='p-8 mx-auto max-w-7xl space-y-8'>
+            <h2 className="text-5xl font-extrabold dark:text-white">Profiles</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {profiles.map((profile) =>
                     <li>
-                        <h1>{profile.getId()}</h1>
-                        <h1>{profile.getName()}</h1>
-                        <h1>{profile.getDescription()}</h1>
-                        <hr />
+                        <ProfileCard profile={profile}></ProfileCard>
                     </li>
                 )}
             </ul>

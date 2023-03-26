@@ -1,7 +1,8 @@
 function Spanish() {
     return {
         translation: {
-            welcome: "Bienvenido a React"
+            welcome_to: "Bienvenido a",
+            app_name: "SeniorityGo"
         },
     };
 }
