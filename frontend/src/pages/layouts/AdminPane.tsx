@@ -1,20 +1,18 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import AdminSideBar from "../../components/admin/AdminSideBar";
 
-const AdminPaneLayout = () => {
-    return <div>
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/admin/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/admin/profiles">Profiles</Link>
-                </li>
-            </ul>
-        </nav>
-        <hr />
-        <Outlet />
-    </div>;
+function AdminPaneLayout() {
+    
+    return (
+        <div className="flex h-screen overflow-hidden">
+            <aside>
+                <AdminSideBar />
+            </aside>
+            <main className="flex-1 overflow-y-auto bg-gray-800">
+                <Outlet />
+            </main>
+        </div>
+    );
 }
 
 export default AdminPaneLayout;
