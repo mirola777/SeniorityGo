@@ -4,7 +4,17 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'dark-blue': {
+          300: '#302b63',
+          800: '#24243e',
+          900: '#0f0c29',
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite-typography'),
+  ],
 }
