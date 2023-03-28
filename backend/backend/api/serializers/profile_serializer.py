@@ -1,7 +1,12 @@
-from rest_framework import serializers
-from api.models.profile import Profile
 
-class ProfileSerializer(serializers.ModelSerializer):
+from api.models.profile import Profile
+from drf_writable_nested.serializers import WritableNestedModelSerializer
+from api.serializers.profileseniority_serializer import ProfileSenioritySerializer
+
+
+class ProfileSerializer(WritableNestedModelSerializer):
+    profileseniority_set = ProfileSenioritySerializer(many=True)
+
     class Meta:
         model = Profile
-        fields = ['id', 'name', 'description', 'organization']
+        fields = ['id', 'name', 'description', 'organization', 'profileseniority_set']
