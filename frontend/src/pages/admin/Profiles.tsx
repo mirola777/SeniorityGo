@@ -17,15 +17,29 @@ function Profiles() {
     });
 
     return (
-        <div className='p-8 mx-auto max-w-7xl space-y-8'>
-            <h2 className="text-5xl font-extrabold dark:text-white">Profiles</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {profiles.map((profile) =>
-                    <li>
-                        <ProfileCard profile={profile}></ProfileCard>
-                    </li>
-                )}
-            </ul>
+        <div className='py-8 pr-8 mx-auto w-full '>
+            <div className='rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
+                <div className='flex items-center justify-between'>
+                    <h2 className="text-5xl font-extrabold dark:text-white">{t('profiles')}</h2>
+
+                    <button className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
+                        <span
+                            className="block rounded-full bg-dark-blue-800/60 px-8 py-4 text-sm font-medium hover:bg-dark-blue-800/40">
+                            {t('create_profile')}
+                        </span>
+                    </button>
+                </div>
+
+                <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {profiles.map((profile) =>
+                        <li>
+                            <ProfileCard profile={profile}></ProfileCard>
+                        </li>
+                    )}
+                </ul>
+            </div>
         </div>
     );
 }

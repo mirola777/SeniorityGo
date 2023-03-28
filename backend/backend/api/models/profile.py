@@ -6,5 +6,3 @@ class Profile(models.Model):
     description = models.TextField()
     organization = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='profiles')
     seniorities = models.ManyToManyField('Seniority', through='ProfileSeniority')
-    
-
