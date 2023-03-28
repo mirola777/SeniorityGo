@@ -12,15 +12,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'organization', 'seniorities']
         
     def create(self, validated_data):
-        print(validated_data)
         seniorities_data = validated_data.pop('profileseniority_set')
         profile = Profile.objects.create(**validated_data)
         
         for seniority_data in seniorities_data:
-            seniority_dict = seniority_data.pop('seniority')
-            seniority, _ = Seniority.objects.get_or_create(**seniority_dict)
-
-       
+            seniority = seniority_data.pop('seniority')
             pokemon = seniority_data.pop('pokemon')
             ProfileSeniority.objects.create(seniority=seniority, pokemon=pokemon, profile=profile)
         
@@ -42,4 +38,17 @@ class ProfileSerializer(serializers.ModelSerializer):
      "pokemon" : 1
   }
 ]
-}"""
+}
+    {
+"name" :"a",
+"description" : "n",
+"organization" : 1,
+"seniorities":[
+  {
+     "seniority" :2,
+     "pokemon" : 1
+  }
+]
+}
+
+"""

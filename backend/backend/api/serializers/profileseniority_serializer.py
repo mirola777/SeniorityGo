@@ -1,11 +1,15 @@
 from rest_framework import serializers
 from api.models.profileseniority import ProfileSeniority
-from api.serializers.seniority_serializer import SenioritySerializer
+from api.models.seniority import Seniority
+from api.models.pokemon import Pokemon
+from api.serializers.fields.seniority_field import SeniorityField
+from api.serializers.fields.pokemon_field import PokemonField
 from api.serializers.pokemon_serializer import PokemonSerializer
 
+
 class ProfileSenioritySerializer(serializers.ModelSerializer):
-    seniority = SenioritySerializer()
-    #pokemon = PokemonSerializer()
+    seniority = SeniorityField(queryset=Seniority.objects.all())
+    pokemon = PokemonField(queryset=Pokemon.objects.all())
 
     class Meta:
         model = ProfileSeniority
