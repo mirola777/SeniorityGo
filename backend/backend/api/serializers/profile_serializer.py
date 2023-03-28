@@ -1,4 +1,4 @@
-from rest_framework import serializers
+
 from api.models.profile import Profile
 from api.models.profileseniority import ProfileSeniority
 from api.serializers.profileseniority_serializer import ProfileSenioritySerializer

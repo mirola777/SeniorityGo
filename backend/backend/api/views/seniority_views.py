@@ -30,17 +30,17 @@ def _checkNameIsUnique(serializer, seniority_id=-1):
     Verifies that the seniority name is unique within the organization, excluding the given seniority ID.
 
     Args:
-        serializer (Serializer): The serializer containing the data to be validated.
+        serializer (Serializer): The serializer containing the data to be validated.[]
         seniority_id (int, optional): The ID of the seniority object to exclude from the check. Defaults to -1.
 
     Returns:
         bool: True if the name is unique, False otherwise.
     """
-    name = serializer.validated_data['name']
+    seniority = serializer.validated_data['seniority']
     organization_id = serializer.validated_data['organization']
 
     seniority_count = Seniority.objects.exclude(id=seniority_id).filter(
-        organization=organization_id, name=name).count()
+        organization=organization_id, seniority=seniority).count()
 
     return seniority_count == 0
 

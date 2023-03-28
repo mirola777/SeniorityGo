@@ -1,5 +1,5 @@
 from django.db import models
-
+#from models import ProfileSeniority
 
 class Profile(models.Model):
     name = models.CharField(max_length=255)
