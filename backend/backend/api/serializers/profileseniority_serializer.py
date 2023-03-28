@@ -4,7 +4,6 @@ from api.models.seniority import Seniority
 from api.models.pokemon import Pokemon
 from api.serializers.fields.seniority_field import SeniorityField
 from api.serializers.fields.pokemon_field import PokemonField
-from api.serializers.pokemon_serializer import PokemonSerializer
 
 
 class ProfileSenioritySerializer(serializers.ModelSerializer):
