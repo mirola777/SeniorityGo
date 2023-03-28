@@ -4,4 +4,4 @@ from api.models.seniority import Seniority
 class SenioritySerializer(serializers.ModelSerializer):
     class Meta:
         model = Seniority
-        fields = ['id', 'seniority', 'level', 'organization']
+        fields = ['id', 'name', 'level', 'organization']
