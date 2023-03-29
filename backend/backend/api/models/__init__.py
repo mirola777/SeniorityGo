@@ -5,6 +5,6 @@ from .organization import Organization
 from .pokemon import Pokemon
 from .profile import Profile
 from .profileseniority import ProfileSeniority
-#from .profileseniorityrequirement import ProfileSeniorityRequirement
+from .profileseniorityrequirement import ProfileSeniorityRequirement
 from .requirement import Requirement
 from .seniority import Seniority
