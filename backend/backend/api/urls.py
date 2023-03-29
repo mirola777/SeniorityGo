@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views
+from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, user_views
 
 urlpatterns = [
     # Pokemon urls
@@ -33,4 +33,9 @@ urlpatterns = [
     path("requirement/get/<int:pk>", requirement_views.get),
     path("requirement/update/<int:pk>", requirement_views.update),
     path("requirement/delete/<int:pk>", requirement_views.delete),
+
+    # Users urls
+    path("user/all", user_views.getAll),
+    path("user/create", user_views.create),
+
 ]
