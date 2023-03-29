@@ -37,5 +37,8 @@ urlpatterns = [
     # Users urls
     path("user/all", user_views.getAll),
     path("user/create", user_views.create),
+    path("user/get/<int:pk>", user_views.get),
+    path("user/update/<int:pk>", user_views.update),
+    path("user/delete/<int:pk>", user_views.delete),
 
 ]
