@@ -3,8 +3,8 @@ from api.views import profile_views, pokemon_views, organization_views, seniorit
 
 urlpatterns = [
     # Pokemon urls
-    path("pokemon/all", pokemon_views.getAll),
-    path("pokemon/create", pokemon_views.create),
+    path("pokemon/", pokemon_views.getAll),
+    path("pokemon/<int:pk>", pokemon_views.get),
     
     # Profile urls
     path("profile/all", profile_views.getAll),
