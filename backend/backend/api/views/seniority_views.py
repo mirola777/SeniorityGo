@@ -5,46 +5,6 @@ from api.models.seniority import Seniority
 from api.serializers.seniority_serializer import SenioritySerializer
 
 
-def _checkLevelIsUnique(serializer, seniority_id=-1):
-    """
-    Verifies that the seniority level is unique within the organization, excluding the given seniority ID.
-
-    Args:
-        serializer (Serializer): The serializer containing the data to be validated.
-        seniority_id (int, optional): The ID of the seniority object to exclude from the check. Defaults to -1.
-
-    Returns:
-        bool: True if the level is unique, False otherwise.
-    """
-    level = serializer.validated_data['level']
-    organization_id = serializer.validated_data['organization']
-
-    seniority_count = Seniority.objects.exclude(id=seniority_id).filter(
-        organization=organization_id, level=level).count()
-
-    return seniority_count == 0
-
-
-def _checkNameIsUnique(serializer, seniority_id=-1):
-    """
-    Verifies that the seniority name is unique within the organization, excluding the given seniority ID.
-
-    Args:
-        serializer (Serializer): The serializer containing the data to be validated.[]
-        seniority_id (int, optional): The ID of the seniority object to exclude from the check. Defaults to -1.
-
-    Returns:
-        bool: True if the name is unique, False otherwise.
-    """
-    seniority = serializer.validated_data['seniority']
-    organization_id = serializer.validated_data['organization']
-
-    seniority_count = Seniority.objects.exclude(id=seniority_id).filter(
-        organization=organization_id, seniority=seniority).count()
-
-    return seniority_count == 0
-
-
 @api_view(['GET'])
 def getAll(request):
     seniorities = Seniority.objects.all()
@@ -56,19 +16,13 @@ def getAll(request):
 def create(request):
     serializer = SenioritySerializer(data=request.data)
 
-    if serializer.is_valid():
-        if not _checkLevelIsUnique(serializer):
-            return Response({
-                'error': 'Seniority level must be unique in the organization'
-            })
-
-        if not _checkNameIsUnique(serializer):
-            return Response({
-                'error': 'Seniority name must be unique in the organization'
-            })
-
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    try:
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        error = {'error': str(e)}
+        return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -99,22 +53,11 @@ def get(request, pk):
 def update(request, pk):
     try:
         seniority = Seniority.objects.get(pk=pk)
-    except Seniority.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    serializer = SenioritySerializer(seniority, data=request.data)
-    if serializer.is_valid():
-        if not _checkLevelIsUnique(serializer, seniority.id):
-            return Response({
-                'error': 'Seniority level must be unique in the organization'
-            })
-
-        if not _checkNameIsUnique(serializer, seniority.id):
-            return Response({
-                'error': 'Seniority name must be unique in the organization'
-            })
-
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = SenioritySerializer(seniority, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        error = {'error': str(e)}
+        return Response(error, status=status.HTTP_400_BAD_REQUEST)

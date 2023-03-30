@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from api.models.pokemon import Pokemon
-from django.core.cache import cache
-import requests
 from api.services.poke_api_service import getPokemonData
 
 

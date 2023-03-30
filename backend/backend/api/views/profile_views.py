@@ -53,12 +53,11 @@ def get(request, pk):
 def update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
-    except Profile.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    serializer = ProfileSerializer(profile, data=request.data)
-    if serializer.is_valid():
-        
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        error = {'error': str(e)}
+        return Response(error, status=status.HTTP_400_BAD_REQUEST)
