@@ -24,7 +24,7 @@ function Profiles() {
 
                     <button className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
                         <span
-                            className="block rounded-full bg-dark-blue-800/60 px-8 py-4 text-sm font-medium hover:bg-dark-blue-800/40">
+                            className="block rounded-full bg-dark-blue-800/60 px-8 py-2 text-sm font-medium hover:bg-dark-blue-800/40">
                             {t('create_profile')}
                         </span>
                     </button>
