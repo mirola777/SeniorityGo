@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as ProfilesIcon } from "../../assests/icons/RectangleGroup.svg"
 import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 import { ReactComponent as LogoutIcon } from "../../assests/icons/ArrowRightOnRectangle.svg"
+import { ReactComponent as SenioritiesIcon } from "../../assests/icons/CodeBracket.svg"
 import { useTranslation } from 'react-i18next';
 
 function AdminSideBar() {
@@ -20,6 +21,10 @@ function AdminSideBar() {
                         <Link to="/admin/profiles" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <ProfilesIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('profiles')}</span>
+                        </Link>
+                        <Link to="/admin/seniorities" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <SenioritiesIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('seniorities')}</span>
                         </Link>
                     </div>
                 </div>

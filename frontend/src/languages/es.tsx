@@ -7,6 +7,8 @@ function Spanish() {
             profiles: "Perfiles",
             logout: "Cerrar sesión",
             create_profile: "Crear un nuevo Perfil",
+            seniorities: "Seniorities",
+            create_seniority: "Crea un nuevo nivel de Seniority",
         },
     };
 }
