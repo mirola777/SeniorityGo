@@ -7,7 +7,7 @@ from api.serializers.seniority_serializer import SenioritySerializer
 
 @api_view(['GET'])
 def getAll(request):
-    seniorities = Seniority.objects.all()
+    seniorities = Seniority.objects.all().order_by('level')
     serializer = SenioritySerializer(seniorities, many=True)
     return Response(serializer.data)
 

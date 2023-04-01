@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SeniorityCard from '../../components/common/SeniorityCard';
+import SeniorityCard from '../../components/admin/seniority/SeniorityCard';
 import { Seniority } from '../../models/Seniority';
 import { getAllSeniorities } from '../../services/SeniorityService';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ function Seniorities() {
         getAllSeniorities().then((senioritiesResponse) => {
             setSeniorities(senioritiesResponse);
         });
-    });
+    }, []);
 
     return (
         <div className='py-8 pr-8 mx-auto w-full '>

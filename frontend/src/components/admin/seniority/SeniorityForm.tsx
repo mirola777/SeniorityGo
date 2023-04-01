@@ -1,19 +1,25 @@
 import { useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { createSeniority } from '../../services/SeniorityService';
-import { ReactComponent as NameIcon } from '../../assests/icons/CodeBracket.svg';
-import { ReactComponent as LevelIcon } from '../../assests/icons/ArrowTrendingUp.svg';
-import { ReactComponent as ErrorIcon } from '../../assests/icons/ExclamationTriangle.svg';
-import { ReactComponent as SuccessIcon } from '../../assests/icons/CheckCircle.svg';
-import { Seniority } from '../../models/Seniority';
+import { createSeniority } from '../../../services/SeniorityService';
+import { ReactComponent as NameIcon } from '../../../assests/icons/CodeBracket.svg';
+import { ReactComponent as LevelIcon } from '../../../assests/icons/ArrowTrendingUp.svg';
+import { Seniority } from '../../../models/Seniority';
+import FormOutputMessage from '../../common/FormOutputMessage';
 
-function SeniorityForm() {
+
+interface SeniorityFormProps {
+    onCreateSeniority: (seniority: Seniority) => void;
+}
+
+
+function SeniorityForm({ onCreateSeniority }: SeniorityFormProps) {
     // Translation component
     const { t } = useTranslation();
 
     const [errors, setErrors] = useState<string[]>([]);
-    const [createdSeniority, setCreatedSeniority] = useState<Seniority | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const [, setCreatedSeniority] = useState<Seniority | null>(null);
     const [seniorityDict, setSeniorityDict] = useState({
         name: '',
         level: 0,
@@ -24,10 +30,13 @@ function SeniorityForm() {
         event.preventDefault();
         createSeniority(seniorityDict).then((seniorityResponse) => {
 
+            setSuccess(t('seniority_created'));
+            onCreateSeniority(seniorityResponse);
             setCreatedSeniority(seniorityResponse);
             setErrors([]);
         }).catch((error) => {
 
+            setSuccess(null);
             setCreatedSeniority(null);
             setErrors([]);
             setErrors((prevErrors) => {
@@ -89,29 +98,7 @@ function SeniorityForm() {
                 </span>
             </button>
 
-            {errors.length > 0 ? <div role="alert" className="rounded border-l-4 border-red-500 bg-gray-700 p-4">
-                <ul className="list-inside text-gray-200">
-                    {
-                        errors.map((error) => {
-                            return (
-                                <li className="flex items-center">
-                                    <ErrorIcon className="w-5 h-5 mr-2 text-gray-400 flex-shrink-0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                                    {error}
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </div> : null}
-
-            {createdSeniority && (
-                <div role="alert" className="rounded border-l-4 border-green-600 bg-gray-700 p-4">
-                    <p className="flex items-center text-gray-200">
-                        <SuccessIcon className="w-5 h-5 mr-2 text-green-400 flex-shrink-0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                        {createdSeniority.getName()}
-                    </p>
-                </div>
-            )}
+            <FormOutputMessage errors={errors} success={success} />
         </form>
     );
 }

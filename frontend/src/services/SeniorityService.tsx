@@ -37,3 +37,42 @@ export async function createSeniority(seniorityDict: object): Promise<Seniority>
         throw error.response.data;
     }
 }
+
+export async function getSeniority(id: number): Promise<Seniority> {
+    try {
+        const response = await axios.get(BACKEND_URL + 'seniority/get/' + id);
+        const json = response.data;
+        const seniority = new Seniority(
+            json.id,
+            json.name,
+            json.level
+        );
+
+        return seniority;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function updateSeniority(id: number, seniorityDict: object): Promise<Seniority> {
+    try {
+        const response = await axios.put(BACKEND_URL + 'seniority/update/' + id, seniorityDict);
+        const json = response.data;
+        const seniority = new Seniority(
+            json.id,
+            json.name,
+            json.level
+        );
+        return seniority;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function deleteSeniority(id: number): Promise<void> {
+    try {
+        await axios.delete(BACKEND_URL + 'seniority/delete/' + id);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
