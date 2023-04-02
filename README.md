@@ -30,9 +30,9 @@ El proyecto se encuentra bajo la supervisión de la consultora Softserve, de la 
 
 ### **2. Arquitectura**
 #### 2.1. Diagrama de componentes
-![PokeClimbComponentsDiagram](https://user-images.githubusercontent.com/69641274/225128222-b740f10f-c551-4b1f-a14a-1a2f95462865.jpg)
+![PokeClimbComponentsDiagram (1)](https://user-images.githubusercontent.com/69641274/229372332-2a5f7160-01e1-4d49-844b-a91ef5091f0b.jpg)
 #### 2.2 Diagrama de clases
-![PokeClimbClasses (2)](https://user-images.githubusercontent.com/69641274/225128423-9299576f-35bb-4f24-91cb-2618e9b94e30.jpg)
+![PokeClimbClasses (3)](https://user-images.githubusercontent.com/69641274/229372333-e0d3d13c-2b85-40cf-ab96-c721528942c1.jpg)
 
 *******
 
