@@ -27,6 +27,9 @@ function Spanish() {
             update_seniority: "Actualizar nivel de Seniority",
             seniority_updated: "Nivel de Seniority actualizado correctamente!",
             seniority_page: "Este es un nivel de Seniority, una organización puede tener varios niveles de Seniority, cada uno con un nombre y un nivel. Los niveles de Seniority se utilizan para clasificar a los perfiles de la organización en diferentes niveles de experiencia. Por ejemplo, un nivel de Seniority puede ser un desarrollador Junior, un desarrollador Senior, un desarrollador Principal, etc.",
+            go_back: "Volver a la página principal",
+            page_not_found: "¡Uh oh! Página no encontrada",
+            page_not_found_body: "La página que estás buscando no existe. Por favor, comprueba la URL o vuelve a la página principal.",
         },
     };
 }
