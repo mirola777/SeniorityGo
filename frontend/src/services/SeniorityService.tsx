@@ -4,9 +4,28 @@ import { Seniority } from "../models/Seniority";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function getAllSeniorities(): Promise<Seniority[]> {
-    const response = axios.get(BACKEND_URL +  'seniority/all');
+    try {
+        const response = await axios.get(BACKEND_URL + 'seniority/all');
+        const seniorities: Seniority[] = response.data.map((json: any) => {
+            const seniority = new Seniority(
+                json.id,
+                json.name,
+                json.level
+            );
 
-    const seniorities: Seniority[] = (await response).data.map((json: any) => {
+            return seniority;
+        });
+
+        return seniorities;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function createSeniority(seniorityDict: object): Promise<Seniority> {
+    try {
+        const response = await axios.post(BACKEND_URL + 'seniority/create', seniorityDict);
+        const json = response.data;
         const seniority = new Seniority(
             json.id,
             json.name,
@@ -14,7 +33,46 @@ export async function getAllSeniorities(): Promise<Seniority[]> {
         );
 
         return seniority;
-    });
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
 
-    return seniorities;
+export async function getSeniority(id: number): Promise<Seniority> {
+    try {
+        const response = await axios.get(BACKEND_URL + 'seniority/get/' + id);
+        const json = response.data;
+        const seniority = new Seniority(
+            json.id,
+            json.name,
+            json.level
+        );
+
+        return seniority;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function updateSeniority(id: number, seniorityDict: object): Promise<Seniority> {
+    try {
+        const response = await axios.put(BACKEND_URL + 'seniority/update/' + id, seniorityDict);
+        const json = response.data;
+        const seniority = new Seniority(
+            json.id,
+            json.name,
+            json.level
+        );
+        return seniority;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function deleteSeniority(id: number): Promise<void> {
+    try {
+        await axios.delete(BACKEND_URL + 'seniority/delete/' + id);
+    } catch (error: any) {
+        throw error.response.data;
+    }
 }
