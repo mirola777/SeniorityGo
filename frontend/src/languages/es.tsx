@@ -38,6 +38,9 @@ function Spanish() {
             stat_profile_number: "Número de perfiles en la organización",
             stat_user_number: "Número de usuarios en la organización",
             organization_stats: "Estadísticas de la organización",
+            organization_update_advice: "Eres libre de cambiar el nombre y logo de tu organización, pero te recomiendo añadir una imagen transparente blanca, preferiblemente en formato PNG, para que se adapte bien a la estética de la aplicación.", 
+            click_or_drop_image: "Haz click o arrastra una imagen aquí",
+            click_or_drop_image_types: "JPEG, JPG ó PNG",
         },
     };
 }

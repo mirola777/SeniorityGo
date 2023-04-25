@@ -4,6 +4,7 @@ import AdviceCard from '../../components/common/AdviceCard';
 import { getOrganization } from '../../services/OrganizationService';
 import { Organization } from '../../models/Organization';
 import StatsCard from '../../components/common/StatsCard';
+import { Link } from 'react-router-dom';
 
 
 function OrganizationPage() {
@@ -29,12 +30,12 @@ function OrganizationPage() {
                             <h2 className="text-5xl font-extrabold dark:text-white">{organization.getName()}</h2>
                         </div>
 
-                        <button className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
+                        <Link to="update" className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
                             <span
                                 className="block rounded-full bg-dark-blue-800/60 px-8 py-2 text-sm font-medium hover:bg-dark-blue-800/40">
                                 {t('update_organization')}
                             </span>
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

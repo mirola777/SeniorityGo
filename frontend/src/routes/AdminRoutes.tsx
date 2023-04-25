@@ -7,6 +7,7 @@ import CreateSeniorty from '../pages/admin/CreateSeniority';
 import SeniorityPage from '../pages/admin/SeniorityPage';
 import AdminNotFound from '../pages/admin/AdminNotFound';
 import OrganizationPage from '../pages/admin/OrganizationPage';
+import UpdateOrganization from '../pages/admin/UpdateOrganization';
 
 
 const AdminRoutes = [
@@ -17,6 +18,7 @@ const AdminRoutes = [
         <Route path="/admin/seniorities/create" element={<CreateSeniorty />} />
         <Route path="/admin/seniorities/:id" element={<SeniorityPage />} />
         <Route path="/admin/organization" element={<OrganizationPage />} />
+        <Route path='/admin/organization/update' element={<UpdateOrganization />}/>
         <Route path='/admin/*' element={<AdminNotFound />}/>
     </Route>
 ];

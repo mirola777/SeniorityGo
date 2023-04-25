@@ -38,6 +38,9 @@ function English() {
             stat_profile_number: "Profiles in the organization",
             stat_user_number: "Users in the organization",
             organization_stats: "Organization Stats",
+            organization_update_advice: "You're free to update the organization's name and logo whenever you want, but I recommend you to use a white logo with a transparent background to make it look better", 
+            click_or_drop_image: "Click or drop an image to upload",
+            click_or_drop_image_types: "JPEG, JPG or PNG",
         },
     };
 }
