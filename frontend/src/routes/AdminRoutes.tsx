@@ -6,6 +6,8 @@ import Seniorities from '../pages/admin/seniority/Seniorities';
 import CreateSeniorty from '../pages/admin/seniority/CreateSeniority';
 import SeniorityPage from '../pages/admin/seniority/SeniorityPage';
 import AdminNotFound from '../pages/admin/AdminNotFound';
+import OrganizationPage from '../pages/admin/OrganizationPage';
+import UpdateOrganization from '../pages/admin/UpdateOrganization';
 import Requirements from '../pages/admin/requirement/Requirements';
 import CreateRequirement from '../pages/admin/requirement/CreateRequirement';
 import RequirementPage from '../pages/admin/requirement/RequirementPage';
@@ -18,6 +20,8 @@ const AdminRoutes = [
         <Route path="/admin/seniorities" element={<Seniorities />} />
         <Route path="/admin/seniorities/create" element={<CreateSeniorty />} />
         <Route path="/admin/seniorities/:id" element={<SeniorityPage />} />
+        <Route path="/admin/organization" element={<OrganizationPage />} />
+        <Route path='/admin/organization/update' element={<UpdateOrganization />}/>
         <Route path="/admin/requirements" element={<Requirements />} />
         <Route path="/admin/requirements/create" element={<CreateRequirement />} />
         <Route path="/admin/requirements/:id" element={<RequirementPage />} />

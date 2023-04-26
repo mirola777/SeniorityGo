@@ -9,6 +9,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     profiles = ProfileSerializer(read_only=True, many=True)
     seniorities = SenioritySerializer(read_only=True, many=True)
     requirements = RequirementSerializer(read_only=True, many=True)
+    image = serializers.ImageField(required=False)
 
     class Meta:
         model = Organization

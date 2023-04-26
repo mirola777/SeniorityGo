@@ -42,6 +42,17 @@ function English() {
             go_back: "Go back home",
             page_not_found: "Uh oh! Page not found",
             page_not_found_body: "The page you are looking for does not exist. Please check the URL or go back to the home page.",
+            organization: "Organization",
+            update_organization: "Update Organization",
+            organization_page: "This is your organization. An organization is a group of people who work together. An organization can have several Seniority levels, each with a name and a level. The Seniority levels are used to classify the organization's profiles into different levels of experience. For example, a Seniority level can be a Junior developer, a Senior developer, a Principal developer, etc. An organization can also have several profiles, each with a name, a Seniority level, and a description. The profiles are used to represent the people who work in the organization. For example, a profile can be a developer named John Doe, with a Seniority level of Senior, and a description of 5 years of experience in the company.",
+            organization_updated: "Organization updated successfully!",
+            stat_seniortiy_number: "Seniority levels in the organization",
+            stat_profile_number: "Profiles in the organization",
+            stat_user_number: "Users in the organization",
+            organization_stats: "Organization Stats",
+            organization_update_advice: "You're free to update the organization's name and logo whenever you want, but I recommend you to use a white logo with a transparent background to make it look better", 
+            click_or_drop_image: "Click or drop an image to upload (1.5 MB max)",
+            click_or_drop_image_types: "JPEG, JPG or PNG",
         },
     };
 }

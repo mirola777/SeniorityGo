@@ -5,7 +5,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function getAllSeniorities(): Promise<Seniority[]> {
     try {
-        const response = await axios.get(BACKEND_URL + 'seniority/all');
+        const response = await axios.get(BACKEND_URL + '/api/seniority/all');
         const seniorities: Seniority[] = response.data.map((json: any) => {
             const seniority = new Seniority(
                 json.id,
@@ -24,7 +24,7 @@ export async function getAllSeniorities(): Promise<Seniority[]> {
 
 export async function createSeniority(seniorityDict: object): Promise<Seniority> {
     try {
-        const response = await axios.post(BACKEND_URL + 'seniority/create', seniorityDict);
+        const response = await axios.post(BACKEND_URL + '/api/seniority/create', seniorityDict);
         const json = response.data;
         const seniority = new Seniority(
             json.id,
@@ -40,7 +40,7 @@ export async function createSeniority(seniorityDict: object): Promise<Seniority>
 
 export async function getSeniority(id: number): Promise<Seniority> {
     try {
-        const response = await axios.get(BACKEND_URL + 'seniority/get/' + id);
+        const response = await axios.get(BACKEND_URL + '/api/seniority/get/' + id);
         const json = response.data;
         const seniority = new Seniority(
             json.id,
@@ -56,7 +56,7 @@ export async function getSeniority(id: number): Promise<Seniority> {
 
 export async function updateSeniority(id: number, seniorityDict: object): Promise<Seniority> {
     try {
-        const response = await axios.put(BACKEND_URL + 'seniority/update/' + id, seniorityDict);
+        const response = await axios.put(BACKEND_URL + '/api/seniority/update/' + id, seniorityDict);
         const json = response.data;
         const seniority = new Seniority(
             json.id,
@@ -71,7 +71,7 @@ export async function updateSeniority(id: number, seniorityDict: object): Promis
 
 export async function deleteSeniority(id: number): Promise<void> {
     try {
-        await axios.delete(BACKEND_URL + 'seniority/delete/' + id);
+        await axios.delete(BACKEND_URL + '/api/seniority/delete/' + id);
     } catch (error: any) {
         throw error.response.data;
     }
