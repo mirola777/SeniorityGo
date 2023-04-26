@@ -3,6 +3,7 @@ import { ReactComponent as ProfilesIcon } from "../../assests/icons/RectangleGro
 import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 import { ReactComponent as LogoutIcon } from "../../assests/icons/ArrowRightOnRectangle.svg"
 import { ReactComponent as SenioritiesIcon } from "../../assests/icons/CodeBracket.svg"
+import { ReactComponent as RequirementsIcon } from "../../assests/icons/Req.svg"
 import { useTranslation } from 'react-i18next';
 
 function AdminSideBar() {
@@ -25,6 +26,10 @@ function AdminSideBar() {
                         <Link to="/admin/seniorities" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <SenioritiesIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('seniorities')}</span>
+                        </Link>
+                        <Link to="/admin/requirements" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <RequirementsIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('requirements')}</span>
                         </Link>
                     </div>
                 </div>

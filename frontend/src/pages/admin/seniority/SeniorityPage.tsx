@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Seniority } from '../../models/Seniority';
-import { getSeniority } from '../../services/SeniorityService';
+import { Seniority } from '../../../models/Seniority';
+import { getSeniority } from '../../../services/SeniorityService';
 import { useParams, useNavigate } from 'react-router-dom';
-import SeniorityDeleteButton from '../../components/admin/seniority/SeniorityDeleteButton';
-import SeniorityUpdateForm from '../../components/admin/seniority/SeniorityUpdateForm';
-import AdviceCard from '../../components/common/AdviceCard';
+import SeniorityDeleteButton from '../../../components/admin/seniority/SeniorityDeleteButton';
+import SeniorityUpdateForm from '../../../components/admin/seniority/SeniorityUpdateForm';
+import AdviceCard from '../../../components/common/AdviceCard';
 
 
 
