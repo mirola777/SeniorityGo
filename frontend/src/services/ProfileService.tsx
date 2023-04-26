@@ -4,7 +4,7 @@ import { Profile } from "../models/Profile";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function getAllProfiles(): Promise<Profile[]> {
-    const response = axios.get(BACKEND_URL +  'profile/all');
+    const response = axios.get(BACKEND_URL +  '/api/profile/all');
 
     const profiles: Profile[] = (await response).data.map((json: any) => {
         const profile = new Profile(

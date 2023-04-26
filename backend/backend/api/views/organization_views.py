@@ -1,8 +1,9 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework import status
 from rest_framework.response import Response
 from api.models.organization import Organization
 from api.serializers.organization_serializer import OrganizationSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 @api_view(['GET'])
@@ -46,11 +47,14 @@ def get(request, pk):
 
 
 @api_view(['PUT'])
+@parser_classes([MultiPartParser, FormParser])
 def update(request, pk):
     try:
         organization = Organization.objects.get(pk=pk)
     except Organization.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    print(request.data)
 
     serializer = OrganizationSerializer(organization, data=request.data)
     if serializer.is_valid():

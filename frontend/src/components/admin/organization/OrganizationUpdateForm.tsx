@@ -25,7 +25,7 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
     const [organizationDict, setOrganizationDict] = useState({
         id: organization.getId(),
         name: organization.getName(),
-        image: organization.getImage()
+        image: null
     });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,10 +55,12 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
             setOrganizationDict({ ...organizationDict, [name]: parseInt(value) });
         else if (type === 'text')
             setOrganizationDict({ ...organizationDict, [name]: value });
+        else if (type === 'file')
+            setOrganizationDict({ ...organizationDict, [name]: value });
     };
 
     return (
-        <form className='w-full max-w-lg mx-auto space-y-4 flex flex-col' onSubmit={handleSubmit}>
+        <form className='w-full max-w-lg mx-auto space-y-4 flex flex-col' onSubmit={handleSubmit} >
             <div className='space-y-4'>
                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-white">Name</label>
                 <div className="relative">
@@ -76,17 +78,7 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
                 </div>
 
                 <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">Logo</label>
-                <DropzoneImage />
-                <div className="flex items-center justify-center w-full">
-                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700  border-gray-600 hover:border-gray-500 hover:bg-gray-600">
-                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                <p className="mb-2 text-sm text-gray-400">{t('click_or_drop_image')}</p>
-                                <p className="text-xs text-gray-400">{t('click_or_drop_image_types')}</p>
-                            </div>
-                            <input id="image" name='image' type="file" accept=".jpg, .jpeg, .png" className="hidden" />
-                        </label>
-                    </div>
+                <DropzoneImage onChange={handleInputChange} />
             </div>
 
             <button type="submit"
