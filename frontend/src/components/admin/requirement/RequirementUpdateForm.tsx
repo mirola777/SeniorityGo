@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { updateRequirement } from '../../../services/RequirementService';
 import { ReactComponent as NameIcon } from '../../../assests/icons/CodeBracket.svg';
 import { ReactComponent as LevelIcon } from '../../../assests/icons/ArrowTrendingUp.svg';
+import { ReactComponent as RequirementsIcon } from "../../../assests/icons/Req.svg";
+import { ReactComponent as PointsIcon } from "../../../assests/icons/Points.svg";
+import { ReactComponent as ImageIcon } from "../../../assests/icons/Image.svg";
 import { Requirement } from '../../../models/Requirement';
 import FormOutputMessage from '../../common/FormOutputMessage';
 
@@ -63,7 +66,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-white">Name</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <NameIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                        <RequirementsIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                     </div>
                     <input
                         type="text"
@@ -72,7 +75,41 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                         onChange={handleInputChange}
                         value={requirementDict.name}
                         className="border text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Junior, SemiSenior, Senior..." />
+                        placeholder="Git certificate..." />
+                </div>
+            </div>
+
+            <div>
+                <label htmlFor="description" className="block mb-2 text-sm font-medium text-white">Description</label>
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <RequirementsIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                    </div>
+                    <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        onChange={handleInputChange}
+                        value={requirementDict.description}
+                        className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Important aspects..." />
+                </div>
+            </div>
+
+            <div>
+                <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">Image</label>
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <ImageIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                    </div>
+                    <input
+                        type="text"
+                        id="image"
+                        name="image"
+                        onChange={handleInputChange}
+                        value={requirementDict.image}
+                        className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="requirement.jpg" />
                 </div>
             </div>
 
@@ -80,7 +117,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                 <label htmlFor="points" className="block mb-2 text-sm font-medium text-white">Points</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <LevelIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                        <PointsIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                     </div>
                     <input
                         type="number"
@@ -93,6 +130,9 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                         placeholder="0" />
                 </div>
             </div>
+
+
+
             <button type="submit"
                 className="mx-auto inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
                 <span

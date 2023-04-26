@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Requirement } from '../../../models/Requirement';
-import { ReactComponent as RequirementIcon } from '../../../assests/icons/CodeBracket.svg';
+import { ReactComponent as RequirementIcon } from '../../../assests/icons/Req.svg';
 import { t } from 'i18next';
 
 interface RequirementCardProps {
