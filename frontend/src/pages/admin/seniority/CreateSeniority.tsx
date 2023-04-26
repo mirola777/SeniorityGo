@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import CreatedSeniorities from '../../components/admin/seniority/CreatedSeniorities';
-import SeniorityForm from '../../components/admin/seniority/SeniorityForm';
-import AdviceCard from '../../components/common/AdviceCard';
-import { Seniority } from '../../models/Seniority';
+import CreatedSeniorities from '../../../components/admin/seniority/CreatedSeniorities';
+import SeniorityForm from '../../../components/admin/seniority/SeniorityForm';
+import AdviceCard from '../../../components/common/AdviceCard';
+import { Seniority } from '../../../models/Seniority';
 
 
 function CreateSeniorty() {

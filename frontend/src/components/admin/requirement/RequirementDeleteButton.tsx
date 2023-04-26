@@ -1,16 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { Seniority } from '../../../models/Seniority';
-import { deleteSeniority } from '../../../services/SeniorityService';
+import { Requirement } from '../../../models/Requirement';
+import { deleteRequirement } from '../../../services/RequirementService';
 import { useState } from 'react';
 
-
-interface SeniorityDeleteButtonProps {
-    seniority: Seniority;
-    onDeleteSeniority: (seniority: Seniority) => void;
+interface RequirementDeleteButtonProps {
+    requirement: Requirement;
+    onDeleteRequirement: (requirement: Requirement) => void;
 }
 
-function SeniorityDeleteButton({ seniority, onDeleteSeniority }: SeniorityDeleteButtonProps) {
-    // Translation component
+function RequirementDeleteButton({requirement, onDeleteRequirement}: RequirementDeleteButtonProps) {
     const { t } = useTranslation();
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -24,8 +22,8 @@ function SeniorityDeleteButton({ seniority, onDeleteSeniority }: SeniorityDelete
     }
 
     const handleDelete = () => {
-        deleteSeniority(seniority.getId()).then(() => {
-            onDeleteSeniority(seniority);
+        deleteRequirement(requirement.getId()).then(() => {
+            onDeleteRequirement(requirement);
             closeModal();
         });
     };
@@ -49,7 +47,7 @@ function SeniorityDeleteButton({ seniority, onDeleteSeniority }: SeniorityDelete
                             <div className='w-full flex flex-col rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
                                 <div className='flex items-center text-center justify-center'>
                                     <h2 className="text-3xl font-extrabold text-white">
-                                        {t('delete_seniority_sure')}
+                                        {t('delete_requirement_sure')}
                                     </h2>
                                 </div>
                                 <hr className="h-px my-8 border-0 bg-gray-700" />
@@ -90,4 +88,4 @@ function SeniorityDeleteButton({ seniority, onDeleteSeniority }: SeniorityDelete
     );
 }
 
-export default SeniorityDeleteButton;
+export default RequirementDeleteButton;
