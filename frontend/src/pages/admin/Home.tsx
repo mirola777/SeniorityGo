@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-function Home() {
+function AdminHome() {
 	// Translation component
 	const { t } = useTranslation();
 
@@ -16,4 +16,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default AdminHome;

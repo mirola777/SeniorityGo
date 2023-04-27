@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import AdminPaneLayout from '../pages/layouts/AdminPane';
-import Home from '../pages/admin/Home';
+import AdminHome from '../pages/admin/Home';
 import Profiles from '../pages/admin/profile/Profiles';
 import Seniorities from '../pages/admin/seniority/Seniorities';
 import CreateSeniorty from '../pages/admin/seniority/CreateSeniority';
@@ -11,11 +11,16 @@ import UpdateOrganization from '../pages/admin/organization/UpdateOrganization';
 import Requirements from '../pages/admin/requirement/Requirements';
 import CreateRequirement from '../pages/admin/requirement/CreateRequirement';
 import RequirementPage from '../pages/admin/requirement/RequirementPage';
+import DeveloperPageLayout from '../pages/layouts/DeveloperPane';
+import DeveloperHome from '../pages/developer/Home';
 
 
 const AdminRoutes = [
+    <Route path='/' element={<DeveloperPageLayout />}>
+        <Route path="/" element={<DeveloperHome />} />
+    </Route>,
     <Route path='/admin' element={<AdminPaneLayout />}>
-        <Route path="/admin/" element={<Home />} />
+        <Route path="/admin/" element={<AdminHome />} />
         <Route path="/admin/profiles" element={<Profiles />} />
         <Route path="/admin/seniorities" element={<Seniorities />} />
         <Route path="/admin/seniorities/create" element={<CreateSeniorty />} />
