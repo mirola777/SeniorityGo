@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ProfileCard from '../../components/common/ProfileCard';
-import { Profile } from '../../models/Profile';
-import { getAllProfiles } from '../../services/ProfileService';
+import ProfileCard from '../../../components/common/ProfileCard';
+import { Profile } from '../../../models/Profile';
+import { getAllProfiles } from '../../../services/ProfileService';
 
 function Profiles() {
     // Translation component

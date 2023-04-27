@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import AdminPaneLayout from '../pages/layouts/AdminPane';
 import Home from '../pages/admin/Home';
-import Profiles from '../pages/admin/Profiles';
+import Profiles from '../pages/admin/profile/Profiles';
 import Seniorities from '../pages/admin/seniority/Seniorities';
 import CreateSeniorty from '../pages/admin/seniority/CreateSeniority';
 import SeniorityPage from '../pages/admin/seniority/SeniorityPage';
