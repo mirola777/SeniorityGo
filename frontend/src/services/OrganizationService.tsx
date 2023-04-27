@@ -34,7 +34,7 @@ export async function updateOrganization(id: number, organizationDict: object): 
         const organization = new Organization(
             json.id,
             json.name,
-            BACKEND_URL + json.image,
+            json.image ? BACKEND_URL + json.image : null,
             []
         );
 

@@ -9,6 +9,7 @@ import { ReactComponent as PointsIcon } from "../../../assests/icons/Points.svg"
 import { ReactComponent as ImageIcon } from "../../../assests/icons/Image.svg";
 import { Requirement } from '../../../models/Requirement';
 import FormOutputMessage from '../../common/FormOutputMessage';
+import DropzoneImage from '../../common/DropzoneImage';
 
 
 interface RequirementUpdateFormProps {
@@ -27,7 +28,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
         id: requirement.getId(),
         name: requirement.getName(),
         description: requirement.getDescription(),
-        image: requirement.getImage(),
+        image: null,
         points: requirement.getPoints(),
         organization: 1
     });
@@ -56,7 +57,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
 
         if (type === 'number')
             setRequirementDict({ ...requirementDict, [name]: parseInt(value) });
-        else if (type === 'text')
+        else if (type === 'text' || type === 'file')
             setRequirementDict({ ...requirementDict, [name]: value });
     };
 
@@ -97,20 +98,8 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
             </div>
 
             <div>
-                <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">Image</label>
-                <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <ImageIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                    </div>
-                    <input
-                        type="text"
-                        id="image"
-                        name="image"
-                        onChange={handleInputChange}
-                        value={requirementDict.image}
-                        className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="requirement.jpg" />
-                </div>
+                <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">Logo</label>
+                <DropzoneImage previousImage={requirement.getImage()} onChange={handleInputChange} />
             </div>
 
             <div>

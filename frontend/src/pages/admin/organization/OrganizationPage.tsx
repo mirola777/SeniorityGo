@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import AdviceCard from '../../components/common/AdviceCard';
-import { getOrganization } from '../../services/OrganizationService';
-import { Organization } from '../../models/Organization';
-import StatsCard from '../../components/common/StatsCard';
+import AdviceCard from '../../../components/common/AdviceCard';
+import { getOrganization } from '../../../services/OrganizationService';
+import { Organization } from '../../../models/Organization';
+import StatsCard from '../../../components/common/StatsCard';
 import { Link } from 'react-router-dom';
 
 

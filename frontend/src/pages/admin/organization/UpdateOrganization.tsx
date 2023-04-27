@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import CreatedSeniorities from '../../components/admin/seniority/CreatedSeniorities';
-import SeniorityForm from '../../components/admin/seniority/SeniorityForm';
-import AdviceCard from '../../components/common/AdviceCard';
-import { Seniority } from '../../models/Seniority';
-import OrganizationUpdateForm from '../../components/admin/organization/OrganizationUpdateForm';
-import { Organization } from '../../models/Organization';
+import CreatedSeniorities from '../../../components/admin/seniority/CreatedSeniorities';
+import SeniorityForm from '../../../components/admin/seniority/SeniorityForm';
+import AdviceCard from '../../../components/common/AdviceCard';
+import { Seniority } from '../../../models/Seniority';
+import OrganizationUpdateForm from '../../../components/admin/organization/OrganizationUpdateForm';
+import { Organization } from '../../../models/Organization';
 import { useEffect } from 'react';
 
-import { getOrganization } from '../../services/OrganizationService';
+import { getOrganization } from '../../../services/OrganizationService';
 
 
 function UpdateOrganization() {

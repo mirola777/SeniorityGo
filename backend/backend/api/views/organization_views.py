@@ -14,6 +14,7 @@ def getAll(request):
 
 
 @api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
 def create(request):
     serializer = OrganizationSerializer(data=request.data)
 
@@ -53,8 +54,6 @@ def update(request, pk):
         organization = Organization.objects.get(pk=pk)
     except Organization.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    print(request.data)
 
     serializer = OrganizationSerializer(organization, data=request.data)
     if serializer.is_valid():
