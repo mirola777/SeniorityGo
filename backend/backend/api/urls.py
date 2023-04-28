@@ -1,7 +1,13 @@
 from django.urls import path
-from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, user_views
+from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, user_views, authentication_views
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
+    # Auth urls
+    path("token/", jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
+    path("token/refresh/", jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
+    path("logout/", authentication_views.logout),
+    
     # Pokemon urls
     path("pokemon/", pokemon_views.getAll),
     path("pokemon/<int:pk>", pokemon_views.get),
