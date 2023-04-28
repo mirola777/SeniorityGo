@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { createRequirement } from '../../../services/RequirementService';
 import { ReactComponent as RequirementsIcon } from "../../../assests/icons/Req.svg";
 import { ReactComponent as PointsIcon } from "../../../assests/icons/Points.svg";
-import { ReactComponent as ImageIcon } from "../../../assests/icons/Image.svg";
 import { Requirement } from '../../../models/Requirement';
 import FormOutputMessage from '../../common/FormOutputMessage';
 import DropzoneImage from '../../common/DropzoneImage';
