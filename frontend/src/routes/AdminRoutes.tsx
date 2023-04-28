@@ -15,12 +15,14 @@ import DeveloperPageLayout from '../pages/layouts/DeveloperPane';
 import DeveloperHome from '../pages/developer/Home';
 import DeveloperAbout from '../pages/developer/About';
 import NotFound from '../pages/developer/NotFound';
+import DeveloperLogin from '../pages/developer/Login';
 
 
 const AdminRoutes = [
     <Route path='/' element={<DeveloperPageLayout />}>
         <Route path="/" element={<DeveloperHome />} />
         <Route path='/about' element={<DeveloperAbout />}/>
+        <Route path='/login' element={<DeveloperLogin />}/>
         <Route path='/*' element={<NotFound />} />
     </Route>,
     <Route path='/admin' element={<AdminPaneLayout />}>
