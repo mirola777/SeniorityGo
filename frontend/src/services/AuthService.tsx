@@ -145,9 +145,7 @@ export async function logout(): Promise<void> {
 
 export async function getUserSession(): Promise<Developer | Admin | null> {
     try {
-        console.log('getUserSession');
         const response = await axios.get(BACKEND_URL + '/api/auth/session/');
-        console.log(response.data);
         const json = response.data;
 
         if (json.role === 'developer') {
@@ -184,7 +182,6 @@ export async function getUserSession(): Promise<Developer | Admin | null> {
         return null;
 
     } catch (error: any) {
-        console.log(error.response.data);
         throw error.response.data;
     }
 }
