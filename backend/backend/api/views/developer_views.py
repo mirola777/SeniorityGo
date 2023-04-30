@@ -1,24 +1,23 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
-from api.models.profile import Profile
-from api.serializers.profile_serializer import ProfileSerializer
+from api.models.developer import Developer
+from api.serializers.developer_serializer import DeveloperSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getAll(request):
-    profiles = Profile.objects.all()
-    serializer = ProfileSerializer(profiles, many=True)
+    developers = Developer.objects.all()
+    serializer = DeveloperSerializer(developers, many=True)
     return Response(serializer.data)
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def create(request):
-    serializer = ProfileSerializer(data=request.data)
-
+    serializer = DeveloperSerializer(data=request.data)
+    
     try:
         if serializer.is_valid():
             serializer.save()
@@ -26,7 +25,7 @@ def create(request):
     except Exception as e:
         error = {'error': str(e)}
         return Response(error, status=status.HTTP_400_BAD_REQUEST)
-
+    
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -34,11 +33,11 @@ def create(request):
 @permission_classes([IsAuthenticated])
 def delete(request, pk):
     try:
-        profile = Profile.objects.get(pk=pk)
-    except Profile.DoesNotExist:
+        developer = Developer.objects.get(pk=pk)
+    except Developer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    profile.delete()
+    developer.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -46,11 +45,11 @@ def delete(request, pk):
 @permission_classes([IsAuthenticated])
 def get(request, pk):
     try:
-        profile = Profile.objects.get(pk=pk)
-    except Profile.DoesNotExist:
+        developer = Developer.objects.get(pk=pk)
+    except Developer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = ProfileSerializer(profile)
+    serializer = DeveloperSerializer(developer)
     return Response(serializer.data)
 
 
@@ -58,12 +57,12 @@ def get(request, pk):
 @permission_classes([IsAuthenticated])
 def update(request, pk):
     try:
-        profile = Profile.objects.get(pk=pk)
-        serializer = ProfileSerializer(profile, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    except Exception as e:
-        error = {'error': str(e)}
-        return Response(error, status=status.HTTP_400_BAD_REQUEST)
+        developer = Developer.objects.get(pk=pk)
+    except Developer.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = DeveloperSerializer(developer, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

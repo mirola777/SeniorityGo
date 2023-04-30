@@ -1,5 +1,6 @@
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
 from api.models.requirement import Requirement
@@ -7,6 +8,7 @@ from api.serializers.requirement_serializer import RequirementSerializer
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getAll(request):
     requirements = Requirement.objects.all()
     serializer = RequirementSerializer(requirements, many=True)
@@ -14,6 +16,7 @@ def getAll(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def create(request):
     serializer = RequirementSerializer(data=request.data)
@@ -26,6 +29,7 @@ def create(request):
 
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete(request, pk):
     try:
         requirement = Requirement.objects.get(pk=pk)
@@ -37,6 +41,7 @@ def delete(request, pk):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get(request, pk):
     try:
         requirement = Requirement.objects.get(pk=pk)
@@ -48,6 +53,7 @@ def get(request, pk):
 
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def update(request, pk):
     try:
