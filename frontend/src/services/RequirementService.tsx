@@ -5,13 +5,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function getAllRequirements(): Promise<Requirement[]> {
     try {
-        const response = await axios.get(BACKEND_URL + '/api/requirement/all');
+        const response = await axios.get(BACKEND_URL + '/api/requirement/all/');
         const requirements: Requirement[] = response.data.map((json: any) => {
             const requirement = new Requirement(
                 json.id,
                 json.name,
                 json.description,
-                json.image,
+                json.image ? BACKEND_URL + json.image : null,
                 json.points
             );
 
@@ -26,13 +26,18 @@ export async function getAllRequirements(): Promise<Requirement[]> {
 
 export async function createRequirement(requirementDict: object): Promise<Requirement> {
     try {
-        const response = await axios.post(BACKEND_URL + '/api/requirement/create', requirementDict);
+        const response = await axios.post(BACKEND_URL + '/api/requirement/create/', requirementDict, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
         const json = response.data;
         const requirement = new Requirement(
             json.id,
             json.name,
             json.description,
-            json.image,
+            json.image ? BACKEND_URL + json.image : null,
             json.points
         );
 
@@ -44,13 +49,13 @@ export async function createRequirement(requirementDict: object): Promise<Requir
 
 export async function getRequirement(id: number): Promise<Requirement> {
     try {
-        const response = await axios.get(BACKEND_URL + '/api/requirement/get/' + id);
+        const response = await axios.get(BACKEND_URL + '/api/requirement/get/' + id + '/');
         const json = response.data;
         const requirement = new Requirement(
             json.id,
             json.name,
             json.description,
-            json.image,
+            json.image ? BACKEND_URL + json.image : null,
             json.points
         );
 
@@ -62,13 +67,17 @@ export async function getRequirement(id: number): Promise<Requirement> {
 
 export async function updateRequirement(id: number, requirementDict: object): Promise<Requirement> {
     try {
-        const response = await axios.put(BACKEND_URL + '/api/requirement/update/' + id, requirementDict);
+        const response = await axios.put(BACKEND_URL + '/api/requirement/update/' + id + '/', requirementDict, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
         const json = response.data;
         const requirement = new Requirement(
             json.id,
             json.name,
             json.description,
-            json.image,
+            json.image ? BACKEND_URL + json.image : null,
             json.points
         );
 
@@ -80,7 +89,7 @@ export async function updateRequirement(id: number, requirementDict: object): Pr
 
 export async function deleteRequirement(id: number): Promise<void> {
     try {
-        await axios.delete(BACKEND_URL + '/api/requirement/delete/' + id);
+        await axios.delete(BACKEND_URL + '/api/requirement/delete/' + id + '/');
     } catch (error: any) {
         throw error.response.data;
     }

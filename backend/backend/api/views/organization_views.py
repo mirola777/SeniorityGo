@@ -1,12 +1,14 @@
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
 from api.models.organization import Organization
 from api.serializers.organization_serializer import OrganizationSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getAll(request):
     organizations = Organization.objects.all()
     serializer = OrganizationSerializer(organizations, many=True)
@@ -14,6 +16,8 @@ def getAll(request):
 
 
 @api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
+@permission_classes([IsAuthenticated])
 def create(request):
     serializer = OrganizationSerializer(data=request.data)
 
@@ -25,6 +29,7 @@ def create(request):
 
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete(request, pk):
     try:
         organization = Organization.objects.get(pk=pk)
@@ -36,6 +41,7 @@ def delete(request, pk):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get(request, pk):
     try:
         organization = Organization.objects.get(pk=pk)
@@ -47,14 +53,13 @@ def get(request, pk):
 
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def update(request, pk):
     try:
         organization = Organization.objects.get(pk=pk)
     except Organization.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    print(request.data)
 
     serializer = OrganizationSerializer(organization, data=request.data)
     if serializer.is_valid():

@@ -53,9 +53,7 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
 
         if (type === 'number')
             setOrganizationDict({ ...organizationDict, [name]: parseInt(value) });
-        else if (type === 'text')
-            setOrganizationDict({ ...organizationDict, [name]: value });
-        else if (type === 'file')
+        else if (type === 'text' || type === 'file')
             setOrganizationDict({ ...organizationDict, [name]: value });
     };
 
@@ -78,7 +76,7 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
                 </div>
 
                 <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">Logo</label>
-                <DropzoneImage onChange={handleInputChange} />
+                <DropzoneImage previousImage={organization.getImage()} onChange={handleInputChange} />
             </div>
 
             <button type="submit"

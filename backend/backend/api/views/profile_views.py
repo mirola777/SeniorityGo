@@ -1,11 +1,13 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
 from api.models.profile import Profile
 from api.serializers.profile_serializer import ProfileSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getAll(request):
     profiles = Profile.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
@@ -13,6 +15,7 @@ def getAll(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create(request):
     serializer = ProfileSerializer(data=request.data)
 
@@ -28,6 +31,7 @@ def create(request):
 
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -39,6 +43,7 @@ def delete(request, pk):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -50,6 +55,7 @@ def get(request, pk):
 
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)

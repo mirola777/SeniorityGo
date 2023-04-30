@@ -20,6 +20,10 @@ function AdminSideBar() {
 
                 <div className="w-full px-2">
                     <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
+                        <Link to="/admin/organization" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <OrganizationIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('organization')}</span>
+                        </Link>
                         <Link to="/admin/profiles" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <ProfilesIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('profiles')}</span>
@@ -27,10 +31,6 @@ function AdminSideBar() {
                         <Link to="/admin/seniorities" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <SenioritiesIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('seniorities')}</span>
-                        </Link>
-                        <Link to="/admin/organization" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
-                            <OrganizationIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                            <span className="ml-2 text-sm font-medium">{t('organization')}</span>
                         </Link>
                         <Link to="/admin/requirements" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <RequirementsIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />

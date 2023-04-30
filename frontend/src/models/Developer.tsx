@@ -4,6 +4,9 @@ import { Requirement } from './Requirement';
 
 export class Developer {
     private _birthday: Date;
+    private _first_name: string;
+    private _second_name: string;
+    private _last_name: string;
     private _avatar: string;
     private _phone_number: string;
     private _is_activated: boolean;
@@ -11,7 +14,7 @@ export class Developer {
     private _profiles: Profile[];
     private _requirements: Requirement[];
 
-    constructor(user: User, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, profiles: Profile[], requirements: Requirement[]) {
+    constructor(user: User, first_name: string, second_name: string, last_name: string, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, profiles: Profile[], requirements: Requirement[]) {
         this._user = user;
         this._birthday = birthday;
         this._avatar = avatar;
@@ -19,6 +22,9 @@ export class Developer {
         this._is_activated = is_activated;
         this._profiles = profiles;
         this._requirements = requirements;
+        this._first_name = first_name;
+        this._second_name = second_name;
+        this._last_name = last_name;
     }
 
     public getUser(): User {
@@ -27,6 +33,30 @@ export class Developer {
 
     public setUser(user: User): void {
         this._user = user;
+    }
+
+    public getFirstName(): string {
+        return this._first_name;
+    }
+
+    public setFirstName(first_name: string): void {
+        this._first_name = first_name;
+    }
+
+    public getSecondName(): string {
+        return this._second_name;
+    }
+
+    public setSecondName(second_name: string): void {
+        this._second_name = second_name;
+    }
+
+    public getLastName(): string {
+        return this._last_name;
+    }
+
+    public setLastName(last_name: string): void {
+        this._last_name = last_name;
     }
 
     public getBirthday(): Date {

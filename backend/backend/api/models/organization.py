@@ -2,7 +2,7 @@ from django.db import models
 
 
 def upload_to(instance, filename):
-    return 'images/{filename}'.format(filename=filename)
+    return 'images/organization/{filename}'.format(filename=filename)
 
 
 class Organization(models.Model):
