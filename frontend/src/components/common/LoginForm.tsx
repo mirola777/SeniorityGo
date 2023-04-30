@@ -52,7 +52,7 @@ function LoginForm() {
                         <div>
                             <label htmlFor="username" className="block mb-2 text-sm font-medium  text-white">{t('username')}</label>
                             <input
-                                placeholder="Enter Username"
+                                placeholder={t('username_placeholder') || ''}
                                 name='username'
                                 type='text'
                                 value={credentialsDict.username}
@@ -65,7 +65,7 @@ function LoginForm() {
                             <input
                                 name='password'
                                 type="password"
-                                placeholder="Enter password"
+                                placeholder={t('password_placeholder') || ''}
                                 value={credentialsDict.password}
                                 required
                                 onChange={handleInputChange}
