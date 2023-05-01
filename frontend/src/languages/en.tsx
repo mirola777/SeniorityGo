@@ -83,6 +83,17 @@ function English() {
             register_wrong: "There was an error registering the user",
             passwords_not_match: "The passwords don't match",
             username_already_exists: "The username already exists",
+            seniority_unique_level_organization: "The Seniority level must be unique within the organization",
+            seniority_unique_name_organization: "The Seniority name must be unique within the organization",
+            seniority_unique_name_level_organization: "The Seniority name and level must be unique within the organization",
+            requirement_unique_name_organization: "The Requirement name must be unique within the organization",
+            organization_unique_name: "The organization name must be unique",
+            profile_unique_name_organization: "The Profile name must be unique within the organization",
+            profile_unique_requirement: "The must be unique within the Profile",
+            profileseniority_unique_pokemon_profile_seniority: "The Pokemon must be unique within the Profile and the Seniority Level",
+            profileseniority_unique_pokemon_profile: "The Pokemon must be unique within the Profile",
+            profileseniority_unique_profile_seniority: "The Profile and the Seniority Level must be unique",
+            profileseniorityrequirement_unique_profileseniority_requirement: "The Profile, the Seniority Level and the Requirement must be unique",
 
         },
     };

@@ -11,6 +11,3 @@ class Requirement(models.Model):
     image = models.ImageField(upload_to=upload_to, blank=True, null=True)
     points = models.IntegerField()
     organization = models.ForeignKey('Organization', on_delete=models.CASCADE, related_name='requirements')
-    
-    class Meta:
-        unique_together = ['name', 'organization']

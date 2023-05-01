@@ -2,11 +2,8 @@ import { useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { updateRequirement } from '../../../services/RequirementService';
-import { ReactComponent as NameIcon } from '../../../assests/icons/CodeBracket.svg';
-import { ReactComponent as LevelIcon } from '../../../assests/icons/ArrowTrendingUp.svg';
 import { ReactComponent as RequirementsIcon } from "../../../assests/icons/Req.svg";
 import { ReactComponent as PointsIcon } from "../../../assests/icons/Points.svg";
-import { ReactComponent as ImageIcon } from "../../../assests/icons/Image.svg";
 import { Requirement } from '../../../models/Requirement';
 import FormOutputMessage from '../../common/FormOutputMessage';
 import DropzoneImage from '../../common/DropzoneImage';
@@ -72,6 +69,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                     <input
                         type="text"
                         id="name"
+                        required
                         name="name"
                         onChange={handleInputChange}
                         value={requirementDict.name}
@@ -90,6 +88,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                         type="text"
                         id="description"
                         name="description"
+                        required
                         onChange={handleInputChange}
                         value={requirementDict.description}
                         className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
@@ -109,6 +108,7 @@ function RequirementUpdateForm({ requirement, onUpdateRequirement }: Requirement
                         <PointsIcon className="w-5 h-5 text-gray-400" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                     </div>
                     <input
+                        required
                         type="number"
                         id="points"
                         name="points"

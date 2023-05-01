@@ -68,6 +68,7 @@ function SeniorityForm({ onCreateSeniority }: SeniorityFormProps) {
                         type="text"
                         id="name"
                         name="name"
+                        required
                         onChange={handleInputChange}
                         className="border text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Junior, SemiSenior, Senior..." />
@@ -85,6 +86,7 @@ function SeniorityForm({ onCreateSeniority }: SeniorityFormProps) {
                         id="level"
                         name="level"
                         min={0}
+                        required
                         onChange={handleInputChange}
                         className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="0" />
