@@ -71,6 +71,7 @@ function RequirementForm({ onCreateRequirement }: RequirementFormProps) {
                         id="name"
                         name="name"
                         onChange={handleInputChange}
+                        required
                         className="border text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Git certificate..." />
                 </div>
@@ -87,6 +88,7 @@ function RequirementForm({ onCreateRequirement }: RequirementFormProps) {
                         id="description"
                         name="description"
                         onChange={handleInputChange}
+                        required
                         className="border text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Important aspects..." />
                 </div>
@@ -109,6 +111,7 @@ function RequirementForm({ onCreateRequirement }: RequirementFormProps) {
                         id="points"
                         name="points"
                         min={0}
+                        required
                         onChange={handleInputChange}
                         className="borde text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="0" />

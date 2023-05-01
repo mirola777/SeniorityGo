@@ -69,6 +69,17 @@ function Spanish() {
             register_wrong: "Ha habido un error al registrarte",
             passwords_not_match: "Las contraseñas no coinciden",
             username_already_exists: "El nombre de usuario ya existe",
+            seniority_unique_level_organization: "El nivel de Seniority debe ser único dentro de la organización",
+            seniority_unique_name_organization: "El nombre de Seniority debe ser único dentro de la organización",
+            seniority_unique_name_level_organization: "El nombre y el nivel de Seniority deben ser únicos dentro de la organización",
+            requirement_unique_name_organization: "El nombre del requisito debe ser único dentro de la organización",
+            organization_unique_name: "El nombre de la organización debe ser único",
+            profile_unique_name_organization: "El nombre del perfil debe ser único dentro de la organización",
+            profile_unique_requirement: "El requisito debe ser único dentro del perfil",
+            profileseniority_unique_pokemon_profile_seniority: "El Pokémon debe ser único dentro del perfil y nivel de Seniority",
+            profileseniority_unique_pokemon_profile: "El Pokémon debe ser único dentro del perfil",
+            profileseniority_unique_profile_seniority: "El perfil y nivel de Seniority deben ser únicos",
+            profileseniorityrequirement_unique_profileseniority_requirement: "El requisito debe ser único dentro del perfil y nivel de Seniority",
         },
     };
 }

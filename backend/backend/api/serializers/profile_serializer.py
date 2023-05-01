@@ -4,6 +4,7 @@ from api.models.profileseniority import ProfileSeniority
 from api.models.profileseniorityrequirement import ProfileSeniorityRequirement
 from api.serializers.profileseniority_serializer import ProfileSenioritySerializer
 from django.db import transaction
+from rest_framework.validators import UniqueTogetherValidator
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -12,6 +13,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Profile.objects.all(),
+                message='profile_unique_name_organization',
+                fields=('name', 'organization')
+            )
+        ]
         fields = ['id', 'name', 'description', 'organization', 'seniorities']
 
     def create(self, validated_data):
@@ -36,8 +44,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
                         # Checking if requirement already exists
                         if requirement in all_requirements:
-                            raise serializers.ValidationError(
-                                'Requirement already exists in other Seniority of the same Profile')
+                            raise serializers.ValidationError('profile_unique_requirement')
 
                         all_requirements.append(requirement)
 

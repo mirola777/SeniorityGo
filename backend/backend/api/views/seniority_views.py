@@ -19,13 +19,9 @@ def getAll(request):
 def create(request):
     serializer = SenioritySerializer(data=request.data)
 
-    try:
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-    except Exception as e:
-        error = {'error': str(e)}
-        return Response(error, status=status.HTTP_400_BAD_REQUEST)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -59,11 +55,12 @@ def get(request, pk):
 def update(request, pk):
     try:
         seniority = Seniority.objects.get(pk=pk)
-        serializer = SenioritySerializer(seniority, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    except Exception as e:
-        error = {'error': str(e)}
-        return Response(error, status=status.HTTP_400_BAD_REQUEST)
+    except Seniority.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = SenioritySerializer(seniority, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

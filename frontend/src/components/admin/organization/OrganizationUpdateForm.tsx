@@ -1,11 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as NameIcon } from '../../../assests/icons/CodeBracket.svg';
 import FormOutputMessage from '../../common/FormOutputMessage';
 import { Organization } from '../../../models/Organization';
 import { updateOrganization } from '../../../services/OrganizationService';
-import { useDropzone } from 'react-dropzone';
 import DropzoneImage from '../../common/DropzoneImage';
 
 
@@ -69,6 +68,7 @@ function OrganizationUpdateForm({ organization, onUpdateOrganization }: Organiza
                         type="text"
                         id="name"
                         name="name"
+                        required
                         onChange={handleInputChange}
                         value={organizationDict.name}
                         className="border text-sm rounded-lg block w-full pl-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"

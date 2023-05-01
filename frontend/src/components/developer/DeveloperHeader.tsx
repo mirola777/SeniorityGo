@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
 
+
 function DeveloperHeader() {
     // Translation component
     const { t } = useTranslation();
@@ -53,7 +54,7 @@ function DeveloperHeader() {
                             <button className="block">
                                 <img
                                     alt=""
-                                    src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    src="https://i.redd.it/pokémon-themed-profile-icon-v0-c8z5m7o3osk81.jpg?s=a03d2cbbd1f41c453f88fe1b7d77f7c0832e8d13"
                                     className="h-8 w-8 rounded-full object-cover"
                                 />
                             </button>
