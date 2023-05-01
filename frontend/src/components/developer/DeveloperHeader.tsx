@@ -12,17 +12,13 @@ function DeveloperHeader() {
     // Translation component
     const { t } = useTranslation();
 
-    const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState<Admin | Developer | null>(null);
 
     useEffect(() => {
-        if (localStorage.getItem('access_token') !== null) {
-            setIsAuth(true);
-            getUserSession().then((user) => {
-                setUser(user);
-            });
-        }
-    }, [isAuth]);
+        getUserSession().then((user) => {
+            setUser(user);
+        });
+    }, [setUser]);
 
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
@@ -40,7 +36,7 @@ function DeveloperHeader() {
                 </div>
 
                 <div className="flex items-center w-full mx-auto justify-end gap-2">
-                    {isAuth ? (
+                    {user ? (
                         <div className="flex items-center w-full mx-auto justify-end gap-2">
                             <div className="flex items-center gap-4">
                                 <button className="block shrink-0 rounded-full bg-dark-blue-900 p-1.5 text-gray-400 shadow-sm hover:bg-dark-blue-300 hover:text-gray-100">
