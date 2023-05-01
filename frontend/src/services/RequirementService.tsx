@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Requirement } from "../models/Requirement";
+import JsonToRequirement from "../parsers/RequirementParser";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -7,15 +8,20 @@ export async function getAllRequirements(): Promise<Requirement[]> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/requirement/all/');
         const requirements: Requirement[] = response.data.map((json: any) => {
-            const requirement = new Requirement(
-                json.id,
-                json.name,
-                json.description,
-                json.image ? BACKEND_URL + json.image : null,
-                json.points
-            );
+            return JsonToRequirement(json);
+        });
 
-            return requirement;
+        return requirements;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+export async function getOrganizationRequirements(organization: number): Promise<Requirement[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/requirement/organization/' + organization + '/');
+        const requirements: Requirement[] = response.data.map((json: any) => {
+            return JsonToRequirement(json);
         });
 
         return requirements;
@@ -33,15 +39,7 @@ export async function createRequirement(requirementDict: object): Promise<Requir
         });
 
         const json = response.data;
-        const requirement = new Requirement(
-            json.id,
-            json.name,
-            json.description,
-            json.image ? BACKEND_URL + json.image : null,
-            json.points
-        );
-
-        return requirement;
+        return JsonToRequirement(json);
     } catch (error: any) {
         throw error.response.data;
     }
@@ -51,15 +49,7 @@ export async function getRequirement(id: number): Promise<Requirement> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/requirement/get/' + id + '/');
         const json = response.data;
-        const requirement = new Requirement(
-            json.id,
-            json.name,
-            json.description,
-            json.image ? BACKEND_URL + json.image : null,
-            json.points
-        );
-
-        return requirement;
+        return JsonToRequirement(json);
     } catch (error: any) {
         throw error.response.data;
     }
@@ -73,15 +63,7 @@ export async function updateRequirement(id: number, requirementDict: object): Pr
             }
         });
         const json = response.data;
-        const requirement = new Requirement(
-            json.id,
-            json.name,
-            json.description,
-            json.image ? BACKEND_URL + json.image : null,
-            json.points
-        );
-
-        return requirement;
+        return JsonToRequirement(json);
     } catch (error: any) {
         throw error.response.data;
     }

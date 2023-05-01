@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { register } from "../../services/AuthService";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,19 +6,23 @@ import FormOutputMessage from "./FormOutputMessage";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { formatDate } from "../../util/DateFormat";
+import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
+import { Organization } from "../../models/Organization";
+import { getAllOrganizations } from "../../services/OrganizationService";
 
 
 function RegisterForm() {
     // Translation component
     const { t } = useTranslation();
 
+    const [organizations, setOrganizations] = useState<Organization[]>([]);
     const [errors, setErrors] = useState<string[]>([]);
     const [success, setSuccess] = useState<string | null>(null);
     const [registerDict, setRegisterDict] = useState({
         user: {
             username: '',
             email: '',
-            password: ''
+            password: '',
         },
         confirm_password: '',
         first_name: '',
@@ -27,6 +31,7 @@ function RegisterForm() {
         avatar: '',
         birthday: formatDate(new Date()),
         phone_number: '',
+        organization: 0,
         requirements: [],
         profiles: [],
     });
@@ -72,15 +77,33 @@ function RegisterForm() {
         setRegisterDict({ ...registerDict, birthday: formatDate(date.startDate) });
     }
 
+    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = event.target;
+        if (name === 'organization') {
+            setRegisterDict({ ...registerDict, [name]: +value });
+        } else {
+            setRegisterDict({ ...registerDict, [name]: value });
+        }
+    }
+
+    useEffect(() => {
+        getAllOrganizations().then((organizations) => {
+            setOrganizations(organizations);
+        })
+    }, [setOrganizations]);
+
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
-            <div className="w-full rounded-lg border md:mt-0 sm:max-w-3xl xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-white">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+            <div className="w-full rounded-lg border max-w-3xl xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
+            <div className="flex flex-col items-center space-y-4 p-8">
+                    <Link to="/">
+                        <AppLogo className="w-48"></AppLogo>
+                    </Link>
+                    <h2 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-white">
                         {t('register')}
-                    </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                    </h2>
+                    <form className="w-full space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="username" className="block mb-2 text-sm font-medium  text-white">{t('username')}*</label>
                             <input
@@ -105,6 +128,24 @@ function RegisterForm() {
                                 onChange={handleInputChange}
                                 className=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
                         </div>
+
+                        <div>
+                            <label htmlFor="organization" className="block mb-2 text-sm font-medium  text-white">{t('organization')}*</label>
+                            <select
+                                id="organization"
+                                name='organization' 
+                                value={registerDict.organization}
+                                required
+                                onChange={handleSelectChange}
+                                className=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" >
+                                    <option disabled selected>{t('select_organization')}</option>
+                                    {organizations.map((organization) => {
+                                        return <option value={organization.getId()}>{organization.getName()}</option>
+                                    })}
+                            </select>
+
+                        </div>
+
 
                         <div className="flex space-x-4">
                             <div className="w-full">

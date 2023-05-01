@@ -6,16 +6,35 @@ import { ReactComponent as SenioritiesIcon } from "../../assests/icons/CodeBrack
 import { ReactComponent as OrganizationIcon } from "../../assests/icons/BuildingOffice.svg"
 import { ReactComponent as RequirementsIcon } from "../../assests/icons/Req.svg"
 import { useTranslation } from 'react-i18next';
+import { getUserSession, logout } from "../../services/AuthService";
+import { useEffect, useState } from "react";
+import { getOrganization } from "../../services/OrganizationService";
+import { Organization } from "../../models/Organization";
 
 function AdminSideBar() {
     // Translation component
     const { t } = useTranslation();
+    
+    const [organization, setOrganization] = useState<Organization | null>();
+
+    useEffect(() => {
+        getUserSession().then((user) => {
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
+                setOrganization(organizationResponse);
+            });
+        });
+        
+    }, []);
 
     return (
         <div className="p-8 h-full ">
             <div className="h-full flex flex-col items-center w-52 text-gray-300 rounded-lg bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl overflow-hidden ">
                 <Link to="/admin/" className="flex flex-col items-center w-full px-3 mt-3">
-                    <AppLogo className="w-32 h-32 fill-current" />
+                    {organization && organization.getImage() !== null && <img src={organization.getImage()} alt="Organization Logo" className="py-4 w-32"></img>}
                 </Link>
 
                 <div className="w-full px-2">
@@ -38,7 +57,7 @@ function AdminSideBar() {
                         </Link>
                     </div>
                 </div>
-                <button className="flex items-center justify-center w-full h-16 mt-auto bg-gradient-to-r from-dark-blue-800 to-dark-blue-300 hover:bg-gray-700 hover:text-gray-300">
+                <button onClick={logout} className="flex items-center justify-center w-full h-16 mt-auto bg-gradient-to-r from-dark-blue-800 to-dark-blue-300 hover:bg-gray-700 hover:text-gray-300">
                     <LogoutIcon className="w-6 h-6 stroke-current" />
                     <span className="ml-2 text-sm font-medium">{t('logout')}</span>
                 </button>

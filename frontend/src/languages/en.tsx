@@ -94,6 +94,7 @@ function English() {
             profileseniority_unique_pokemon_profile: "The Pokemon must be unique within the Profile",
             profileseniority_unique_profile_seniority: "The Profile and the Seniority Level must be unique",
             profileseniorityrequirement_unique_profileseniority_requirement: "The Profile, the Seniority Level and the Requirement must be unique",
+            select_organization: "Select an organization",
 
         },
     };

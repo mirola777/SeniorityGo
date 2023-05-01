@@ -8,9 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def getAll(request):
-    organizations = Organization.objects.all()
+    organizations = Organization.objects.all().order_by('name')
     serializer = OrganizationSerializer(organizations, many=True)
     return Response(serializer.data)
 
@@ -41,7 +40,6 @@ def delete(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def get(request, pk):
     try:
         organization = Organization.objects.get(pk=pk)

@@ -6,29 +6,46 @@ import { getUserSession, logout } from "../../services/AuthService";
 import { Link } from "react-router-dom";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
+import { getOrganization } from "../../services/OrganizationService";
+import { Organization } from "../../models/Organization";
 
 
 function DeveloperHeader() {
     // Translation component
     const { t } = useTranslation();
 
-    const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState<Admin | Developer | null>(null);
+    const [organization, setOrganization] = useState<Organization | null>();
 
     useEffect(() => {
-        if (localStorage.getItem('access_token') !== null) {
-            setIsAuth(true);
-            getUserSession().then((user) => {
-                setUser(user);
+        getUserSession().then((user) => {
+            setUser(user);
+
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
+                setOrganization(organizationResponse);
             });
-        }
-    }, [isAuth]);
+        });
+        
+    }, []);
+
+    useEffect(() => {
+        getUserSession().then((user) => {
+            setUser(user);
+        });
+    }, []);
 
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
             <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-8">
-                <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2">
-                    <AppLogo className="h-16 w-16"></AppLogo>
+                <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2 py-4">
+                    {user && organization && organization.getImage() !== null ? (
+                            <img src={organization.getImage()} alt="Organization Logo" className="h-8 object-cover"></img>
+                    ) : (<AppLogo className="h-8"></AppLogo>)}
+                    
                 </Link>
 
                 <div className="flex items-center gap-4">
@@ -40,7 +57,7 @@ function DeveloperHeader() {
                 </div>
 
                 <div className="flex items-center w-full mx-auto justify-end gap-2">
-                    {isAuth ? (
+                    {user ? (
                         <div className="flex items-center w-full mx-auto justify-end gap-2">
                             <div className="flex items-center gap-4">
                                 <button className="block shrink-0 rounded-full bg-dark-blue-900 p-1.5 text-gray-400 shadow-sm hover:bg-dark-blue-300 hover:text-gray-100">

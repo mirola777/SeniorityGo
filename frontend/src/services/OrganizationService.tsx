@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Organization } from "../models/Organization";
+import JsonToOrganization from "../parsers/OrganizationParser";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -7,18 +8,28 @@ export async function getOrganization(id: number): Promise<Organization> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/organization/get/' + id + '/');
         const json = response.data;
-        const organization = new Organization(
-            json.id,
-            json.name,
-            BACKEND_URL + json.image,
-            []
-        );
-
-        return organization;
+        return JsonToOrganization(json);
     } catch (error: any) {
         throw error.response.data;
     }
 }
+
+
+export async function getAllOrganizations(): Promise<Organization[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/organization/all/');
+
+        const organizations: Organization[] = (await response).data.map((json: any) => {
+            return JsonToOrganization(json);
+        });
+
+
+        return organizations;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
 
 
 export async function updateOrganization(id: number, organizationDict: object): Promise<Organization> {
@@ -31,16 +42,8 @@ export async function updateOrganization(id: number, organizationDict: object): 
         });
         
         const json = response.data;
-        const organization = new Organization(
-            json.id,
-            json.name,
-            json.image ? BACKEND_URL + json.image : null,
-            []
-        );
+        return JsonToOrganization(json);
 
-        console.log(organization);
-
-        return organization;
     } catch (error: any) {
         throw error.response.data;
     }

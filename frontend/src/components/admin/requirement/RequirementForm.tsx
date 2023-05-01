@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { createRequirement } from '../../../services/RequirementService';
@@ -7,6 +7,7 @@ import { ReactComponent as PointsIcon } from "../../../assests/icons/Points.svg"
 import { Requirement } from '../../../models/Requirement';
 import FormOutputMessage from '../../common/FormOutputMessage';
 import DropzoneImage from '../../common/DropzoneImage';
+import { getUserSession } from '../../../services/AuthService';
 
 
 interface RequirementFormProps {
@@ -25,7 +26,7 @@ function RequirementForm({ onCreateRequirement }: RequirementFormProps) {
         description: '',
         image: '',
         points: 0,
-        organization: 1
+        organization: 0
     });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -57,6 +58,17 @@ function RequirementForm({ onCreateRequirement }: RequirementFormProps) {
         else if (type === 'text' || type === 'file')
             setRequirementDict({ ...requirementDict, [name]: value });
     };
+
+
+    useEffect(() => {
+        getUserSession().then((user) => {
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            setRequirementDict({ ...requirementDict, organization: user.getUser().getOrganization() });
+        });
+    }, []);
 
     return (
         <form className='w-full max-w-lg mx-auto space-y-4 flex flex-col' onSubmit={handleSubmit}>

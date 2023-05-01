@@ -5,19 +5,26 @@ import { getOrganization } from '../../../services/OrganizationService';
 import { Organization } from '../../../models/Organization';
 import StatsCard from '../../../components/common/StatsCard';
 import { Link } from 'react-router-dom';
+import { getUserSession } from '../../../services/AuthService';
 
 
 function OrganizationPage() {
     // Translation component
     const { t } = useTranslation();
 
-    // Seniority var
     const [organization, setOrganization] = useState<Organization | null>();
 
     useEffect(() => {
-        getOrganization(1).then((organizationResponse) => {
-            setOrganization(organizationResponse);
+        getUserSession().then((user) => {
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
+                setOrganization(organizationResponse);
+            });
         });
+        
     }, []);
 
     return (

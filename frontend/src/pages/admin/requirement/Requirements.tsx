@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RequirementCard from "../../../components/admin/requirement/RequirementCard";
 import { Requirement } from "../../../models/Requirement";
-import { getAllRequirements } from "../../../services/RequirementService";
+import { getOrganizationRequirements } from "../../../services/RequirementService";
 import { Link } from "react-router-dom";
+import { getUserSession } from "../../../services/AuthService";
 
 
 function Requirements() {
@@ -13,8 +14,14 @@ function Requirements() {
     const [requirements, setRequirements] = useState<Requirement[]>([]);
 
     useEffect(() => {
-        getAllRequirements().then((requirementsResponse) => {
-            setRequirements(requirementsResponse);
+        getUserSession().then((user) => {
+            if (user === null) {
+                return;
+            }
+            
+            getOrganizationRequirements(user?.getUser().getOrganization()).then((senioritiesResponse) => {
+                setRequirements(senioritiesResponse);
+            });
         });
     }, []);
 

@@ -1,10 +1,15 @@
 import axios from "axios";
 import { Developer } from "../models/Developer";
-import { User } from "../models/User";
 import { Admin } from "../models/Admin";
 import CustomAxiosError from "../util/CustomAxiosError";
+import JsonToUser from "../parsers/UserParser";
 
 
+const USER_STORAGE_KEY = 'user';
+const USER_STORAGE_USER_TIME = 'user_time';
+const USER_STORAGE_EXPIRE = 30 * 1000; // 30 seconds
+const TOKEN_ACCESS = 'access_token';
+const TOKEN_REFRESH = 'refresh_token';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -19,6 +24,7 @@ interface RegisterCredentials {
         username: string;
         email: string;
         password: string;
+
     }
     first_name: string;
     second_name?: string | null;
@@ -27,6 +33,7 @@ interface RegisterCredentials {
     phone_number: string;
     avatar?: string;
     confirm_password: string;
+    organization: number;
 }
 
 
@@ -40,8 +47,8 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         });
 
         localStorage.clear();
-        localStorage.setItem('access_token', data.data.access);
-        localStorage.setItem('refresh_token', data.data.refresh);
+        localStorage.setItem(TOKEN_ACCESS, data.data.access);
+        localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
         window.location.reload();
     } catch (error: any) {
@@ -58,10 +65,10 @@ export async function register(credentials: RegisterCredentials): Promise<void> 
         if (credentials.user.password !== credentials.confirm_password) {
             const error = new Error() as CustomAxiosError;
             error.response = {
-                data: { 
+                data: {
                     errors: [
                         'passwords_not_match'
-                    ] 
+                    ]
                 },
             };
 
@@ -95,7 +102,7 @@ export async function refreshToken(): Promise<void> {
     try {
         const response = await axios.post(BACKEND_URL + '/api/auth/token/refresh/',
             {
-                refresh: localStorage.getItem('refresh_token'),
+                refresh: localStorage.getItem(TOKEN_REFRESH),
             },
             {
                 headers: {
@@ -107,13 +114,13 @@ export async function refreshToken(): Promise<void> {
 
         if (response.status === 200) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
+            localStorage.setItem(TOKEN_ACCESS, response.data.access);
+            localStorage.setItem(TOKEN_REFRESH, response.data.refresh);
         }
     } catch (e) {
         axios.defaults.headers.common['Authorization'] = null;
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        localStorage.removeItem(TOKEN_ACCESS);
+        localStorage.removeItem(TOKEN_REFRESH);
         window.location.reload();
     }
 
@@ -137,51 +144,62 @@ export async function logout(): Promise<void> {
     }
 
     axios.defaults.headers.common['Authorization'] = null;
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem(USER_STORAGE_KEY);
+    localStorage.removeItem(TOKEN_ACCESS);
+    localStorage.removeItem(TOKEN_REFRESH);
     window.location.reload();
 }
 
 
-export async function getUserSession(): Promise<Developer | Admin | null> {
+async function getUserSessionFromBack(): Promise<any | null> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/auth/session/');
         const json = response.data;
+        if (json === null || json === undefined) return null;
 
-        if (json.role === 'developer') {
-            const developer = new Developer(
-                new User(
-                    json.user.id,
-                    json.user.username,
-                    json.user.email
-                ),
-                json.first_name,
-                json.second_name,
-                json.last_name,
-                json.birthday,
-                json.avatar ? BACKEND_URL + json.avatar : null,
-                json.phone_number,
-                json.is_activated,
-                [],
-                []
-            );
-
-            return developer;
-        } else if (json.role === 'admin') {
-            const admin = new Admin(
-                new User(
-                    json.user.id,
-                    json.user.email,
-                    json.user.username
-                )
-            );
-
-            return admin;
-        }
-
-        return null;
+        return json;
 
     } catch (error: any) {
         throw error.response.data;
     }
+}
+
+
+export async function getUserSession(): Promise<Developer | Admin | null> {
+    if (localStorage.getItem(TOKEN_ACCESS) === null) {
+        return null;
+    }
+    
+    let user = localStorage.getItem(USER_STORAGE_KEY);
+    let time = localStorage.getItem(USER_STORAGE_USER_TIME) as unknown as number;
+    if (!time) {
+        time = new Date().getTime();
+        localStorage.setItem(USER_STORAGE_USER_TIME, time.toString());
+    };
+
+    const now = new Date();
+
+    if (now.getTime() - time > USER_STORAGE_EXPIRE) {
+        localStorage.removeItem(USER_STORAGE_KEY);
+        localStorage.setItem(USER_STORAGE_USER_TIME, now.getTime().toString());
+        user = null;
+    }
+
+    if (user) {
+        const json = JSON.parse(user);
+        return JsonToUser(json);
+    }
+
+    try {
+        const user = await getUserSessionFromBack();
+        if (user !== null) {
+            localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+            const json = JSON.parse(JSON.stringify(user));
+            return JsonToUser(json);
+        }
+    } catch (error) {
+        return null;
+    }
+
+    return null;
 }
