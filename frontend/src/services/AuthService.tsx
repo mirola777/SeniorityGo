@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Developer } from "../models/Developer";
-import { User } from "../models/User";
 import { Admin } from "../models/Admin";
 import CustomAxiosError from "../util/CustomAxiosError";
+import JsonToDeveloper from "../parsers/DeveloperParser";
+import JsonToAdmin from "../parsers/AdminParser";
 
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -151,36 +152,9 @@ export async function getUserSession(): Promise<Developer | Admin | null> {
         const json = response.data;
 
         if (json.role === 'developer') {
-            const developer = new Developer(
-                new User(
-                    json.user.id,
-                    json.user.username,
-                    json.user.email,
-                    json.organization
-                ),
-                json.first_name,
-                json.second_name,
-                json.last_name,
-                json.birthday,
-                json.avatar ? BACKEND_URL + json.avatar : null,
-                json.phone_number,
-                json.is_activated,
-                [],
-                []
-            );
-
-            return developer;
+            return JsonToDeveloper(json);
         } else if (json.role === 'admin') {
-            const admin = new Admin(
-                new User(
-                    json.user.id,
-                    json.user.email,
-                    json.user.username,
-                    json.organization
-                )
-            );
-
-            return admin;
+            return JsonToAdmin(json);
         }
 
         return null;
