@@ -18,7 +18,7 @@ function DeveloperHeader() {
         getUserSession().then((user) => {
             setUser(user);
         });
-    }, [setUser]);
+    }, []);
 
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">

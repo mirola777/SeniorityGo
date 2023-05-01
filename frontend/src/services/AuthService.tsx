@@ -166,6 +166,10 @@ async function getUserSessionFromBack(): Promise<any | null> {
 
 
 export async function getUserSession(): Promise<Developer | Admin | null> {
+    if (localStorage.getItem(TOKEN_ACCESS) === null) {
+        return null;
+    }
+    
     let user = localStorage.getItem(USER_STORAGE_KEY);
     let time = localStorage.getItem(USER_STORAGE_USER_TIME) as unknown as number;
     if (!time) {
