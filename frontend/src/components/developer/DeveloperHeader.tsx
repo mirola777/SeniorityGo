@@ -6,6 +6,8 @@ import { getUserSession, logout } from "../../services/AuthService";
 import { Link } from "react-router-dom";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
+import { getOrganization } from "../../services/OrganizationService";
+import { Organization } from "../../models/Organization";
 
 
 function DeveloperHeader() {
@@ -13,6 +15,22 @@ function DeveloperHeader() {
     const { t } = useTranslation();
 
     const [user, setUser] = useState<Admin | Developer | null>(null);
+    const [organization, setOrganization] = useState<Organization | null>();
+
+    useEffect(() => {
+        getUserSession().then((user) => {
+            setUser(user);
+
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
+                setOrganization(organizationResponse);
+            });
+        });
+        
+    }, []);
 
     useEffect(() => {
         getUserSession().then((user) => {
@@ -23,8 +41,11 @@ function DeveloperHeader() {
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
             <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-8">
-                <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2">
-                    <AppLogo className="h-16 w-16"></AppLogo>
+                <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2 py-4">
+                    {user && organization && organization.getImage() !== null ? (
+                            <img src={organization.getImage()} alt="Organization Logo" className="h-8 object-cover"></img>
+                    ) : (<AppLogo className="h-8"></AppLogo>)}
+                    
                 </Link>
 
                 <div className="flex items-center gap-4">

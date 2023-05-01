@@ -34,9 +34,7 @@ function AdminSideBar() {
         <div className="p-8 h-full ">
             <div className="h-full flex flex-col items-center w-52 text-gray-300 rounded-lg bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl overflow-hidden ">
                 <Link to="/admin/" className="flex flex-col items-center w-full px-3 mt-3">
-                    {
-                        organization && <img className="h-32 object-cover fill-current" src={organization.getImage()} alt="Logo" />
-                    }
+                    {organization && organization.getImage() !== null && <img src={organization.getImage()} alt="Organization Logo" className="py-4 w-32"></img>}
                 </Link>
 
                 <div className="w-full px-2">
