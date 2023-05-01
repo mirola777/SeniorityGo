@@ -12,7 +12,6 @@ function OrganizationPage() {
     // Translation component
     const { t } = useTranslation();
 
-    // Seniority var
     const [organization, setOrganization] = useState<Organization | null>();
 
     useEffect(() => {
