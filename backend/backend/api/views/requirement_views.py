@@ -15,6 +15,14 @@ def getAll(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrganizationRequirements(request, pk): 
+    requirements = Requirement.objects.filter(organization=pk).all()
+    serializer = RequirementSerializer(requirements, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])

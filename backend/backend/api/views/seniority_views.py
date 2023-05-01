@@ -14,6 +14,14 @@ def getAll(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrganizationSeniorities(request, pk): 
+    seniorities = Seniority.objects.filter(organization=pk).order_by('level')
+    serializer = SenioritySerializer(seniorities, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create(request):

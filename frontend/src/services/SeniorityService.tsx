@@ -17,6 +17,19 @@ export async function getAllSeniorities(): Promise<Seniority[]> {
     }
 }
 
+export async function getOrganizationSeniorities(organization: number): Promise<Seniority[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/seniority/organization/' + organization + '/');
+        const seniorities: Seniority[] = response.data.map((json: any) => {
+            return JsonToSeniority(json);
+        });
+
+        return seniorities;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
 export async function createSeniority(seniorityDict: object): Promise<Seniority> {
     try {
         const response = await axios.post(BACKEND_URL + '/api/seniority/create/', seniorityDict);

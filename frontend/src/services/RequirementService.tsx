@@ -17,6 +17,19 @@ export async function getAllRequirements(): Promise<Requirement[]> {
     }
 }
 
+export async function getOrganizationRequirements(organization: number): Promise<Requirement[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/requirement/organization/' + organization + '/');
+        const requirements: Requirement[] = response.data.map((json: any) => {
+            return JsonToRequirement(json);
+        });
+
+        return requirements;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
 export async function createRequirement(requirementDict: object): Promise<Requirement> {
     try {
         const response = await axios.post(BACKEND_URL + '/api/requirement/create/', requirementDict, {
