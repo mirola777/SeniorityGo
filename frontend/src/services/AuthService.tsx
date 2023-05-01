@@ -19,6 +19,7 @@ interface RegisterCredentials {
         username: string;
         email: string;
         password: string;
+        
     }
     first_name: string;
     second_name?: string | null;
@@ -27,6 +28,7 @@ interface RegisterCredentials {
     phone_number: string;
     avatar?: string;
     confirm_password: string;
+    organization: number;
 }
 
 
@@ -153,7 +155,8 @@ export async function getUserSession(): Promise<Developer | Admin | null> {
                 new User(
                     json.user.id,
                     json.user.username,
-                    json.user.email
+                    json.user.email,
+                    json.organization
                 ),
                 json.first_name,
                 json.second_name,
@@ -172,7 +175,8 @@ export async function getUserSession(): Promise<Developer | Admin | null> {
                 new User(
                     json.user.id,
                     json.user.email,
-                    json.user.username
+                    json.user.username,
+                    json.organization
                 )
             );
 

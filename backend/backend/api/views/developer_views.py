@@ -7,7 +7,6 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def getAll(request):
     developers = Developer.objects.all()
     serializer = DeveloperSerializer(developers, many=True)

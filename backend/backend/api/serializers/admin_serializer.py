@@ -8,4 +8,4 @@ class AdminSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Admin
-        fields = ['id', 'user',  'role']
+        fields = ['id', 'user',  'role', 'organization']

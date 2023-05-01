@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import CreatedSeniorities from '../../../components/admin/seniority/CreatedSeniorities';
-import SeniorityForm from '../../../components/admin/seniority/SeniorityForm';
 import AdviceCard from '../../../components/common/AdviceCard';
-import { Seniority } from '../../../models/Seniority';
 import OrganizationUpdateForm from '../../../components/admin/organization/OrganizationUpdateForm';
 import { Organization } from '../../../models/Organization';
 import { useEffect } from 'react';
 
 import { getOrganization } from '../../../services/OrganizationService';
+import { getUserSession } from '../../../services/AuthService';
 
 
 function UpdateOrganization() {
@@ -21,8 +19,14 @@ function UpdateOrganization() {
     }
 
     useEffect(() => {
-        getOrganization(1).then((organizationResponse) => {
-            setOrganization(organizationResponse);
+        getUserSession().then((user) => {
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
+                setOrganization(organizationResponse);
+            });
         });
     }, []);
 

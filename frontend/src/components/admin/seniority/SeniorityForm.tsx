@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { createSeniority } from '../../../services/SeniorityService';
@@ -6,6 +6,7 @@ import { ReactComponent as NameIcon } from '../../../assests/icons/CodeBracket.s
 import { ReactComponent as LevelIcon } from '../../../assests/icons/ArrowTrendingUp.svg';
 import { Seniority } from '../../../models/Seniority';
 import FormOutputMessage from '../../common/FormOutputMessage';
+import { getUserSession } from '../../../services/AuthService';
 
 
 interface SeniorityFormProps {
@@ -23,7 +24,7 @@ function SeniorityForm({ onCreateSeniority }: SeniorityFormProps) {
     const [seniorityDict, setSeniorityDict] = useState({
         name: '',
         level: 0,
-        organization: 1
+        organization: 0
     });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,6 +56,18 @@ function SeniorityForm({ onCreateSeniority }: SeniorityFormProps) {
         else if (type === 'text')
             setSeniorityDict({ ...seniorityDict, [name]: value });
     };
+
+    useEffect(() => {
+        getUserSession().then((user) => {
+            if (user?.getUser() === null || user?.getUser() === undefined) {
+                return;
+            }
+
+            console.log(user.getUser().getOrganization())
+            setSeniorityDict({ ...seniorityDict, organization: user.getUser().getOrganization() });
+            console.log(seniorityDict)
+        });
+    }, []);
 
     return (
         <form className='w-full max-w-lg mx-auto space-y-4 flex flex-col' onSubmit={handleSubmit}>

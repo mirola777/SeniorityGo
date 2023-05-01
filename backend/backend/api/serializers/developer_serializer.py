@@ -15,6 +15,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
     second_name = serializers.CharField(required=False)
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
+  
     
     def is_valid(self, *, raise_exception=False):
         try:
@@ -28,7 +29,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Developer
-        fields = ['user', 'role', 'first_name', 'second_name', 
+        fields = ['user', 'organization', 'role', 'first_name', 'second_name', 
                   'last_name', 'birthday', 'avatar', 'phone_number', 
                   'is_activated', 'profiles', 'requirements']
         
@@ -36,12 +37,12 @@ class DeveloperSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         with transaction.atomic():
             try:
-                
                 user_data = validated_data.pop('user')
                 user_serializer = UserSerializer(data=user_data)
                 if user_serializer.is_valid():
                     user = user_serializer.save()
                     developer = Developer.objects.create(user=user, **validated_data)
+                
             except Exception as e:
                 raise e
 

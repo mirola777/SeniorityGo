@@ -18,3 +18,4 @@ class Developer(models.Model):
     is_activated = models.BooleanField(default=False)
     profiles = models.ManyToManyField('Profile', through='DeveloperProfile')
     requirements = models.ManyToManyField('Requirement', through='DeveloperRequirement')
+    organization = models.ForeignKey('Organization', on_delete=models.CASCADE, default=1)
