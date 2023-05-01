@@ -3,6 +3,7 @@ import { login } from "../../services/AuthService";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FormOutputMessage from "./FormOutputMessage";
+import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 
 
 function LoginForm() {
@@ -23,15 +24,15 @@ function LoginForm() {
             setSuccess(t('login_success'));
             setErrors([]);
         })
-        .catch((error) => {
-            setSuccess(null);
-            const errorObj = JSON.parse(error.message);
-            setErrors([]);
-            setErrors((prevErrors) => {
-                const newErrors = errorObj['errors'].map((error: string) => t(error));
-                return [...prevErrors, ...newErrors];
+            .catch((error) => {
+                setSuccess(null);
+                const errorObj = JSON.parse(error.message);
+                setErrors([]);
+                setErrors((prevErrors) => {
+                    const newErrors = errorObj['errors'].map((error: string) => t(error));
+                    return [...prevErrors, ...newErrors];
+                });
             });
-        });
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,11 +45,15 @@ function LoginForm() {
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
             <div className="w-full rounded-lg border md:mt-0 sm:max-w-md xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div className="flex flex-col items-center p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <Link to="/">
+                        <AppLogo className="w-48"></AppLogo>
+                    </Link>
                     <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-white">
-                    {t('login')}
+                        {t('login')}
                     </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+
+                    <form className="w-full space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="username" className="block mb-2 text-sm font-medium  text-white">{t('username')}</label>
                             <input

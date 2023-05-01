@@ -6,6 +6,7 @@ import FormOutputMessage from "./FormOutputMessage";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { formatDate } from "../../util/DateFormat";
+import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 
 
 function RegisterForm() {
@@ -74,13 +75,16 @@ function RegisterForm() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
-            <div className="w-full rounded-lg border md:mt-0 sm:max-w-3xl xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+            <div className="w-full rounded-lg border max-w-3xl xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
+            <div className="flex flex-col items-center space-y-4 p-8">
+                    <Link to="/">
+                        <AppLogo className="w-48"></AppLogo>
+                    </Link>
                     <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-white">
                         {t('register')}
                     </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                    <form className="w-full space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="username" className="block mb-2 text-sm font-medium  text-white">{t('username')}*</label>
                             <input
