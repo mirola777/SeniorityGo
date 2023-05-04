@@ -6,25 +6,11 @@ export class Organization {
     private _id: number;
     private _name: string;
     private _image: string;
-    private _profiles: Profile[];
-    private _seniorities: Seniority[];
-    private _requirements: Requirement[];
 
-    constructor(id: number, name: string, image: string, profiles: Profile[], seniorities: Seniority[], requirements: Requirement[]) {
+    constructor(id: number, name: string, image: string) {
         this._id = id;
         this._name = name;
         this._image = image;
-        this._profiles = profiles;
-        this._seniorities = seniorities;
-        this._requirements = requirements;
-    }
-
-    public getRequirements(): Requirement[] {
-        return this._requirements;
-    }
-
-    public getSeniorities(): Seniority[] {
-        return this._seniorities;
     }
 
     public getId(): number {
@@ -49,13 +35,5 @@ export class Organization {
 
     public setImage(image: string): void {
         this._image = image;
-    }
-
-    public getProfiles(): Profile[] {
-        return this._profiles;
-    }
-
-    public setProfiles(profiles: Profile[]): void {
-        this._profiles = profiles;
     }
 }
