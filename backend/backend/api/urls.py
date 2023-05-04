@@ -15,6 +15,7 @@ urlpatterns = [
     
     # Profile urls
     path("profile/all/", profile_views.getAll),
+    path("profile/organization/", profile_views.getOrganizationProfiles),
     path("profile/create/", profile_views.create),
     path("profile/get/<int:pk>/", profile_views.get),
     path("profile/update/<int:pk>/", profile_views.update),
@@ -22,7 +23,7 @@ urlpatterns = [
     
     # Seniority urls
     path("seniority/all/", seniority_views.getAll),
-    path("seniority/organization/<int:pk>/", seniority_views.getOrganizationSeniorities),
+    path("seniority/organization/", seniority_views.getOrganizationSeniorities),
     path("seniority/create/", seniority_views.create),
     path("seniority/get/<int:pk>/", seniority_views.get),
     path("seniority/update/<int:pk>/", seniority_views.update),
@@ -37,7 +38,7 @@ urlpatterns = [
     
     # Requirement urls
     path("requirement/all/", requirement_views.getAll),
-    path("requirement/organization/<int:pk>/", requirement_views.getOrganizationRequirements),
+    path("requirement/organization/", requirement_views.getOrganizationRequirements),
     path("requirement/create/", requirement_views.create),
     path("requirement/get/<int:pk>/", requirement_views.get),
     path("requirement/update/<int:pk>/", requirement_views.update),

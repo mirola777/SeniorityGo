@@ -4,12 +4,29 @@ from rest_framework.response import Response
 from api.models.profile import Profile
 from api.serializers.profile_serializer import ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
+from api.models.developer import Developer
+from api.models.admin import Admin
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getAll(request):
     profiles = Profile.objects.all()
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrganizationProfiles(request):
+    
+    if Developer.objects.filter(user=request.user.id).exists():
+        user = Developer.objects.get(user=request.user.id)
+        
+    if Admin.objects.filter(user=request.user.id).exists():
+        user = Admin.objects.get(user=request.user.id)
+    
+    profiles = Profile.objects.filter(organization=user.organization)
     serializer = ProfileSerializer(profiles, many=True)
     return Response(serializer.data)
 

@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from api.models.requirement import Requirement
 from api.serializers.requirement_serializer import RequirementSerializer
+from api.models.developer import Developer
+from api.models.admin import Admin
 
 
 @api_view(['GET'])
@@ -17,8 +19,15 @@ def getAll(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getOrganizationRequirements(request, pk): 
-    requirements = Requirement.objects.filter(organization=pk).all()
+def getOrganizationRequirements(request): 
+    
+    if Developer.objects.filter(user=request.user.id).exists():
+        user = Developer.objects.get(user=request.user.id)
+        
+    if Admin.objects.filter(user=request.user.id).exists():
+        user = Admin.objects.get(user=request.user.id)
+    
+    requirements = Requirement.objects.filter(organization=user.organization).order_by('points')
     serializer = RequirementSerializer(requirements, many=True)
     return Response(serializer.data)
 
