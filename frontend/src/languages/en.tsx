@@ -95,6 +95,7 @@ function English() {
             profileseniority_unique_profile_seniority: "The Profile and the Seniority Level must be unique",
             profileseniorityrequirement_unique_profileseniority_requirement: "The Profile, the Seniority Level and the Requirement must be unique",
             select_organization: "Select an organization",
+            invalid_email: "Invalid email",
 
         },
     };

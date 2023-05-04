@@ -23,6 +23,9 @@ class DeveloperSerializer(serializers.ModelSerializer):
         except ValidationError as e:  
             if 'username already exists' in str(e.detail):
                 self._errors = {'errors': ["username_already_exists"]}
+                
+            if 'Enter a valid email address.' in str(e.detail):
+                self._errors = {'errors': ["invalid_email"]}
         
         return False
 
