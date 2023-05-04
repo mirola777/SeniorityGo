@@ -186,6 +186,7 @@ class Command(BaseCommand):
             
             for developer in organization_developers:
                 for profile in random.sample(organization_profiles, 2):
+                    pass
                     #CREATE DEVELOPER PROFILE
                     #DeveloperProfile.objects.create(developer=developer, profile=profile)
 
