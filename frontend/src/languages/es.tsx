@@ -82,6 +82,7 @@ function Spanish() {
             profileseniorityrequirement_unique_profileseniority_requirement: "El requisito debe ser único dentro del perfil y nivel de Seniority",
             select_organization: "Selecciona una organización",
             invalid_email: "Email inválido",
+            users: "Usuarios",
         },
     };
 }
