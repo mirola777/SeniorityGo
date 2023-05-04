@@ -167,7 +167,7 @@ class Command(BaseCommand):
             self.stdout.write(f"Assinging requirements to profilesseniorities...")
             
             for profileseniority in organization_profileseniorities:
-                for requirement in random.sample(organization_requirements, 5):
+                for requirement in random.sample(organization_requirements, 3):
                     ProfileSeniorityRequirement.objects.create(profile_seniority=profileseniority, requirement=requirement)
                     
                 
