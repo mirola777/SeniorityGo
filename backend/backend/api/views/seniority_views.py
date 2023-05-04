@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from api.models.seniority import Seniority
 from api.serializers.seniority_serializer import SenioritySerializer
+from api.models.developer import Developer
+from api.models.admin import Admin
 
 
 @api_view(['GET'])
@@ -16,8 +18,14 @@ def getAll(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getOrganizationSeniorities(request, pk): 
-    seniorities = Seniority.objects.filter(organization=pk).order_by('level')
+def getOrganizationSeniorities(request):
+    if Developer.objects.filter(user=request.user.id).exists():
+        user = Developer.objects.get(user=request.user.id)
+        
+    if Admin.objects.filter(user=request.user.id).exists():
+        user = Admin.objects.get(user=request.user.id)
+    
+    seniorities = Seniority.objects.filter(organization=user.organization).order_by('level')
     serializer = SenioritySerializer(seniorities, many=True)
     return Response(serializer.data)
 

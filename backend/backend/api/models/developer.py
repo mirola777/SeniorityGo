@@ -14,7 +14,7 @@ class Developer(models.Model):
     role = models.CharField(max_length=50, default='developer')
     birthday = models.DateField()
     avatar = models.ImageField(upload_to=upload_to, blank=True, null=True)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=50)
     is_activated = models.BooleanField(default=False)
     profiles = models.ManyToManyField('Profile', through='DeveloperProfile')
     requirements = models.ManyToManyField('Requirement', through='DeveloperRequirement')

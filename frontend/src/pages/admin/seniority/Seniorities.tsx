@@ -4,7 +4,6 @@ import SeniorityCard from "../../../components/admin/seniority/SeniorityCard";
 import { Seniority } from "../../../models/Seniority";
 import { getOrganizationSeniorities } from "../../../services/SeniorityService";
 import { Link } from "react-router-dom";
-import { getUserSession } from "../../../services/AuthService";
 
 function Seniorities() {
     // Translation component
@@ -13,14 +12,8 @@ function Seniorities() {
     const [seniorities, setSeniorities] = useState<Seniority[]>([]);
 
     useEffect(() => {
-        getUserSession().then((user) => {
-            if (user === null) {
-                return;
-            }
-            
-            getOrganizationSeniorities(user?.getUser().getOrganization()).then((senioritiesResponse) => {
-                setSeniorities(senioritiesResponse);
-            });
+        getOrganizationSeniorities().then((senioritiesResponse) => {
+            setSeniorities(senioritiesResponse);
         });
     }, []);
 

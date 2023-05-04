@@ -4,7 +4,6 @@ import RequirementCard from "../../../components/admin/requirement/RequirementCa
 import { Requirement } from "../../../models/Requirement";
 import { getOrganizationRequirements } from "../../../services/RequirementService";
 import { Link } from "react-router-dom";
-import { getUserSession } from "../../../services/AuthService";
 
 
 function Requirements() {
@@ -13,15 +12,9 @@ function Requirements() {
     // Profiles var
     const [requirements, setRequirements] = useState<Requirement[]>([]);
 
-    useEffect(() => {
-        getUserSession().then((user) => {
-            if (user === null) {
-                return;
-            }
-            
-            getOrganizationRequirements(user?.getUser().getOrganization()).then((senioritiesResponse) => {
-                setRequirements(senioritiesResponse);
-            });
+    useEffect(() => {  
+        getOrganizationRequirements().then((senioritiesResponse) => {
+            setRequirements(senioritiesResponse);
         });
     }, []);
 
