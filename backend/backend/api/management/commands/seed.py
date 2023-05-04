@@ -9,6 +9,8 @@ from api.models.profile import Profile
 from api.models.profileseniority import ProfileSeniority
 from api.models.profileseniorityrequirement import ProfileSeniorityRequirement
 from api.models.pokemon import Pokemon
+from api.models.developerprofile import DeveloperProfile
+from api.models.developerrequirement import DeveloperRequirement
 
 import random
 from faker import Faker
@@ -174,9 +176,19 @@ class Command(BaseCommand):
             self.stdout.write(f"Creating organization developers...")
                 
             # Create developers
+            organization_developers = []
             for i in range(1, 10):
                 user = User.objects.create_user(username=faker.user_name(), password=faker.password(), email=faker.email())
                 developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                organization_developers.append(developer)
+                
+            self.stdout.write(f"Assinging profiles to developers...")
+            
+            for developer in organization_developers:
+                for profile in random.sample(organization_profiles, 2):
+                    #CREATE DEVELOPER PROFILE
+                    #DeveloperProfile.objects.create(developer=developer, profile=profile)
+
                 
             if not is_my_organization:
                 user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
