@@ -83,6 +83,7 @@ function Spanish() {
             select_organization: "Selecciona una organización",
             invalid_email: "Email inválido",
             users: "Usuarios",
+            organizations: "Organizaciones",
         },
     };
 }

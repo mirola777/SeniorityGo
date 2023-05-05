@@ -29,7 +29,7 @@ function DeveloperHeader() {
                 setOrganization(organizationResponse);
             });
         });
-        
+
     }, []);
 
     useEffect(() => {
@@ -43,16 +43,28 @@ function DeveloperHeader() {
             <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-8">
                 <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2 py-4">
                     {user && organization && organization.getImage() !== null ? (
-                            <img src={organization.getImage()} alt="Organization Logo" className="h-8 object-cover"></img>
+                        <img src={organization.getImage()} alt="Organization Logo" className="h-8 object-cover"></img>
                     ) : (<AppLogo className="h-8"></AppLogo>)}
-                    
+
                 </Link>
 
                 <div className="flex items-center gap-4">
-                    <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                        <li>
-                            <Link to="/" className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Home</Link>
-                        </li>
+                    <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
+                        {user ? (
+                            <li className="w-full">
+                                <Link to="/" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('profiles')}</Link>
+                            </li>
+                        ) : (
+                            <li className="w-full">
+                                <Link to="/" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
+                            </li>
+                        )}
+                        {user /*&& user instanceof Admin*/ && (
+                            <li className="w-full">
+                                <Link to="/admin" className="block  w-full text-white rounded whitespace-nowrap" aria-current="page">{t('admin_panel')}</Link>
+                            </li>
+                        )}
+
                     </ul>
                 </div>
 

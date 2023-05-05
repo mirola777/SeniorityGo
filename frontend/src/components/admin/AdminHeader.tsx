@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getUserSession } from "../../services/AuthService";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
+import { Link } from "react-router-dom";
 
 
 function AdminHeader() {
@@ -22,12 +23,12 @@ function AdminHeader() {
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
             <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-8">
-                <div className="flex items-center mx-auto w-full justify-start gap-2">
+                <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2">
                     <AppLogo className="h-16 w-16"></AppLogo>
-                    <span className="ml-2 whitespace-nowrap rounded-full bg-dark-blue-300 px-2.5 py-0.5 text-xs text-gray-400">
+                    <span className="ml-2 whitespace-nowrap rounded-full bg-dark-blue-300 px-2.5 py-0.5 text-xs text-gray-100">
                         {t('admin_panel')}
                     </span>
-                </div>
+                </Link>
 
                 <div className="flex items-center w-full mx-auto justify-end">
                     {user && (

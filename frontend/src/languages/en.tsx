@@ -97,6 +97,7 @@ function English() {
             select_organization: "Select an organization",
             invalid_email: "Invalid email",
             users: "Users",
+            organizations: "Organizations",
 
         },
     };
