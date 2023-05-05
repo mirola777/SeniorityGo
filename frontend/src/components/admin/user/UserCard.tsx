@@ -21,6 +21,13 @@ function UserCard({ user }: UserCardProps) {
                         {t('level') + " " + user.getUser().getEmail()}
                     </p>
                     {user instanceof Developer && (<img className="mx-auto rounded-full" src={user.getAvatar()} alt="avatar" />)}
+                    {user instanceof Developer && (user.getDeveloperProfiles().map((developerprofile) => {
+                            return <p className="mt-2 text-sm text-gray-400">
+                                {developerprofile.getProfile().getName() + " (" + developerprofile.getSeniority().getName() + ")"}
+                            </p>
+                        })
+                    )}
+         
                 </div>
             </div>
         </div>
