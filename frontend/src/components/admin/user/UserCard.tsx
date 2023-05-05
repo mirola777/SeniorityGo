@@ -20,6 +20,7 @@ function UserCard({ user }: UserCardProps) {
                     <p className="mt-2 text-sm text-gray-400">
                         {t('level') + " " + user.getUser().getEmail()}
                     </p>
+                    {user instanceof Developer && (<img className="mx-auto rounded-full" src={user.getAvatar()} alt="avatar" />)}
                 </div>
             </div>
         </div>
