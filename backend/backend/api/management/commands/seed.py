@@ -135,8 +135,8 @@ class Command(BaseCommand):
             
             # Create requirements
             organization_requirements = []
-            for req in random.sample(self.requirements, 10):
-                requirement = Requirement.objects.create(description=faker.text(), name=req, points=random.randint(50, 1000), organization=organization)
+            for req in random.sample(self.requirements, 20):
+                requirement = Requirement.objects.create(description=faker.text(), name=req, points=random.randint(50, 1500), organization=organization)
                 organization_requirements.append(requirement)
                 
             self.stdout.write(f"Creating organization seniorities...")
@@ -153,7 +153,7 @@ class Command(BaseCommand):
                 
             # Create profiles
             organization_profiles = []
-            for prof in random.sample(self.profiles, 5):
+            for prof in random.sample(self.profiles, 10):
                 profile = Profile.objects.create(name=prof, description=prof, organization=organization)
                 organization_profiles.append(profile)
                 
@@ -169,7 +169,7 @@ class Command(BaseCommand):
             self.stdout.write(f"Assinging requirements to profilesseniorities...")
             
             for profileseniority in organization_profileseniorities:
-                for requirement in random.sample(organization_requirements, 3):
+                for requirement in random.sample(organization_requirements, 8):
                     ProfileSeniorityRequirement.objects.create(profile_seniority=profileseniority, requirement=requirement)
                     
                 
@@ -177,7 +177,7 @@ class Command(BaseCommand):
                 
             # Create developers
             organization_developers = []
-            for i in range(1, 10):
+            for i in range(1, 30):
                 user = User.objects.create_user(username=faker.user_name(), password=faker.password(), email=faker.email())
                 developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
                 organization_developers.append(developer)
@@ -186,7 +186,7 @@ class Command(BaseCommand):
             
             organization_developerprofiles = []
             for developer in organization_developers:
-                for profile in random.sample(organization_profiles, 3):
+                for profile in random.sample(organization_profiles, 5):
                     seniority = random.choice(organization_seniorities)
                     
                     #CREATE DEVELOPER PROFILE
