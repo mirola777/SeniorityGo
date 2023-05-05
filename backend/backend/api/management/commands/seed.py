@@ -136,7 +136,7 @@ class Command(BaseCommand):
             
             # Create requirements
             organization_requirements = []
-            for req in random.sample(self.requirements, 20):
+            for req in random.sample(self.requirements, random.randint(10, len(self.requirements))):
                 requirement = Requirement.objects.create(description=faker.text(), name=req, points=random.randint(50, 1500), organization=organization)
                 organization_requirements.append(requirement)
                 
@@ -154,7 +154,7 @@ class Command(BaseCommand):
                 
             # Create profiles
             organization_profiles = []
-            for prof in random.sample(self.profiles, 10):
+            for prof in random.sample(self.profiles, random.randint(1, len(self.profiles))):
                 profile = Profile.objects.create(name=prof, description=prof, organization=organization)
                 organization_profiles.append(profile)
                 
@@ -170,7 +170,7 @@ class Command(BaseCommand):
             self.stdout.write(f"Assinging requirements to profilesseniorities...")
             
             for profileseniority in organization_profileseniorities:
-                for requirement in random.sample(organization_requirements, 8):
+                for requirement in random.sample(organization_requirements, random.randint(2, len(organization_requirements))):
                     ProfileSeniorityRequirement.objects.create(profile_seniority=profileseniority, requirement=requirement)
                     
                 
@@ -178,7 +178,7 @@ class Command(BaseCommand):
                 
             # Create developers
             organization_developers = []
-            for i in range(1, 30):
+            for i in range(1, random.randint(10, 25)):
                 username = faker.user_name()
                 while username in usernames:
                     username = faker.user_name()
@@ -193,7 +193,7 @@ class Command(BaseCommand):
             
             organization_developerprofiles = []
             for developer in organization_developers:
-                for profile in random.sample(organization_profiles, 5):
+                for profile in random.sample(organization_profiles, random.randint(1, len(organization_profiles))):
                     seniority = random.choice(organization_seniorities)
                     
                     #CREATE DEVELOPER PROFILE

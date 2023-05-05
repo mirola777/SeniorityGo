@@ -56,7 +56,7 @@ function DeveloperHeader() {
                             </li>
                         ) : (
                             <li className="w-full">
-                                <Link to="/" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
+                                <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                             </li>
                         )}
                         {user /*&& user instanceof Admin*/ && (
