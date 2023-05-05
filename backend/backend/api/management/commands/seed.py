@@ -125,9 +125,10 @@ class Command(BaseCommand):
         
         faker = Faker()
         is_my_organization = False
+        usernames = []
 
         # Create organizations
-        for org in random.sample(self.organizations, 6):
+        for org in random.sample(self.organizations, len(self.organizations)):
             self.stdout.write(f"Creating organization {org}...")
             organization = Organization.objects.create(name=org)
             
@@ -178,7 +179,13 @@ class Command(BaseCommand):
             # Create developers
             organization_developers = []
             for i in range(1, 30):
-                user = User.objects.create_user(username=faker.user_name(), password=faker.password(), email=faker.email())
+                username = faker.user_name()
+                while username in usernames:
+                    username = faker.user_name()
+                
+                usernames.append(username)
+                    
+                user = User.objects.create_user(username=username, password=faker.password(), email=faker.email())
                 developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
                 organization_developers.append(developer)
                 
