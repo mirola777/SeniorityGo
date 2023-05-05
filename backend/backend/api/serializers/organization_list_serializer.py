@@ -1,14 +1,8 @@
 from rest_framework import serializers
 from api.models.organization import Organization
-from api.serializers.profile_list_serializer import ProfileListSerializer
-from api.serializers.seniority_serializer import SenioritySerializer
-from api.serializers.requirement_serializer import RequirementSerializer
-        
 
-class OrganizationSerializer(serializers.ModelSerializer):
-    profiles = ProfileListSerializer(read_only=True, many=True)
-    seniorities = SenioritySerializer(read_only=True, many=True)
-    requirements = RequirementSerializer(read_only=True, many=True)
+
+class OrganizationListSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
     name = serializers.CharField(required=True) 
     
@@ -24,5 +18,4 @@ class OrganizationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organization
-        fields = ['id', 'name', 'image', 'profiles', 'seniorities', 'requirements']
-       
+        fields = ['id', 'name', 'image']

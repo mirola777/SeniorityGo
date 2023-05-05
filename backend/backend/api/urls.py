@@ -31,6 +31,7 @@ urlpatterns = [
     
     # Organization urls
     path("organization/all/", organization_views.getAll),
+    path("organization/all/detailed/", organization_views.getAllDetailed),
     path("organization/create/", organization_views.create),
     path("organization/get/<int:pk>/", organization_views.get),
     path("organization/update/<int:pk>/", organization_views.update),
