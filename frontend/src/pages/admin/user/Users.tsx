@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import SeniorityCard from "../../../components/admin/seniority/SeniorityCard";
-import { Seniority } from "../../../models/Seniority";
-import { getOrganizationSeniorities } from "../../../services/SeniorityService";
 import UserCard from "../../../components/admin/user/UserCard";
 import { Developer } from "../../../models/Developer";
-import { Admin } from "../../../models/Admin";
 import { getOrganizationUsers } from "../../../services/DeveloperService";
 
 function Users() {

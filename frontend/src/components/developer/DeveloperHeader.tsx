@@ -71,7 +71,7 @@ function DeveloperHeader() {
                             <button className="block">
                                 <img
                                     alt=""
-                                    src="https://i.redd.it/pokémon-themed-profile-icon-v0-c8z5m7o3osk81.jpg?s=a03d2cbbd1f41c453f88fe1b7d77f7c0832e8d13"
+                                    src={user instanceof Developer ? user.getAvatar() : ""}
                                     className="h-8 w-8 rounded-full object-cover"
                                 />
                             </button>
