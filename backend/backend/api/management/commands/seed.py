@@ -184,11 +184,14 @@ class Command(BaseCommand):
                 
             self.stdout.write(f"Assinging profiles to developers...")
             
+            organization_developerprofiles = []
             for developer in organization_developers:
-                for profile in random.sample(organization_profiles, 2):
-                    pass
+                for profile in random.sample(organization_profiles, 3):
+                    seniority = random.choice(organization_seniorities)
+                    
                     #CREATE DEVELOPER PROFILE
-                    #DeveloperProfile.objects.create(developer=developer, profile=profile)
+                    developer_profile = DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=seniority)
+                    organization_developerprofiles.append(developer_profile)
 
                 
             if not is_my_organization:

@@ -20,6 +20,4 @@ class Developer(models.Model):
     avatar = models.ImageField(upload_to=upload_to, default=default_avatar, blank=True, null=True)
     phone_number = models.CharField(max_length=50)
     is_activated = models.BooleanField(default=False)
-    profiles = models.ManyToManyField('Profile', through='DeveloperProfile')
-    requirements = models.ManyToManyField('Requirement', through='DeveloperRequirement')
     organization = models.ForeignKey('Organization', on_delete=models.CASCADE, default=1)
