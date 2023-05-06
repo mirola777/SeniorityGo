@@ -19,10 +19,25 @@ export async function getAllOrganizations(): Promise<Organization[]> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/organization/all/');
 
-        const organizations: Organization[] = (await response).data.map((json: any) => {
+        const organizations: Organization[] = response.data.map((json: any) => {
             return JsonToOrganization(json);
         });
 
+
+        return organizations;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function getAllOrganizationsDetailed(): Promise<Organization[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/organization/all/detailed/');
+
+        const organizations: Organization[] = response.data.map((json: any) => {
+            return JsonToOrganization(json);
+        });
 
         return organizations;
     } catch (error: any) {

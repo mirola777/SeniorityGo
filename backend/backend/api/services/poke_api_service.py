@@ -5,7 +5,7 @@ from django.core.cache import cache
 # This method returns a pokemon from the pokeapi
 # by its id
 def getPokemon(pk):
-    cache_key = f'pokemon:{pk} '
+    cache_key = f'pokemon:{pk}'
     pokemon = cache.get(cache_key)
     if pokemon is None:
         try: 

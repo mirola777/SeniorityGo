@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ProfileCard from '../../../components/common/ProfileCard';
 import { Profile } from '../../../models/Profile';
-import { getAllProfiles } from '../../../services/ProfileService';
+import { getOrganizationProfiles } from '../../../services/ProfileService';
 
 function Profiles() {
     // Translation component
@@ -11,10 +11,10 @@ function Profiles() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
 
     useEffect(() => {
-        getAllProfiles().then((profilesResponse) => {
+        getOrganizationProfiles().then((profilesResponse) => {
             setProfiles(profilesResponse);
         });
-    });
+    }, []);
 
     return (
         <div className='py-8 pr-8 mx-auto w-full '>

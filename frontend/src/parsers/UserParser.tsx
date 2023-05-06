@@ -1,6 +1,7 @@
 import { Admin } from "../models/Admin";
 import { Developer } from "../models/Developer";
 import { User } from "../models/User";
+import JsonToDeveloperProfile from "./DeveloperProfileParser";
 
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -25,7 +26,7 @@ function JsonToUser(json: any): Admin | Developer | null {
             json.avatar ? BACKEND_URL + json.avatar : null,
             json.phone_number,
             json.is_activated,
-            [],
+            json.profiles.map((profileseniority: any) => {  return JsonToDeveloperProfile(profileseniority)}),
             []
         );
     

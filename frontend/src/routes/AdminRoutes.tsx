@@ -12,6 +12,7 @@ import Requirements from '../pages/admin/requirement/Requirements';
 import CreateRequirement from '../pages/admin/requirement/CreateRequirement';
 import RequirementPage from '../pages/admin/requirement/RequirementPage';
 import { ReactElement } from 'react';
+import Users from '../pages/admin/user/Users';
 
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {
@@ -40,6 +41,7 @@ const AdminRoutes = [
         <Route path="/admin/requirements/create" element={<CreateRequirement />} />
         <Route path="/admin/requirements/:id" element={<RequirementPage />} />
         <Route path='/admin/*' element={<AdminNotFound />} />
+        <Route path='/admin/users' element={<Users />} />
     </Route>
 ];
 

@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view, parser_classes, permission_class
 from rest_framework import status
 from rest_framework.response import Response
 from api.models.organization import Organization
+from api.serializers.organization_list_serializer import OrganizationListSerializer
 from api.serializers.organization_serializer import OrganizationSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +10,13 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET'])
 def getAll(request):
+    organizations = Organization.objects.all().order_by('name')
+    serializer = OrganizationListSerializer(organizations, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAllDetailed(request):
     organizations = Organization.objects.all().order_by('name')
     serializer = OrganizationSerializer(organizations, many=True)
     return Response(serializer.data)

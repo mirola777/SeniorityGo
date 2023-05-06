@@ -3,6 +3,8 @@ import DeveloperLogin from '../pages/developer/Login';
 import { ReactElement } from 'react';
 import DeveloperRegister from '../pages/developer/Register';
 import JustBackgroundLayout from '../pages/layouts/JustBackround';
+import Organizations from '../pages/developer/Organizations';
+import DeveloperAbout from '../pages/developer/About';
 
 
 const WithioutCredentialsRoute = ({ children }: { children: ReactElement }) => {
@@ -20,7 +22,6 @@ const WithioutCredentialsRoutes = [
             <JustBackgroundLayout />
         </WithioutCredentialsRoute>
     }>
-        
         <Route path='/login' element={<DeveloperLogin />} />
         <Route path='/register' element={<DeveloperRegister />} />
     </Route>

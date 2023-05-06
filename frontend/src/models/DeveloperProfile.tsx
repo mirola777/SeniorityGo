@@ -1,38 +1,17 @@
-import { Developer } from './Developer';
 import { Profile } from './Profile';
 import { Seniority } from './Seniority';
 
 export class DeveloperProfile {
-    private _id: number;
-    private _developer: Developer;
     private _profile: Profile;
     private _seniority: Seniority;
     private _is_accepted: boolean;
     private _entrance_date: Date;
 
-    constructor(id: number, developer: Developer, profile: Profile, seniority: Seniority, is_accepted: boolean, entrance_date: Date) {
-        this._id = id;
-        this._developer = developer;
+    constructor(profile: Profile, seniority: Seniority, is_accepted: boolean, entrance_date: Date) {
         this._profile = profile;
         this._seniority = seniority;
         this._is_accepted = is_accepted;
         this._entrance_date = entrance_date;
-    }
-
-    public getId(): number {
-        return this._id;
-    }
-
-    public setId(value: number): void {
-        this._id = value;
-    }
-
-    public getDeveloper(): Developer {
-        return this._developer;
-    }
-
-    public setDeveloper(developer: Developer): void {
-        this._developer = developer;
     }
 
     public getProfile(): Profile {
