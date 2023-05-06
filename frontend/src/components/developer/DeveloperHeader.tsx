@@ -49,23 +49,28 @@ function DeveloperHeader() {
                 </Link>
 
                 <div className="flex items-center gap-4">
-                    <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
-                        {user ? (
+                    {user ? (
+                        <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
                             <li className="w-full">
                                 <Link to="/profiles" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('profiles')}</Link>
                             </li>
-                        ) : (
+                            <li className="w-full">
+                                <Link to="/leaderboard" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('leaderboard')}</Link>
+                            </li>
+                            {user /*&& user instanceof Admin*/ && (
+                                <li className="w-full">
+                                    <Link to="/admin" className="block  w-full text-white rounded whitespace-nowrap" aria-current="page">{t('admin_panel')}</Link>
+                                </li>
+                            )}
+                        </ul>
+
+                    ) : (
+                        <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
                             <li className="w-full">
                                 <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                             </li>
-                        )}
-                        {user /*&& user instanceof Admin*/ && (
-                            <li className="w-full">
-                                <Link to="/admin" className="block  w-full text-white rounded whitespace-nowrap" aria-current="page">{t('admin_panel')}</Link>
-                            </li>
-                        )}
-
-                    </ul>
+                        </ul>
+                    )}
                 </div>
 
                 <div className="flex items-center w-full mx-auto justify-end gap-2">

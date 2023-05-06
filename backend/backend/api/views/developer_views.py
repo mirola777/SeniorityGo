@@ -4,19 +4,37 @@ from rest_framework.response import Response
 from api.models.developer import Developer
 from api.models.admin import Admin
 from api.serializers.developer_serializer import DeveloperSerializer
+from api.serializers.developer_list_serializer import DeveloperListSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
 def getAll(request):
-    developers = Developer.objects.all()
-    serializer = DeveloperSerializer(developers, many=True)
+    developers = Developer.objects.all()[0:10]
+    print(developers)
+    serializer = DeveloperListSerializer(developers, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getOrganizationDevelopers(request):
+    if Developer.objects.filter(user=request.user.id).exists():
+        user = Developer.objects.get(user=request.user.id)
+        
+    if Admin.objects.filter(user=request.user.id).exists():
+        user = Admin.objects.get(user=request.user.id)
+    
+    
+    developers = Developer.objects.filter(organization=user.organization)
+    
+    serializer = DeveloperListSerializer(developers, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrganizationDevelopersDetailed(request):
     if Developer.objects.filter(user=request.user.id).exists():
         user = Developer.objects.get(user=request.user.id)
         

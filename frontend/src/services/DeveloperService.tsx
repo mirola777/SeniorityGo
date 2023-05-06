@@ -17,3 +17,17 @@ export async function getOrganizationUsers(): Promise<(Developer)[]> {
         throw error.response.data;
     }
 }
+
+
+export async function getOrganizationUsersDetailed(): Promise<(Developer)[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/developer/organization/detailed/');
+        const users: Developer[] = response.data.map((json: any) => {
+            return JsonToUser(json);
+        });
+
+        return users;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}

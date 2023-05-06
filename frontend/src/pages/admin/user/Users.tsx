@@ -25,7 +25,7 @@ function Users() {
                     </h2>
                 </div>
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {users.map((user) => (
                         <li>
                             <UserCard user={user}></UserCard>

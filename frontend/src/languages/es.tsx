@@ -88,6 +88,7 @@ function Spanish() {
             profile_pokemons: "Pokemons del perfil",
             more_info: "Más información",
             do_you_want_know_more: "¿Quieres saber más?",
+            leaderboard: "Clasificación",
         },
     };
 }
