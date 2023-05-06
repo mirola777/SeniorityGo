@@ -1,9 +1,4 @@
-import { useTranslation } from 'react-i18next';
-
 function DeveloperHome() {
-    // Translation component
-    const { t } = useTranslation();
-
     return (
         <div className="overflow-y-auto scrollbar-none p-8 mx-auto  h-full">
             <div className="flex flex-col w-full h-full space-y-8">
@@ -20,8 +15,6 @@ function DeveloperHome() {
                 </div>
             </div>
         </div>
-
-
     );
 }
 

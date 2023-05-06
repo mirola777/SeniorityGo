@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ReactComponent as ProfilesIcon } from "../../assests/icons/RectangleGroup.svg"
-import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 import { ReactComponent as LogoutIcon } from "../../assests/icons/ArrowRightOnRectangle.svg"
 import { ReactComponent as SenioritiesIcon } from "../../assests/icons/CodeBracket.svg"
 import { ReactComponent as OrganizationIcon } from "../../assests/icons/BuildingOffice.svg"
 import { ReactComponent as RequirementsIcon } from "../../assests/icons/Req.svg"
+import { ReactComponent as UsersIcon } from "../../assests/icons/Users.svg"
 import { useTranslation } from 'react-i18next';
 import { getUserSession, logout } from "../../services/AuthService";
 import { useEffect, useState } from "react";
@@ -54,6 +54,10 @@ function AdminSideBar() {
                         <Link to="/admin/requirements" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <RequirementsIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('requirements')}</span>
+                        </Link>
+                        <Link to="/admin/users" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <UsersIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('users')}</span>
                         </Link>
                     </div>
                 </div>

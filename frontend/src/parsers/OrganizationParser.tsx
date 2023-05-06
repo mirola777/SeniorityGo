@@ -10,9 +10,9 @@ function JsonToOrganization(json: any): Organization {
         json.id,
         json.name,
         json.image ? BACKEND_URL + json.image : null,
-        json.profiles.map((json: any) => JsonToProfile(json)),
-        json.seniorities.map((json: any) => JsonToSeniority(json)),
-        json.requirements.map((json: any) => JsonToRequirement(json))
+        json.profiles ? json.profiles.map((profile: any) => { return JsonToProfile(profile) }) : [],
+        json.seniorities ? json.seniorities.map((seniority: any) => { return JsonToSeniority(seniority) }) : [],
+        json.requirements ? json.requirements.map((requirement: any) => { return JsonToRequirement(requirement) }) : [],
     );
 
     return organization;
