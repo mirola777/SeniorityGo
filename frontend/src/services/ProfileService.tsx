@@ -24,3 +24,15 @@ export async function getOrganizationProfiles(): Promise<Profile[]> {
 
     return profiles;
 }
+
+
+export async function getOrganizationProfilesDetailed(): Promise<Profile[]> {
+    const response = axios.get(BACKEND_URL +  '/api/profile/organization/detailed/');
+
+    const profiles: Profile[] = (await response).data.map((json: any) => {
+        
+        return JsonToProfile(json);
+    });
+
+    return profiles;
+}

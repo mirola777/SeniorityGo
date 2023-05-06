@@ -52,7 +52,7 @@ function DeveloperHeader() {
                     <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
                         {user ? (
                             <li className="w-full">
-                                <Link to="/" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('profiles')}</Link>
+                                <Link to="/profiles" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('profiles')}</Link>
                             </li>
                         ) : (
                             <li className="w-full">

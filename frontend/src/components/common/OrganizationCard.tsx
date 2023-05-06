@@ -11,7 +11,7 @@ function OrganizationCard({ organization }: OrganizationCardProps) {
 
     return (
         <div className="h-full transition ease-in-out hover:scale-105 hover:bg-indigo-500 duration-150 rounded-2xl bg-gradient-to-r from-fuchsia-700 to-blue-600 p-1 shadow-2xl">
-            <a className="h-full transition block rounded-xl hover:bg-gray-800/50 duration-150 bg-gray-800/80 p-4 sm:p-6 lg:p-8" href="#">
+            <div className="h-full transition block rounded-xl hover:bg-gray-800/50 duration-150 bg-gray-800/80 p-4 sm:p-6 lg:p-8">
                 <div className="text-center space-y-8">
 
                     <div className="flex items-center gap-4">
@@ -74,7 +74,7 @@ function OrganizationCard({ organization }: OrganizationCardProps) {
                         })}
                     </ul>
                 </div>
-            </a>
+            </div>
         </div>
     );
 }

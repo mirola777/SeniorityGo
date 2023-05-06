@@ -29,8 +29,6 @@ function JsonToUser(json: any): Admin | Developer | null {
             json.profiles.map((profileseniority: any) => {  return JsonToDeveloperProfile(profileseniority)}),
             []
         );
-
-        console.log(developer);
     
         return developer;
 

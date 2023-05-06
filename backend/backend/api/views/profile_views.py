@@ -32,6 +32,21 @@ def getOrganizationProfiles(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrganizationProfilesDetailed(request):
+    
+    if Developer.objects.filter(user=request.user.id).exists():
+        user = Developer.objects.get(user=request.user.id)
+        
+    if Admin.objects.filter(user=request.user.id).exists():
+        user = Admin.objects.get(user=request.user.id)
+    
+    profiles = Profile.objects.filter(organization=user.organization)
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create(request):
