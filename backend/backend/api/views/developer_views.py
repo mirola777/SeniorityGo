@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET'])
 def getAll(request):
-    developers = Developer.objects.all()[0:10]
+    developers = Developer.objects.all()
     print(developers)
     serializer = DeveloperListSerializer(developers, many=True)
     return Response(serializer.data)
