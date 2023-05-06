@@ -35,7 +35,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
                 <div className="flex items-center flex-wrap">
                     {developer.getDeveloperProfiles().map((developerprofile) => {
                         return (
-                            <span className="text-xs whitespace-nowrap font-medium m-0.5 px-2.5 py-0.5 rounded-xl bg-cyan-900 text-cyan-400 ">
+                            <span className="text-sm whitespace-nowrap font-medium m-0.5 px-2.5 py-0.5 rounded-xl bg-cyan-900 text-cyan-400 ">
                                 {developerprofile.getProfile().getName() + " (" + developerprofile.getSeniority().getName() + ")"}
                             </span>
                         );
