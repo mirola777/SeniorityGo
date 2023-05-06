@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoadingScreen from '../../components/common/LoadingScreen';
-import { getOrganizationUsersDetailed } from '../../services/DeveloperService';
+import { getOrganizationUsers } from '../../services/DeveloperService';
 import { Developer } from '../../models/Developer';
 import LeaderBoardItem from './LeaderboardItem';
 
@@ -13,29 +13,26 @@ function LeaderBoardTable() {
     const [developers, setDevelopers] = useState<Developer[]>([]);
 
     useEffect(() => {
-        getOrganizationUsersDetailed().then((developersResponse) => {
+        getOrganizationUsers().then((developersResponse) => {
             setDevelopers(developersResponse);
         });
     }, []);
 
     return (
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left bg-gradient-to-r from-gray-800 to-dark-blue-800 text-gray-500 dark:text-gray-400">
+            <thead className="text-xs uppercase from-gray-800 to-dark-blue-800 dark:text-gray-400">
                 <tr>
                     <th scope="col" className="p-4">
                         
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Name
+                        {t("user")}
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Position
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                        Status
+                        {t("profiles")}
                     </th>
                     <th scope="col" className="text-center px-6 py-3">
-                        Points
+                        {t("points")}
                     </th>
                 </tr>
             </thead>

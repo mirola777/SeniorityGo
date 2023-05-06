@@ -103,6 +103,7 @@ function English() {
             more_info: "More info",
             do_you_want_know_more: "Do you want to know more?",
             leaderboard: "Leaderboard",
+            user: "User",
         },
     };
 }
