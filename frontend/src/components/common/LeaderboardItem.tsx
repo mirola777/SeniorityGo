@@ -45,7 +45,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
             </td>
             <td className="px-6 py-4 w-1/4">
                 <div className="text-right pr-4 ">
-                    <div className="text-3xl text-white">{index + 1}</div>
+                    <div className="text-3xl text-white">{Math.floor(Math.random() * (10000 - index * 10) * (index + 1))}</div>
                 </div>
             </td>
         </tr>
