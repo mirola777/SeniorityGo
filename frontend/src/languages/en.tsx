@@ -100,6 +100,8 @@ function English() {
             organizations: "Organizations",
             select_profile_description: "Every organization always will have different profiles, each with a name, many Seniority levels, and a description. The profiles are used to represent the people who work in the organization. Every Seniority Level has a Pokemon that represents it. When you reach a Seniority Level, you will get the Pokemon of that level.",
             profile_pokemons: "Pokemons of the Profile",
+            more_info: "More info",
+            do_you_want_know_more: "Do you want to know more?",
         },
     };
 }

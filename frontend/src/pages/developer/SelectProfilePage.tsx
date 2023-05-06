@@ -19,7 +19,6 @@ function SelectProfilePage() {
 
     useEffect(() => {
         getOrganizationProfilesDetailed().then((profilesResponse) => {
-            console.log(profilesResponse);
             setProfiles(profilesResponse);
         });
 
@@ -35,12 +34,16 @@ function SelectProfilePage() {
     }, []);
 
     return (
-        <div className='p-8 mx-auto max-w-4xl w-full items-center overflow-y-auto scrollbar-none space-y-8'>
-            <h2 className="text-5xl font-extrabold text-white">{t('profiles')}</h2>
+        <div className='p-8 mx-auto w-full items-center max-w-4xl overflow-y-auto scrollbar-none space-y-8'>
+            <div className="flex items-center justify-between">
+                <h2 className="text-5xl font-extrabold text-white">{t('profiles')}</h2>
+                {organization && (<img className=" h-24" src={organization.getImage()} alt="Organization logo" />)}
+            </div>
+
             <h3 className="text-xl font-extrabold text-gray-400">{t('select_profile_description')}</h3>
 
             {profiles.length > 0 ? (
-                <ul className="space-y-8">
+                <ul className="grid grid-cols-1 gap-4">
                     {profiles.map((profile) =>
                         <li>
                             <ProfileDetailedCard profile={profile}></ProfileDetailedCard>
@@ -50,8 +53,6 @@ function SelectProfilePage() {
             ) : (
                 <LoadingScreen />
             )}
-
-
         </div>
     );
 }

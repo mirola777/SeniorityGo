@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { getAllOrganizationsDetailed } from '../../services/OrganizationService';
 import { Organization } from '../../models/Organization';
 import OrganizationCard from '../../components/common/OrganizationCard';
+import LoadingScreen from '../../components/common/LoadingScreen';
 
 function Organizations() {
     // Translation component
@@ -12,7 +13,6 @@ function Organizations() {
 
     useEffect(() => {
         getAllOrganizationsDetailed().then((organizationsResponse) => {
-            console.log(organizationsResponse);
             setOrganizations(organizationsResponse);
         });
     }, []);
@@ -28,11 +28,11 @@ function Organizations() {
                 <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {organizations.map((organization) =>
+                    {organizations.length > 0 ? (organizations.map((organization) =>
                         <li>
                             <OrganizationCard organization={organization}></OrganizationCard>
                         </li>
-                    )}
+                    )) : (<LoadingScreen />)}
                 </ul>
             </div>
         </div>

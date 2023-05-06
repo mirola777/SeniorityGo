@@ -86,6 +86,8 @@ function Spanish() {
             organizations: "Organizaciones",
             select_profile_description: "Cada organización puede tener varios perfiles, cada uno con un nombre, un nivel de Seniority y una descripción. Los perfiles se utilizan para representar a las personas que trabajan en la organización. Cada nivel de Seniority tiene un Pokemon asociado, que se utiliza para representar a los perfiles de ese nivel de Seniority.",
             profile_pokemons: "Pokemons del perfil",
+            more_info: "Más información",
+            do_you_want_know_more: "¿Quieres saber más?",
         },
     };
 }
