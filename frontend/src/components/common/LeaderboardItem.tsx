@@ -22,7 +22,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
                     <div className="text-4xl">{index + 1}</div>
                 </div>
             </td>
-            <th scope="row" className="px-6 py-4 whitespace-nowrap text-white">
+            <th scope="row" className="w-1/4 px-6 py-4 whitespace-nowrap text-white">
                 <div className="flex items-center h-full">
                     <img className="w-10 h-10 rounded-full" src={developer.getAvatar()} alt="Avatar" />
                     <div className="pl-3">
@@ -35,7 +35,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
                 <div className="flex items-center flex-wrap">
                     {developer.getDeveloperProfiles().map((developerprofile) => {
                         return (
-                            <span className="text-xs font-medium m-0.5 px-2.5 py-0.5 rounded-xl bg-cyan-900 text-cyan-400 ">
+                            <span className="text-xs whitespace-nowrap font-medium m-0.5 px-2.5 py-0.5 rounded-xl bg-cyan-900 text-cyan-400 ">
                                 {developerprofile.getProfile().getName() + " (" + developerprofile.getSeniority().getName() + ")"}
                             </span>
                         );
@@ -43,7 +43,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
                     }
                 </div>
             </td>
-            <td className="px-6 py-4 ">
+            <td className="px-6 py-4 w-1/4">
                 <div className="text-right pr-4 ">
                     <div className="text-3xl text-white">{index + 1}</div>
                 </div>
