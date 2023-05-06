@@ -155,7 +155,7 @@ class Command(BaseCommand):
             # Create profiles
             organization_profiles = []
             for prof in random.sample(self.profiles, random.randint(1, len(self.profiles))):
-                profile = Profile.objects.create(name=prof, description=prof, organization=organization)
+                profile = Profile.objects.create(name=prof, description=faker.text(), organization=organization)
                 organization_profiles.append(profile)
                 
             self.stdout.write(f"Assinging seniorities to profiles...")
@@ -193,7 +193,8 @@ class Command(BaseCommand):
             
             organization_developerprofiles = []
             for developer in organization_developers:
-                for profile in random.sample(organization_profiles, random.randint(1, len(organization_profiles))):
+                n = len(organization_profiles) if len(organization_profiles) <= 4 else 4
+                for profile in random.sample(organization_profiles, random.randint(1, n)):
                     seniority = random.choice(organization_seniorities)
                     
                     #CREATE DEVELOPER PROFILE
