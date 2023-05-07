@@ -3,6 +3,7 @@ import DeveloperPageLayout from '../pages/layouts/DeveloperPane';
 import SelectProfilePage from '../pages/developer/SelectProfilePage';
 import { ReactElement } from 'react';
 import LeaderBoardPage from '../pages/developer/LeaderboardPage';
+import ProfileDetailedPage from '../pages/developer/ProfileDetailedPage';
 
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {
@@ -22,6 +23,7 @@ const DeveloperRoutes = [
     }>
         <Route path='/profiles' element={<SelectProfilePage />} />
         <Route path='/leaderboard' element={<LeaderBoardPage />} />
+        <Route path="/profiles/:id" element={<ProfileDetailedPage />} />
     </Route>
 ];
 

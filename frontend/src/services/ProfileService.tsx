@@ -36,3 +36,15 @@ export async function getOrganizationProfilesDetailed(): Promise<Profile[]> {
 
     return profiles;
 }
+
+
+export async function getProfile(id: number): Promise<Profile> {
+    try {
+        const response = await axios.get(BACKEND_URL +  '/api/profile/get/' + id + '/');
+        
+        const json = response.data;
+        return JsonToProfile(json);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
