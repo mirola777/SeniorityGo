@@ -90,6 +90,8 @@ function Spanish() {
             do_you_want_know_more: "¿Quieres saber más?",
             leaderboard: "Clasificación",
             user: "Usuario",
+            your_page: "Tu página",
+            pokemons: "Pokemons",
         },
     };
 }

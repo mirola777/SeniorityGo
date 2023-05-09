@@ -104,6 +104,8 @@ function English() {
             do_you_want_know_more: "Do you want to know more?",
             leaderboard: "Leaderboard",
             user: "User",
+            your_page: "Your page",
+            pokemons: "Pokemons",
         },
     };
 }

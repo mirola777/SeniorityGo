@@ -43,6 +43,9 @@ function UserDropdown({ user }: UserDropdownProps) {
                                 <Link to="/admin" className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('admin_panel')}</Link>
                             </li>
                         )}
+                        <li className="w-full">
+                            <Link to="/developer" className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('your_page')}</Link>
+                        </li>
                     </ul>
                     <div className="py-2">
                         <button onClick={logout} className="w-full text-start block rounded-lg px-4 py-2 text-base  hover:bg-gray-600 text-white">{t('logout')}</button>
