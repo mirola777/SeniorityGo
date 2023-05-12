@@ -7,7 +7,7 @@ function LeaderBoardPage() {
 
 
     return (
-        <div className='p-8 mx-auto w-full overflow-y-auto scrollbar-none'>
+        <div className='p-8 max-w-screen-2xl mx-auto w-full overflow-y-auto scrollbar-none'>
             <div className='rounded-lg  space-y-8'>
                 <div className='flex items-center justify-between'>
                     <h2 className="text-5xl font-extrabold dark:text-white">{t('leaderboard')}</h2>
