@@ -95,7 +95,21 @@ function English() {
             profileseniority_unique_profile_seniority: "The Profile and the Seniority Level must be unique",
             profileseniorityrequirement_unique_profileseniority_requirement: "The Profile, the Seniority Level and the Requirement must be unique",
             select_organization: "Select an organization",
-
+            invalid_email: "Invalid email",
+            users: "Users",
+            organizations: "Organizations",
+            select_profile_description: "Every organization always will have different profiles, each with a name, many Seniority levels, and a description. The profiles are used to represent the people who work in the organization. Every Seniority Level has a Pokemon that represents it. When you reach a Seniority Level, you will get the Pokemon of that level.",
+            profile_pokemons: "Pokemons of the Profile",
+            more_info: "More info",
+            do_you_want_know_more: "Do you want to know more?",
+            leaderboard: "Leaderboard",
+            user: "User",
+            your_page: "Your page",
+            pokemons: "Pokemons",
+            have_your_ever_feel_stuck: "Have you ever feel stuck in your organization?",
+            dont_you_know_how_to_advance: "Don't you know how to advance in your Seniority Level? Don't worry, we are here to help you!",
+            seniority_go_is_your_solution: "SeniorityGo is your solution!",
+            seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
         },
     };
 }

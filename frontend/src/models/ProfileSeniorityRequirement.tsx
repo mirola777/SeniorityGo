@@ -14,15 +14,7 @@ export class ProfileSeniorityRequirement {
         return this._profileseniority;
     }
 
-    public setProfileSeniority(profileseniority: ProfileSeniority): void {
-        this._profileseniority = profileseniority;
-    }
-
     public getRequirement(): Requirement {
         return this._requirement;
-    }
-
-    public setRequirement(requirement: Requirement): void {
-        this._requirement = requirement;
     }
 }

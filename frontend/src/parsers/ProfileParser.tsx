@@ -1,4 +1,5 @@
 import { Profile } from "../models/Profile";
+import JsonToProfileSeniority from "./ProfileSeniorityParser";
 
 
 function JsonToProfile(json: any): Profile {
@@ -7,7 +8,7 @@ function JsonToProfile(json: any): Profile {
         json.name,
         json.description,
         [],
-        []
+        json.seniorities ? json.seniorities.map((json: any) => { return JsonToProfileSeniority(json); }) : []
     );
 
     return profile;

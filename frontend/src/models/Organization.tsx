@@ -31,31 +31,15 @@ export class Organization {
         return this._id;
     }
 
-    public setId(id: number): void {
-        this._id = id;
-    }
-
     public getName(): string {
         return this._name;
-    }
-
-    public setName(name: string): void {
-        this._name = name;
     }
 
     public getImage(): string {
         return this._image;
     }
 
-    public setImage(image: string): void {
-        this._image = image;
-    }
-
     public getProfiles(): Profile[] {
         return this._profiles;
-    }
-
-    public setProfiles(profiles: Profile[]): void {
-        this._profiles = profiles;
     }
 }
