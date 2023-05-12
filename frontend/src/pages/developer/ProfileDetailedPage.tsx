@@ -22,7 +22,7 @@ function ProfileDetailedPage() {
 
 
     return (
-        <div className='p-8 mx-auto w-full overflow-y-auto scrollbar-none'>
+        <div className='p-8 mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
             <div className=' rounded-lg space-y-8 '>
                 <div className='flex flex-col my-48 items-center text-center justify-between space-y-8'>
                     <h2 className="text-7xl dark:text-white">{profile?.getName()}</h2>

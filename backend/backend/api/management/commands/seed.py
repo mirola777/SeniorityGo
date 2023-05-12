@@ -193,7 +193,7 @@ class Command(BaseCommand):
         usernames = []
 
         # Create organizations
-        for org in random.sample(self.organizations, 2):
+        for org in random.sample(self.organizations, 4):
             self.stdout.write(f"Creating organization {org}...")
             organization = Organization.objects.create(name=org)
 
@@ -257,6 +257,14 @@ class Command(BaseCommand):
                 organization_developers.append(developer)
 
             self.stdout.write(f"Assinging profiles to developers...")
+            
+            if not is_my_organization:
+                user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
+                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                is_my_organization = True
+                organization_developers.append(developer)
+                self.stdout.write(
+                    f"Creating your user... {options['username'][0]}")
 
             organization_developerprofiles = []
             for developer in organization_developers:
@@ -269,10 +277,4 @@ class Command(BaseCommand):
                     organization_developerprofiles.append(developer_profile)
 
 
-            if not is_my_organization:
-                user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
-                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
-                is_my_organization = True
-
-                self.stdout.write(
-                    f"Creating your user... {options['username'][0]}")
+            

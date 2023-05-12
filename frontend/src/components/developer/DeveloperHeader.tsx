@@ -2,12 +2,13 @@ import { ReactComponent as NotificationIcon } from "../../assests/icons/Bell.svg
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 import { useState, useEffect } from "react";
-import { getUserSession, logout } from "../../services/AuthService";
+import { getUserSession } from "../../services/AuthService";
 import { Link } from "react-router-dom";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
 import { getOrganization } from "../../services/OrganizationService";
 import { Organization } from "../../models/Organization";
+import UserDropdown from "../common/UserDropdown";
 
 
 function DeveloperHeader() {
@@ -49,7 +50,7 @@ function DeveloperHeader() {
                 </Link>
 
                 <div className="flex items-center gap-4">
-                    <ul className="flex items-center  flex-col w-full font-medium lg:flex-row lg:space-x-8 ">
+                    <ul className="flex items-center  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
                         <li className="w-full">
                             <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                         </li>
@@ -59,11 +60,6 @@ function DeveloperHeader() {
                         {user && (<li className="w-full">
                             <Link to="/leaderboard" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('leaderboard')}</Link>
                         </li>)}
-                        {user /*&& user instanceof Admin*/ && (
-                            <li className="w-full">
-                                <Link to="/admin" className="block  w-full text-white rounded whitespace-nowrap" aria-current="page">{t('admin_panel')}</Link>
-                            </li>
-                        )}
                     </ul>
 
                 </div>
@@ -78,22 +74,7 @@ function DeveloperHeader() {
                                 </button>
                             </div>
 
-                            <span aria-hidden="true" className="block h-6 w-px rounded-full bg-dark-blue-800"></span>
-
-                            <button className="block">
-                                <img
-                                    alt=""
-                                    src={user instanceof Developer ? user.getAvatar() : ""}
-                                    className="h-8 w-8 rounded-full object-cover"
-                                />
-                            </button>
-
-                            <h3 className="text-white text-lg font-medium">{user?.getUser().getUsername()}</h3>
-                            <button onClick={logout} className="inline-block rounded-full bg-gradient-to-r from-red-700 to-red-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
-                                <span className="block rounded-full bg-dark-blue-800/60 px-4 py-1 text-sm font-medium hover:bg-dark-blue-800/40">
-                                    {t('logout')}
-                                </span>
-                            </button>
+                            <UserDropdown user={user}></UserDropdown>
                         </div>
                     ) : (
                         <div className="space-x-2">

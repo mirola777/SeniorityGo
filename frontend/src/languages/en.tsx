@@ -104,6 +104,12 @@ function English() {
             do_you_want_know_more: "Do you want to know more?",
             leaderboard: "Leaderboard",
             user: "User",
+            your_page: "Your page",
+            pokemons: "Pokemons",
+            have_your_ever_feel_stuck: "Have you ever feel stuck in your organization?",
+            dont_you_know_how_to_advance: "Don't you know how to advance in your Seniority Level? Don't worry, we are here to help you!",
+            seniority_go_is_your_solution: "SeniorityGo is your solution!",
+            seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
         },
     };
 }

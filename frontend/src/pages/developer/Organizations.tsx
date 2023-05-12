@@ -18,7 +18,7 @@ function Organizations() {
     }, []);
 
     return (
-        <div className='p-8 mx-auto w-full overflow-y-auto scrollbar-none'>
+        <div className='p-8 mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
             <div className='rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
                 <div className='flex items-center justify-between'>
                     <h2 className="text-5xl font-extrabold dark:text-white">{t('organizations')}</h2>

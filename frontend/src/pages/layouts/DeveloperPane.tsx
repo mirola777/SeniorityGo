@@ -11,7 +11,7 @@ function DeveloperPaneLayout() {
                 <header className="z-20">
                     <DeveloperHeader />
                 </header>
-                <main className="w-full h-full flex overflow-hidden max-w-screen-2xl mx-auto">
+                <main className="w-full h-full flex overflow-hidden mx-auto">
                     <Outlet />
                 </main>
                 <footer className="z-20">

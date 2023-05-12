@@ -6,6 +6,7 @@ import { getUserSession } from "../../services/AuthService";
 import { Admin } from "../../models/Admin";
 import { Developer } from "../../models/Developer";
 import { Link } from "react-router-dom";
+import UserDropdown from "../common/UserDropdown";
 
 
 function AdminHeader() {
@@ -38,17 +39,9 @@ function AdminHeader() {
                                     <span className="sr-only">{t('notifications')}</span>
                                     <NotificationIcon className="h-5 w-5"></NotificationIcon>
                                 </button>
-                            </div>
+                            </div>  
 
-                            <button className="block">
-                                <img
-                                    alt="User Avatar"
-                                    src={user instanceof Developer ? user.getAvatar() : ""}
-                                    className="h-8 w-8 rounded-full object-cover"
-                                />
-                            </button>
-
-                            <h3 className="text-white text-lg font-medium">{user?.getUser().getUsername()}</h3>
+                            <UserDropdown user={user}></UserDropdown>
                         </div>
                     )}
                 </div>
