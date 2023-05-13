@@ -1,5 +1,5 @@
 import { t } from 'i18next';
-import { Profile } from '../../models/Profile';
+import { Profile } from '../../../models/Profile';
 import ProfileSeniorityCard from './ProfileSeniorityCard';
 import { Link } from 'react-router-dom';
 

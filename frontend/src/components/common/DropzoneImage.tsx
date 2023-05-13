@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 
 interface DropzoneImageProps {
+    id?: string;
     previousImage?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-function DropzoneImage({ previousImage, onChange }: DropzoneImageProps) {
+function DropzoneImage({ id, previousImage, onChange }: DropzoneImageProps) {
     // Translation component
     const { t } = useTranslation();
 
@@ -20,7 +21,7 @@ function DropzoneImage({ previousImage, onChange }: DropzoneImageProps) {
         acceptedFiles.forEach(file => {
             const event = {
                 target: {
-                    name: 'image',
+                    name: id ? id : 'image',
                     value: file,
                     type: 'file',
                 },
@@ -45,7 +46,7 @@ function DropzoneImage({ previousImage, onChange }: DropzoneImageProps) {
         <div>
             <div {...getRootProps()}>
                 <div className="flex items-center justify-center w-full">
-                    <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-78 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700  border-gray-600 hover:border-gray-500 hover:bg-gray-600">
+                    <label htmlFor={id ? id : "image"} className="flex flex-col items-center justify-center w-full h-78 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700  border-gray-600 hover:border-gray-500 hover:bg-gray-600">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             {paths.length === 0 ?
                                 (
@@ -61,7 +62,7 @@ function DropzoneImage({ previousImage, onChange }: DropzoneImageProps) {
                             <p className="mb-2 text-sm text-gray-400">{t('click_or_drop_image')}</p>
                             <p className="text-xs text-gray-400">{t('click_or_drop_image_types')}</p>
                         </div>
-                        <input id="image" name="image" {...getInputProps()} className="hidden" />
+                        <input id={id ? id : "image"} name={id ? id : "image"} {...getInputProps()} className="hidden" />
                     </label>
                 </div>
             </div>

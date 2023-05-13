@@ -24,7 +24,6 @@ interface RegisterCredentials {
         username: string;
         email: string;
         password: string;
-
     }
     first_name: string;
     second_name?: string | null;

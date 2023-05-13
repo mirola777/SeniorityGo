@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Profile } from '../../models/Profile';
 import { getOrganizationProfilesDetailed } from '../../services/ProfileService';
-import ProfileDetailedCard from '../../components/common/ProfileDetailedCard';
+import ProfileDetailedCard from '../../components/common/profile/ProfileDetailedCard';
 import { Organization } from '../../models/Organization';
 import { getOrganization } from '../../services/OrganizationService';
 import { getUserSession } from '../../services/AuthService';

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { ProfileSeniority } from '../../models/ProfileSeniority';
-import { capitalizeFirstLetter } from '../../util/CapitalizeFirstLetter';
-import RequirementRoadmapItem from './RequirementRoadmapItem';
+import { ProfileSeniority } from '../../../models/ProfileSeniority';
+import { capitalizeFirstLetter } from '../../../util/CapitalizeFirstLetter';
+import RequirementRoadmapItem from '../RequirementRoadmapItem';
 
 
 interface ProfileSeniorityRoadmapItemProps {

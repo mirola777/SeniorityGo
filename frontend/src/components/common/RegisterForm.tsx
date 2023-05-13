@@ -105,7 +105,7 @@ function RegisterForm() {
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
             <div className="w-full rounded-lg border max-w-3xl xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
-            <div className="flex flex-col items-center space-y-4 p-8">
+                <div className="flex flex-col items-center space-y-4 p-8">
                     <Link to="/">
                         <AppLogo className="w-48"></AppLogo>
                     </Link>
@@ -142,19 +142,17 @@ function RegisterForm() {
                             <label htmlFor="organization" className="block mb-2 text-sm font-medium  text-white">{t('organization')}*</label>
                             <select
                                 id="organization"
-                                name='organization' 
+                                name='organization'
                                 value={registerDict.organization}
                                 required
                                 onChange={handleSelectChange}
                                 className=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" >
-                                    <option selected disabled >{t('select_organization')}</option>
-                                    {organizations.map((organization) => (
-                                        <option value={organization.getId()}>{organization.getName()}</option>
-                                    ))}
+                                <option selected disabled >{t('select_organization')}</option>
+                                {organizations.map((organization) => (
+                                    <option value={organization.getId()}>{organization.getName()}</option>
+                                ))}
                             </select>
-
                         </div>
-
 
                         <div className="flex space-x-4">
                             <div className="w-full">

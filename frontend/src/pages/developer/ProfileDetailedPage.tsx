@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getProfile } from '../../services/ProfileService';
 import { useEffect, useState } from 'react';
 import { Profile } from '../../models/Profile';
-import ProfileSeniorityRoadmapItem from '../../components/common/ProfileSeniorityRoadmapItem';
+import ProfileSeniorityRoadmapItem from '../../components/common/profile/ProfileSeniorityRoadmapItem';
 
 function ProfileDetailedPage() {
 
