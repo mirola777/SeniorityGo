@@ -120,6 +120,7 @@ function English() {
             profile_join_button: "Join",
             member: "You are a member of this profile",
             not_member: "You are not a member of this profile",
+            validate: "Validate",
             seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
         },
     };
