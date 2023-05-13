@@ -2,13 +2,15 @@ import { useTranslation } from 'react-i18next';
 import { ProfileSeniority } from '../../../models/ProfileSeniority';
 import { capitalizeFirstLetter } from '../../../util/CapitalizeFirstLetter';
 import RequirementRoadmapItem from '../RequirementRoadmapItem';
+import { Developer } from '../../../models/Developer';
 
 
 interface ProfileSeniorityRoadmapItemProps {
     profileseniority: ProfileSeniority;
+    developer?: Developer;
 }
 
-function ProfileSeniorityRoadmapItem({ profileseniority }: ProfileSeniorityRoadmapItemProps) {
+function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSeniorityRoadmapItemProps) {
     const { t } = useTranslation();
 
     const pokemon = profileseniority.getPokemon();
@@ -34,7 +36,7 @@ function ProfileSeniorityRoadmapItem({ profileseniority }: ProfileSeniorityRoadm
                     </div>
                     <div className="space-y-2 lg:space-y-4">
                         {requirements.map((requirement, index) => (
-                            <RequirementRoadmapItem index={index} requirement={requirement} />
+                            <RequirementRoadmapItem developer={developer} index={index} requirement={requirement} />
                         ))}
 
                     </div>

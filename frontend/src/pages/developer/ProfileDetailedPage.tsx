@@ -3,17 +3,27 @@ import { getProfile } from '../../services/ProfileService';
 import { useEffect, useState } from 'react';
 import { Profile } from '../../models/Profile';
 import ProfileSeniorityRoadmapItem from '../../components/common/profile/ProfileSeniorityRoadmapItem';
+import { getUserSession } from '../../services/AuthService';
+import { Admin } from '../../models/Admin';
+import { Developer } from '../../models/Developer';
 
 function ProfileDetailedPage() {
 
     // Profile 
     const [profile, setProfile] = useState<Profile | null>(null);
 
+    // User
+    const [user, setUser] = useState<Admin | Developer | null>(null);
+
     // Get the id from the URL params
     const { id = '' } = useParams<{ id: string }>();
     const idInt = parseInt(id, 10);
 
     useEffect(() => {
+        getUserSession().then((user) => {
+            setUser(user);
+        });
+
         getProfile(idInt).then((profile) => {
             setProfile(profile);
         }
@@ -31,7 +41,7 @@ function ProfileDetailedPage() {
 
                 <section className=''>
                         {profile?.getProfilesSeniorities().map((profileseniority) => (
-                            <ProfileSeniorityRoadmapItem profileseniority={profileseniority} />
+                            <ProfileSeniorityRoadmapItem developer={user instanceof Developer ? user: undefined} profileseniority={profileseniority} />
                         ))}
                     </section>
             </div >
