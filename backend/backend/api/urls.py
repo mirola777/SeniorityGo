@@ -17,6 +17,7 @@ urlpatterns = [
     path("profile/all/", profile_views.getAll),
     path("profile/organization/", profile_views.getOrganizationProfiles),
     path("profile/organization/detailed/", profile_views.getOrganizationProfilesDetailed),
+    path("profile/organization/developer/", profile_views.addDeveloperToProfile),
     path("profile/create/", profile_views.create),
     path("profile/get/<int:pk>/", profile_views.get),
     path("profile/update/<int:pk>/", profile_views.update),

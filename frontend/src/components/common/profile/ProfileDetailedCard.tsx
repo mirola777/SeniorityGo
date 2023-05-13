@@ -2,12 +2,16 @@ import { t } from 'i18next';
 import { Profile } from '../../../models/Profile';
 import ProfileSeniorityCard from './ProfileSeniorityCard';
 import { Link } from 'react-router-dom';
+import { Developer } from '../../../models/Developer';
 
 interface ProfileDetailedCardProps {
+    developer?: Developer;
     profile: Profile;
 }
 
-function ProfileDetailedCard({ profile }: ProfileDetailedCardProps) {
+function ProfileDetailedCard({ developer, profile }: ProfileDetailedCardProps) {
+    const isDeveloperInProfile = developer?.getDeveloperProfiles().some((developerProfile) => developerProfile.getProfile().getId() === profile.getId());
+
     return (
         <div className='rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 h-full shadow-2xl'>
             <div className="container text-white space-y-8">
@@ -19,6 +23,15 @@ function ProfileDetailedCard({ profile }: ProfileDetailedCardProps) {
                     <p className="text-gray-400">
                         {profile.getDescription()}
                     </p>
+                    {isDeveloperInProfile ? (
+                        <span className="inline-flex items-center bg-green-900 text-green-300 text-base font-medium mt-4 mr-2 px-2.5 py-0.5 rounded-full ">
+                            <span className="w-2 h-2 mr-1 bg-green-500 rounded-full"></span>
+                            {t('member')}
+                        </span>) : (
+                        <span className="inline-flex  items-center bg-cyan-900 text-cyan-300 text-base font-medium mt-4 px-2.5 py-0.5 rounded-full ">
+                            <span className="w-2 h-2 mr-1 bg-cyan-500 rounded-full"></span>
+                            {t('not_member')}
+                        </span>)}
                 </section>
 
                 <hr className="h-px bg-gradient-to-r from-fuchsia-700 to-blue-600 border-0" />

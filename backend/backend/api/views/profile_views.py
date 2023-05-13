@@ -7,6 +7,11 @@ from api.serializers.profile_list_serializer import ProfileListSerializer
 from rest_framework.permissions import IsAuthenticated
 from api.models.developer import Developer
 from api.models.admin import Admin
+from api.models.developerprofile import DeveloperProfile
+from api.models.developerrequirement import DeveloperRequirement
+from api.models.requirement import Requirement
+from api.models.profileseniority import ProfileSeniority
+from django.db import transaction
 
 
 @api_view(['GET'])
@@ -61,6 +66,33 @@ def create(request):
         return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addDeveloperToProfile(request):
+    print(request.data)
+    if Developer.objects.filter(user=request.user.id).exists() and Profile.objects.filter(pk=request.data['profile_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.user.id)
+                profile = Profile.objects.get(pk=request.data['profile_id'])
+                seniority = ProfileSeniority.objects.filter(profile=profile).order_by('seniority__level').first().seniority
+                
+                # Creating the developer profile relation
+                DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=seniority)
+                
+                #  Creating the developer requirements relation
+                profileseniorities = ProfileSeniority.objects.filter(profile=profile)
+                requirements = Requirement.objects.filter(profileseniorityrequirement__profile_seniority__in=profileseniorities).distinct()
+                for requirement in requirements:
+                    DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement)
+                
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                pass
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])

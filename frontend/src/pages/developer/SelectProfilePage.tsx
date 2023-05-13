@@ -7,6 +7,8 @@ import { Organization } from '../../models/Organization';
 import { getOrganization } from '../../services/OrganizationService';
 import { getUserSession } from '../../services/AuthService';
 import LoadingScreen from '../../components/common/LoadingScreen';
+import { Developer } from '../../models/Developer';
+import { Admin } from '../../models/Admin';
 
 
 function SelectProfilePage() {
@@ -16,6 +18,8 @@ function SelectProfilePage() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     // Organization var
     const [organization, setOrganization] = useState<Organization | null>(null);
+    // User var
+    const [user, setUser] = useState<Developer | Admin | null>(null);
 
     useEffect(() => {
         getOrganizationProfilesDetailed().then((profilesResponse) => {
@@ -26,6 +30,8 @@ function SelectProfilePage() {
             if (user?.getUser() === null || user?.getUser() === undefined) {
                 return;
             }
+
+            setUser(user);
 
             getOrganization(user.getUser().getOrganization()).then((organizationResponse) => {
                 setOrganization(organizationResponse);
@@ -46,7 +52,7 @@ function SelectProfilePage() {
                 <ul className="grid grid-cols-1 gap-4">
                     {profiles.map((profile) =>
                         <li>
-                            <ProfileDetailedCard profile={profile}></ProfileDetailedCard>
+                            <ProfileDetailedCard developer={user instanceof Developer ? user : undefined}  profile={profile}></ProfileDetailedCard>
                         </li>
                     )}
                 </ul>
