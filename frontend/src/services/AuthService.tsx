@@ -50,6 +50,7 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         localStorage.setItem(TOKEN_ACCESS, data.data.access);
         localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
+        await getUserSession();
         window.location.reload();
     } catch (error: any) {
         const err = new Error(JSON.stringify({ 'errors': ['credentials_wrong'] }));

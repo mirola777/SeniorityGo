@@ -9,11 +9,13 @@ import { formatDate } from "../../util/DateFormat";
 import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
 import { Organization } from "../../models/Organization";
 import { getAllOrganizations } from "../../services/OrganizationService";
+import LoadingScreen from "./LoadingScreen";
 
 
 function RegisterForm() {
     // Translation component
     const { t } = useTranslation();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [organizations, setOrganizations] = useState<Organization[]>([]);
     const [errors, setErrors] = useState<string[]>([]);
@@ -38,10 +40,13 @@ function RegisterForm() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setIsLoading(true);
         register(registerDict).then((response) => {
+            setIsLoading(false);
             setSuccess(t('register_success'));
             setErrors([]);
         }).catch((error) => {
+            setIsLoading(false);
             setSuccess(null);
             setErrors([]);
             setErrors((prevErrors) => {
@@ -261,6 +266,7 @@ function RegisterForm() {
                     </form>
                 </div>
             </div>
+            {isLoading && <LoadingScreen />}
         </div>
     );
 }
