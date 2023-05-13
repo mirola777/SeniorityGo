@@ -92,6 +92,10 @@ function Spanish() {
             user: "Usuario",
             your_page: "Tu página",
             pokemons: "Pokemons",
+            select_avatar: "Selecciona un avatar",
+            skip: "Saltar",
+            update_avatar: "Actualizar avatar",
+            avatar_updated: "Avatar actualizado correctamente!",
         },
     };
 }

@@ -50,6 +50,7 @@ urlpatterns = [
     path("developer/all/", developer_views.getAll),
     path("developer/organization/detailed/", developer_views.getOrganizationDevelopersDetailed),
     path("developer/organization/", developer_views.getOrganizationDevelopers),
+    path("developer/organization/avatar/", developer_views.updateAvatar),
     path("developer/create/", developer_views.create),
     path("developer/get/<int:pk>/", developer_views.get),
     path("developer/update/<int:pk>/", developer_views.update),

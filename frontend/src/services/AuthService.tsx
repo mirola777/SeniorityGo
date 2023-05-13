@@ -90,7 +90,8 @@ export async function register(credentials: RegisterCredentials): Promise<void> 
             password: credentials.user.password
         }
 
-        login(newCredentials);
+        await login(newCredentials);
+        window.location.replace('/avatar');
 
     } catch (error: any) {
         throw error.response.data;
@@ -165,9 +166,14 @@ async function getUserSessionFromBack(): Promise<any | null> {
 }
 
 
-export async function getUserSession(): Promise<Developer | Admin | null> {
+export async function getUserSession(refresh: boolean = false): Promise<Developer | Admin | null> {
     if (localStorage.getItem(TOKEN_ACCESS) === null) {
         return null;
+    }
+
+    if (refresh) {
+        localStorage.removeItem(USER_STORAGE_KEY);
+        localStorage.removeItem(USER_STORAGE_USER_TIME);
     }
     
     let user = localStorage.getItem(USER_STORAGE_KEY);

@@ -24,7 +24,7 @@ function LeaderBoardItem({ developer, index }: LeaderBoardItemProps) {
             </td>
             <th scope="row" className="w-1/4 px-6 py-4 whitespace-nowrap text-white">
                 <div className="flex items-center h-full">
-                    <img className="w-10 h-10 rounded-full" src={developer.getAvatar()} alt="Avatar" />
+                    <img className="w-10 h-10 object-cover rounded-full" src={developer.getAvatar()} alt="Avatar" />
                     <div className="pl-3">
                         <div className="text-base font-semibold">{developer.getUser().getUsername()}</div>
                     </div>
