@@ -265,6 +265,9 @@ class Command(BaseCommand):
                 organization_developers.append(developer)
                 self.stdout.write(
                     f"Creating your user... {options['username'][0]}")
+                
+                for req in random.sample(organization_requirements, len(organization_requirements)//2):
+                    DeveloperRequirement.objects.create(developer=developer, requirement=req, is_completed=random.choice([True, False]))
 
             organization_developerprofiles = []
             for developer in organization_developers:
