@@ -7,7 +7,7 @@ import JsonToUser from "../parsers/UserParser";
 
 const USER_STORAGE_KEY = 'user';
 const USER_STORAGE_USER_TIME = 'user_time';
-const USER_STORAGE_EXPIRE = 30 * 1000; // 30 seconds
+const USER_STORAGE_EXPIRE = 60 * 10 * 1000; // 10 minutes
 const TOKEN_ACCESS = 'access_token';
 const TOKEN_REFRESH = 'refresh_token';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
