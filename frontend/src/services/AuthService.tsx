@@ -49,8 +49,13 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         localStorage.setItem(TOKEN_ACCESS, data.data.access);
         localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
-        await getUserSession();
-        window.location.reload();
+        const user = await getUserSession();
+        if(user instanceof Developer && user.getAvatar() === BACKEND_URL + '/media/assets/user_default.png') {
+            window.location.replace('/avatar');
+        } else {
+            window.location.reload();
+        }
+        
     } catch (error: any) {
         const err = new Error(JSON.stringify({ 'errors': ['credentials_wrong'] }));
         throw err;
@@ -91,7 +96,6 @@ export async function register(credentials: RegisterCredentials): Promise<void> 
         }
 
         await login(newCredentials);
-        window.location.replace('/avatar');
 
     } catch (error: any) {
         throw error.response.data;

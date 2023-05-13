@@ -51,7 +51,7 @@ function English() {
             stat_user_number: "Users in the organization",
             organization_stats: "Organization Stats",
             organization_update_advice: "You're free to update the organization's name and logo whenever you want, but I recommend you to use a white logo with a transparent background to make it look better", 
-            click_or_drop_image: "Click or drop an image to upload (1.5 MB max)",
+            click_or_drop_image: "Click or drop an image to upload (3.0 MB max)",
             click_or_drop_image_types: "JPEG, JPG or PNG",
             app_footer: "© 2023 SeniorityGo™. All Rights Reserved.",
             about: "About us",
@@ -113,6 +113,7 @@ function English() {
             skip: "Skip",
             update_avatar: "Update avatar",
             avatar_updated: "Avatar updated successfully!",
+            empty_avatar: "You can't upload an empty avatar",
             seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
         },
     };

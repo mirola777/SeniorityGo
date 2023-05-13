@@ -1,10 +1,6 @@
 from rest_framework.validators import ValidationError
 from rest_framework import serializers
 from api.models.developer import Developer
-from api.serializers.developerprofile_serializer import DeveloperProfileSerializer
-from api.serializers.developerrequirement_serializer import DeveloperRequirementSerializer
-from api.serializers.user_serializer import UserSerializer
-from django.db import transaction
 
 
 class DeveloperUpdateAvatarSerializer(serializers.ModelSerializer):
@@ -13,3 +9,12 @@ class DeveloperUpdateAvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Developer
         fields = ['avatar']
+        
+    def is_valid(self, *, raise_exception=False):
+        try:
+            return super().is_valid(raise_exception=True)
+        except ValidationError as e:  
+            if 'The submitted data was not a file. Check the encoding type on the form.' in str(e.detail):
+                self._errors = {'errors': ["empty_avatar"]}
+        
+        return False
