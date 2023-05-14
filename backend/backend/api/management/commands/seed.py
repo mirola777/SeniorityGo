@@ -201,7 +201,7 @@ class Command(BaseCommand):
 
             # Create requirements
             organization_requirements = []
-            for req in random.sample(self.requirements, random.randint(10, len(self.requirements))):
+            for req in random.sample(self.requirements, len(self.requirements)):
                 requirement = Requirement.objects.create(description=faker.text(), name=req, points=random.randint(50, 1500), organization=organization)
                 organization_requirements.append(requirement)
 
@@ -223,22 +223,24 @@ class Command(BaseCommand):
                 profile = Profile.objects.create(name=prof, description=faker.text(), organization=organization)
                 organization_profiles.append(profile)
 
-            self.stdout.write(f"Assinging seniorities to profiles...")
+      
 
             organization_profileseniorities = []
             for profile in organization_profiles:
+                profilerequirements = organization_requirements.copy()
+                self.stdout.write(f"Assinging seniorities to profile...")
                 for seniority in organization_seniorities:
                     pokemon, _ = Pokemon.objects.get_or_create(pk=random.randint(1, 152))
                     profileseniority = ProfileSeniority.objects.create(profile=profile, seniority=seniority, pokemon=pokemon)
                     organization_profileseniorities.append(profileseniority)
-
-            self.stdout.write(
-                f"Assinging requirements to profilesseniorities...")
-
-            for profileseniority in organization_profileseniorities:
-                for requirement in random.sample(organization_requirements, random.randint(2, len(organization_requirements))):
-                    ProfileSeniorityRequirement.objects.create(
-                        profile_seniority=profileseniority, requirement=requirement)
+                    
+                    self.stdout.write(
+                        f"Assinging requirements to profilesseniority...")
+                    
+                    # Adding requirements to profileseniorities
+                    for requirement in random.sample(profilerequirements, len(profilerequirements)//len(organization_seniorities)):
+                        ProfileSeniorityRequirement.objects.create(profile_seniority=profileseniority, requirement=requirement)
+                        profilerequirements.remove(requirement)
 
 
             self.stdout.write(f"Creating organization developers...")
@@ -253,21 +255,19 @@ class Command(BaseCommand):
                 usernames.append(username)
 
                 user = User.objects.create_user(username=username, password=faker.password(), email=faker.email())
-                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                developer = Developer.objects.create(
+                    user=user,
+                    organization=organization, 
+                    first_name=faker.first_name(), 
+                    last_name=faker.last_name(),
+                    phone_number=faker.phone_number(),
+                    birthday="2002-11-25", 
+                    score=random.randint(500, 10000))
                 organization_developers.append(developer)
 
             self.stdout.write(f"Assinging profiles to developers...")
             
-            if not is_my_organization:
-                user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
-                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
-                is_my_organization = True
-                organization_developers.append(developer)
-                self.stdout.write(
-                    f"Creating your user... {options['username'][0]}")
-                
-                for req in random.sample(organization_requirements, len(organization_requirements)//2):
-                    DeveloperRequirement.objects.create(developer=developer, requirement=req, is_completed=random.choice([True, False]))
+            
 
             organization_developerprofiles = []
             for developer in organization_developers:
@@ -278,6 +278,14 @@ class Command(BaseCommand):
                     # CREATE DEVELOPER PROFILE
                     developer_profile = DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=seniority)
                     organization_developerprofiles.append(developer_profile)
+                    
+            if not is_my_organization:
+                user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
+                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                is_my_organization = True
+                organization_developers.append(developer)
+                self.stdout.write(
+                    f"Creating your user... {options['username'][0]}")
 
 
             

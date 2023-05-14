@@ -21,3 +21,4 @@ class Developer(models.Model):
     phone_number = models.CharField(max_length=50)
     is_activated = models.BooleanField(default=False)
     organization = models.ForeignKey('Organization', on_delete=models.CASCADE, default=1)
+    score = models.IntegerField(default=0)

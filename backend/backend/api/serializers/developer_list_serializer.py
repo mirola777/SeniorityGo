@@ -34,7 +34,7 @@ class DeveloperListSerializer(serializers.ModelSerializer):
         model = Developer
         fields = ['user', 'organization', 'role', 'first_name', 'second_name', 
                   'last_name', 'birthday', 'avatar', 'phone_number', 
-                  'is_activated', 'profiles', 'requirements']
+                  'is_activated', 'profiles', 'requirements', 'score']
         
         
     def create(self, validated_data):

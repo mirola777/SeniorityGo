@@ -27,6 +27,7 @@ function JsonToUser(json: any): Admin | Developer | null {
             json.avatar ? BACKEND_URL + json.avatar : null,
             json.phone_number,
             json.is_activated,
+            json.score,
             json.profiles ? json.profiles.map((developerprofile: any) => {  return JsonToDeveloperProfile(developerprofile)}) : [],
             json.requirements ? json.requirements.map((developerrequirement: any) => {  return JsonToDeveloperRequirement(developerrequirement)}) : [],
         );

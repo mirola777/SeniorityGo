@@ -17,6 +17,17 @@ function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSen
     const seniority = profileseniority.getSeniority();
     const requirements = profileseniority.getRequirements();
 
+    let isCompleted = false;
+    if (developer) {
+        isCompleted = true;
+        requirements.map((requirement) => {
+            const developerrequirement = developer.getDeveloperRequirements().find((developerRequirement) => developerRequirement.getRequirement().getId() === requirement.getId());
+            if (!developerrequirement || !developerrequirement?.getIsCompleted()) {
+                isCompleted = false;
+            }
+        });
+    }
+
     return (
         <div className="flex w-full justify-center space-x-8 ">
             <div className="sticky top-0 w-1/4 mb-8  flex flex-col bg-white items-center justify-center h-full transition ease-in-out hover:bg-indigo-500 duration-150 rounded-2xl bg-gradient-to-r from-fuchsia-700 to-blue-600 p-0.5 shadow-2xl">
@@ -42,13 +53,17 @@ function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSen
                     </div>
                 </div>
 
-
-                <div className='flex flex-col items-center '>
-                    <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-blue-700 bg-dark-blue-300">
-                       <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
-                    </div>
+                <div className='flex flex-col items-center'>
+                    {isCompleted ? (
+                        <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-cyan-700 bg-green-800">
+                            <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-blue-700 bg-dark-blue-300">
+                            <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
+                        </div>
+                    )}
                 </div>
-
             </div>
         </div>
     );

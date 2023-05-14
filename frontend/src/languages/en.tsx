@@ -106,6 +106,8 @@ function English() {
             user: "User",
             your_page: "Your page",
             pokemons: "Pokemons",
+            attach_your_files: "Attach your files",
+            no_files: "No files attached",
             have_your_ever_feel_stuck: "Have you ever feel stuck in your organization?",
             dont_you_know_how_to_advance: "Don't you know how to advance in your Seniority Level? Don't worry, we are here to help you!",
             seniority_go_is_your_solution: "SeniorityGo is your solution!",
@@ -121,7 +123,11 @@ function English() {
             member: "You are a member of this profile",
             not_member: "You are not a member of this profile",
             validate: "Validate",
+            click_or_drop_files: "Click or drop files to upload (50.0 MB max)",
+            click_or_drop_files_types: "PDF, DOCX, DOC, PPTX, PPT, XLSX, XLS, TXT, CSV, JPG, JPEG or PNG",
             seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
+            validated_requirement_page: "Your request has been sent to the administrator of the organization, you will receive a notification when the administrator validates your requirement",
+            congratulations: "Congratulations!",
         },
     };
 }

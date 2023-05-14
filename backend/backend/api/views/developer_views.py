@@ -29,7 +29,7 @@ def getOrganizationDevelopers(request):
         user = Admin.objects.get(user=request.user.id)
     
     
-    developers = Developer.objects.filter(organization=user.organization)
+    developers = Developer.objects.filter(organization=user.organization).order_by('-score')
     
     serializer = DeveloperListSerializer(developers, many=True)
     return Response(serializer.data)
@@ -45,7 +45,7 @@ def getOrganizationDevelopersDetailed(request):
         user = Admin.objects.get(user=request.user.id)
     
     
-    developers = Developer.objects.filter(organization=user.organization)
+    developers = Developer.objects.filter(organization=user.organization).order_by('-score')
     
     serializer = DeveloperSerializer(developers, many=True)
     return Response(serializer.data)

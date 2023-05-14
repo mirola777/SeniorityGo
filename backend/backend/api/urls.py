@@ -44,6 +44,7 @@ urlpatterns = [
     path("requirement/organization/", requirement_views.getOrganizationRequirements),
     path("requirement/create/", requirement_views.create),
     path("requirement/get/<int:pk>/", requirement_views.get),
+    path("requirement/validate/", requirement_views.validateRequirement),
     path("requirement/update/<int:pk>/", requirement_views.update),
     path("requirement/delete/<int:pk>/", requirement_views.delete),
 
