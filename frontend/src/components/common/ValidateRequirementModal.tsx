@@ -5,7 +5,7 @@ import { useState } from "react";
 import LoadingScreen from "./LoadingScreen";
 import { validateRequirement } from "../../services/RequirementService";
 import FormOutputMessage from "./FormOutputMessage";
-import { Navigate } from "react-router-dom";
+
 
 interface ValidateRequirementModalProps {
     requirement: Requirement;

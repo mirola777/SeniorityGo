@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { createRequirement } from '../../services/RequirementService';
-import { ReactComponent as RequirementsIcon } from "../../assests/icons/Req.svg";
-import { ReactComponent as PointsIcon } from "../../assests/icons/Points.svg";
-import { Requirement } from '../../models/Requirement';
 import FormOutputMessage from '../common/FormOutputMessage';
 import DropzoneImage from '../common/DropzoneImage';
-import { getUserSession } from '../../services/AuthService';
 import { Link } from 'react-router-dom';
 import { updateDeveloperAvatar } from '../../services/DeveloperService';
 import LoadingScreen from './LoadingScreen';

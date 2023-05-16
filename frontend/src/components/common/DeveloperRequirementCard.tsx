@@ -1,4 +1,3 @@
-import { t } from 'i18next';
 import { DeveloperRequirement } from '../../models/DeveloperRequirements';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
