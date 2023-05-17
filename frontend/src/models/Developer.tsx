@@ -1,6 +1,6 @@
 import { User } from './User';
-import { Requirement } from './Requirement';
 import { DeveloperProfile } from './DeveloperProfile';
+import { DeveloperRequirement } from './DeveloperRequirements';
 
 export class Developer {
     private _birthday: Date;
@@ -12,9 +12,10 @@ export class Developer {
     private _is_activated: boolean;
     private _user: User;
     private _profiles: DeveloperProfile[];
-    private _requirements: Requirement[];
+    private _requirements: DeveloperRequirement[];
+    private _score: number;
 
-    constructor(user: User, first_name: string, second_name: string, last_name: string, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, profiles: DeveloperProfile[], requirements: Requirement[]) {
+    constructor(user: User, first_name: string, second_name: string, last_name: string, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, score: number, profiles: DeveloperProfile[], requirements: DeveloperRequirement[]) {
         this._user = user;
         this._birthday = birthday;
         this._avatar = avatar;
@@ -25,6 +26,11 @@ export class Developer {
         this._first_name = first_name;
         this._second_name = second_name;
         this._last_name = last_name;
+        this._score = score;
+    }
+
+    public getScore(): number {
+        return this._score;
     }
 
     public getUser(): User {
@@ -95,11 +101,7 @@ export class Developer {
         return this._profiles;
     }
 
-    public getRequirements(): Requirement[] {
+    public getDeveloperRequirements(): DeveloperRequirement[] {
         return this._requirements;
-    }
-
-    public setRequirements(requirements: Requirement[]): void {
-        this._requirements = requirements;
     }
 }

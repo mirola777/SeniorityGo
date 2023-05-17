@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Requirement } from "../models/Requirement";
 import JsonToRequirement from "../parsers/RequirementParser";
+import { getUserSession } from "./AuthService";
+import CustomAxiosError from "../util/CustomAxiosError";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -72,6 +74,40 @@ export async function updateRequirement(id: number, requirementDict: object): Pr
 export async function deleteRequirement(id: number): Promise<void> {
     try {
         await axios.delete(BACKEND_URL + '/api/requirement/delete/' + id + '/');
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+interface ValidateRequirement {
+    files: File[];
+    requirement_id: number;
+}
+
+
+export async function validateRequirement(validateDict: ValidateRequirement): Promise<void> {
+    try {
+        if(validateDict.files.length === 0) {
+            const error = new Error() as CustomAxiosError;
+            error.response = {
+                data: {
+                    errors: [
+                        'no_files'
+                    ]
+                },
+            };
+
+            throw error;
+        }
+
+        await axios.post(BACKEND_URL + '/api/requirement/validate/', validateDict, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        await getUserSession(true);
+
     } catch (error: any) {
         throw error.response.data;
     }

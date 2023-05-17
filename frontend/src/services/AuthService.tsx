@@ -7,7 +7,7 @@ import JsonToUser from "../parsers/UserParser";
 
 const USER_STORAGE_KEY = 'user';
 const USER_STORAGE_USER_TIME = 'user_time';
-const USER_STORAGE_EXPIRE = 30 * 1000; // 30 seconds
+const USER_STORAGE_EXPIRE = 60 * 10 * 1000; // 10 minutes
 const TOKEN_ACCESS = 'access_token';
 const TOKEN_REFRESH = 'refresh_token';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -24,7 +24,6 @@ interface RegisterCredentials {
         username: string;
         email: string;
         password: string;
-
     }
     first_name: string;
     second_name?: string | null;
@@ -50,7 +49,13 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         localStorage.setItem(TOKEN_ACCESS, data.data.access);
         localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
-        window.location.reload();
+        const user = await getUserSession();
+        if(user instanceof Developer && user.getAvatar() === BACKEND_URL + '/media/assets/user_default.png') {
+            window.location.replace('/avatar');
+        } else {
+            window.location.reload();
+        }
+        
     } catch (error: any) {
         const err = new Error(JSON.stringify({ 'errors': ['credentials_wrong'] }));
         throw err;
@@ -90,7 +95,7 @@ export async function register(credentials: RegisterCredentials): Promise<void> 
             password: credentials.user.password
         }
 
-        login(newCredentials);
+        await login(newCredentials);
 
     } catch (error: any) {
         throw error.response.data;
@@ -165,9 +170,14 @@ async function getUserSessionFromBack(): Promise<any | null> {
 }
 
 
-export async function getUserSession(): Promise<Developer | Admin | null> {
+export async function getUserSession(refresh: boolean = false): Promise<Developer | Admin | null> {
     if (localStorage.getItem(TOKEN_ACCESS) === null) {
         return null;
+    }
+
+    if (refresh) {
+        localStorage.removeItem(USER_STORAGE_KEY);
+        localStorage.removeItem(USER_STORAGE_USER_TIME);
     }
     
     let user = localStorage.getItem(USER_STORAGE_KEY);

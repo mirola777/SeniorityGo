@@ -1,6 +1,6 @@
 import { t } from 'i18next';
-import { ProfileSeniority } from '../../models/ProfileSeniority';
-import { capitalizeFirstLetter } from '../../util/CapitalizeFirstLetter';
+import { ProfileSeniority } from '../../../models/ProfileSeniority';
+import { capitalizeFirstLetter } from '../../../util/CapitalizeFirstLetter';
 
 interface ProfileSeniorityCardProps {
     profileseniority: ProfileSeniority;

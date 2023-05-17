@@ -1,9 +1,8 @@
 from rest_framework.validators import ValidationError
 from rest_framework import serializers
 from api.models.developer import Developer
-from api.serializers.profile_serializer import ProfileSerializer
 from api.serializers.developerprofile_serializer import DeveloperProfileSerializer
-from api.serializers.requirement_serializer import RequirementSerializer
+from api.serializers.developerrequirement_serializer import DeveloperRequirementSerializer
 from api.serializers.user_serializer import UserSerializer
 from django.db import transaction
 
@@ -11,7 +10,7 @@ from django.db import transaction
 class DeveloperSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     profiles = DeveloperProfileSerializer(source='developerprofile_set', many=True, read_only=True)
-    requirements = RequirementSerializer(read_only=True, many=True)
+    requirements = DeveloperRequirementSerializer(source='developerrequirement_set', read_only=True, many=True)
     avatar = serializers.ImageField(required=False)
     second_name = serializers.CharField(required=False)
     first_name = serializers.CharField(required=True)
@@ -35,7 +34,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
         model = Developer
         fields = ['user', 'organization', 'role', 'first_name', 'second_name', 
                   'last_name', 'birthday', 'avatar', 'phone_number', 
-                  'is_activated', 'profiles', 'requirements']
+                  'is_activated', 'profiles', 'requirements', 'score']
         
         
     def create(self, validated_data):

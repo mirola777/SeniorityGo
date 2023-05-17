@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FormOutputMessage from "./FormOutputMessage";
 import { ReactComponent as AppLogo } from "../../assests/icons/AppLogo.svg"
+import LoadingScreen from "./LoadingScreen";
 
 
 function LoginForm() {
     // Translation component
     const { t } = useTranslation();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [errors, setErrors] = useState<string[]>([]);
     const [success, setSuccess] = useState<string | null>(null);
@@ -20,11 +22,14 @@ function LoginForm() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setIsLoading(true);
         login(credentialsDict).then((response) => {
+            setIsLoading(false);
             setSuccess(t('login_success'));
             setErrors([]);
         })
             .catch((error) => {
+                setIsLoading(false);
                 setSuccess(null);
                 const errorObj = JSON.parse(error.message);
                 setErrors([]);
@@ -93,6 +98,7 @@ function LoginForm() {
                     </form>
                 </div>
             </div>
+            {isLoading && <LoadingScreen />}
         </div>
     );
 }
