@@ -49,12 +49,12 @@ function RequirementRoadmapItem({ requirement, index, developer }: RequirementRo
             )}
             {isCompleted ? (
                 <div
-                    className="absolute flex items-center justify-center w-8 h-8 transform -translate-x-1/2 -translate-y-4 bg-green-700  rounded-full left-1/2 sm:translate-y-0">
+                    className="absolute hidden lg:flex items-center justify-center w-8 h-8 transform -translate-x-1/2 -translate-y-4 bg-green-700  rounded-full left-1/2 sm:translate-y-0">
                         <CheckIcon className="text-white w-full h-full" />
                 </div>
             ) : (
                 <div
-                    className="absolute flex items-center justify-center w-8 h-8 transform -translate-x-1/2 -translate-y-4 bg-dark-blue-300 border-4 border-blue-700 rounded-full left-1/2 sm:translate-y-0">
+                    className="absolute  hidden lg:flex items-center justify-center w-8 h-8 transform -translate-x-1/2 -translate-y-4 bg-dark-blue-300 border-4 border-blue-700 rounded-full left-1/2 sm:translate-y-0">
                 </div>
             )}
 

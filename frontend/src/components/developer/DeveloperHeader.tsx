@@ -41,16 +41,15 @@ function DeveloperHeader() {
 
     return (
         <div className="w-full flex bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
-            <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-8">
+            <div className="flex mx-auto max-w-screen-2xl justify-between w-full px-2 sm:px-4 lg:px-8">
                 <Link to="/" className="flex items-center mx-auto w-full justify-start gap-2 py-4">
                     {user && organization && organization.getImage() !== null ? (
                         <img src={organization.getImage()} alt="Organization Logo" className="h-8 object-cover"></img>
                     ) : (<AppLogo className="h-8"></AppLogo>)}
-
                 </Link>
 
                 <div className="flex items-center gap-4">
-                    <ul className="flex items-center  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
+                    <ul className="items-center hidden sm:flex  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
                         <li className="w-full">
                             <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                         </li>
