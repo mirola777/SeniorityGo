@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Profile } from "../models/Profile";
 import JsonToProfile from "../parsers/ProfileParser";
+import { getUserSession } from "./AuthService";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -44,6 +45,19 @@ export async function getProfile(id: number): Promise<Profile> {
         
         const json = response.data;
         return JsonToProfile(json);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function addDeveloperToProfile(profile_id: number): Promise<void> {
+    try {
+        await axios.post(BACKEND_URL +  '/api/profile/organization/developer/', {
+            profile_id: profile_id
+        });
+        
+        await getUserSession(true);
     } catch (error: any) {
         throw error.response.data;
     }

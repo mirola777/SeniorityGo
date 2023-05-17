@@ -4,9 +4,8 @@ import { Developer } from '../../models/Developer';
 import { Admin } from '../../models/Admin';
 import { getUserSession } from '../../services/AuthService';
 import UserCard from '../../components/common/UserCard';
-import UserRequirementsCard from '../../components/common/UserRequirementsCard';
+import DeveloperRequirement from '../../components/common/DeveloperRequirementsCard';
 import UserPokemonsCard from '../../components/common/UserPokemons';
-
 
 
 function DeveloperPage() {
@@ -30,7 +29,7 @@ function DeveloperPage() {
                     {user instanceof Developer && (<UserPokemonsCard user={user} />)}
                 </div>
 
-                {user instanceof Developer && (<UserRequirementsCard user={user} />)}
+                {user instanceof Developer && (<DeveloperRequirement user={user} />)}
 
             </div>
 

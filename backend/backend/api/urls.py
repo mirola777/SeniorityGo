@@ -17,6 +17,7 @@ urlpatterns = [
     path("profile/all/", profile_views.getAll),
     path("profile/organization/", profile_views.getOrganizationProfiles),
     path("profile/organization/detailed/", profile_views.getOrganizationProfilesDetailed),
+    path("profile/organization/developer/", profile_views.addDeveloperToProfile),
     path("profile/create/", profile_views.create),
     path("profile/get/<int:pk>/", profile_views.get),
     path("profile/update/<int:pk>/", profile_views.update),
@@ -43,6 +44,7 @@ urlpatterns = [
     path("requirement/organization/", requirement_views.getOrganizationRequirements),
     path("requirement/create/", requirement_views.create),
     path("requirement/get/<int:pk>/", requirement_views.get),
+    path("requirement/validate/", requirement_views.validateRequirement),
     path("requirement/update/<int:pk>/", requirement_views.update),
     path("requirement/delete/<int:pk>/", requirement_views.delete),
 
@@ -50,6 +52,7 @@ urlpatterns = [
     path("developer/all/", developer_views.getAll),
     path("developer/organization/detailed/", developer_views.getOrganizationDevelopersDetailed),
     path("developer/organization/", developer_views.getOrganizationDevelopers),
+    path("developer/organization/avatar/", developer_views.updateAvatar),
     path("developer/create/", developer_views.create),
     path("developer/get/<int:pk>/", developer_views.get),
     path("developer/update/<int:pk>/", developer_views.update),

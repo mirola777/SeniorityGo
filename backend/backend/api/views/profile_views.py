@@ -7,6 +7,12 @@ from api.serializers.profile_list_serializer import ProfileListSerializer
 from rest_framework.permissions import IsAuthenticated
 from api.models.developer import Developer
 from api.models.admin import Admin
+from api.models.developerprofile import DeveloperProfile
+from api.models.developerrequirement import DeveloperRequirement
+from api.models.requirement import Requirement
+from api.models.profileseniority import ProfileSeniority
+from api.models.profileseniorityrequirement import ProfileSeniorityRequirement
+from django.db import transaction
 
 
 @api_view(['GET'])
@@ -61,6 +67,65 @@ def create(request):
         return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addDeveloperToProfile(request):
+    if Developer.objects.filter(user=request.user.id).exists() and Profile.objects.filter(pk=request.data['profile_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.user.id)
+                profile = Profile.objects.get(pk=request.data['profile_id'])
+                  
+                profileseniorities = ProfileSeniority.objects.filter(profile=profile).order_by('seniority__level')
+                if DeveloperRequirement.objects.filter(developer=developer).exists():
+                    # Developer already has requirements
+                
+                    for indexprofileseniority, profileseniority  in enumerate(profileseniorities):
+                        profileseniorityrequirements = ProfileSeniorityRequirement.objects.filter(profile_seniority=profileseniority).distinct()
+                        is_completed = True
+                        for profileseniorityrequirement in profileseniorityrequirements:
+                            requirement = profileseniorityrequirement.requirement
+                            developerrequirement, _ = DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement)
+                            
+                            if not developerrequirement.is_completed:
+                                is_completed = False
+                                break
+    
+                        if not is_completed:
+                            # Creating the developer profile relation
+                            DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=profileseniority.seniority)
+
+                            #  Creating the developer requirements relation
+                            requirements = Requirement.objects.filter(profileseniorityrequirement__profile_seniority=profileseniority).distinct()
+                            for requirement in requirements:
+                                DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement) 
+                                
+                            return Response({}, status=status.HTTP_200_OK)  
+                        
+                        if is_completed and indexprofileseniority == len(profileseniorities) - 1:
+                            # Creating the developer profile relation
+                            DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=profileseniority.seniority)
+                            return Response({}, status=status.HTTP_200_OK)
+                else:
+                    # Developer does not have requirements
+                    profileseniority = ProfileSeniority.objects.filter(profile=profile).order_by('seniority__level').first()
+                    
+                    # Creating the developer profile relation
+                    DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=profileseniority.seniority)
+                    
+                    #  Creating the developer requirements relation
+                    requirements = Requirement.objects.filter(profileseniorityrequirement__profile_seniority=profileseniority).distinct()
+                    for requirement in requirements:
+                        DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement)
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                error = {'errors': [str(e)]}
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])

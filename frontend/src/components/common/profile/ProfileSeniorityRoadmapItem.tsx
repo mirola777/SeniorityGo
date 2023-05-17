@@ -1,19 +1,32 @@
 import { useTranslation } from 'react-i18next';
-import { ProfileSeniority } from '../../models/ProfileSeniority';
-import { capitalizeFirstLetter } from '../../util/CapitalizeFirstLetter';
-import RequirementRoadmapItem from './RequirementRoadmapItem';
+import { ProfileSeniority } from '../../../models/ProfileSeniority';
+import { capitalizeFirstLetter } from '../../../util/CapitalizeFirstLetter';
+import RequirementRoadmapItem from '../RequirementRoadmapItem';
+import { Developer } from '../../../models/Developer';
 
 
 interface ProfileSeniorityRoadmapItemProps {
     profileseniority: ProfileSeniority;
+    developer?: Developer;
 }
 
-function ProfileSeniorityRoadmapItem({ profileseniority }: ProfileSeniorityRoadmapItemProps) {
+function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSeniorityRoadmapItemProps) {
     const { t } = useTranslation();
 
     const pokemon = profileseniority.getPokemon();
     const seniority = profileseniority.getSeniority();
     const requirements = profileseniority.getRequirements();
+
+    let isCompleted = false;
+    if (developer) {
+        isCompleted = true;
+        requirements.map((requirement) => {
+            const developerrequirement = developer.getDeveloperRequirements().find((developerRequirement) => developerRequirement.getRequirement().getId() === requirement.getId());
+            if (!developerrequirement || !developerrequirement?.getIsCompleted()) {
+                isCompleted = false;
+            }
+        });
+    }
 
     return (
         <div className="flex w-full justify-center space-x-8 ">
@@ -34,19 +47,23 @@ function ProfileSeniorityRoadmapItem({ profileseniority }: ProfileSeniorityRoadm
                     </div>
                     <div className="space-y-2 lg:space-y-4">
                         {requirements.map((requirement, index) => (
-                            <RequirementRoadmapItem index={index} requirement={requirement} />
+                            <RequirementRoadmapItem developer={developer} index={index} requirement={requirement} />
                         ))}
 
                     </div>
                 </div>
 
-
-                <div className='flex flex-col items-center '>
-                    <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-blue-700 bg-dark-blue-300">
-                       <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
-                    </div>
+                <div className='flex flex-col items-center'>
+                    {isCompleted ? (
+                        <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-cyan-700 bg-green-800">
+                            <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-center w-48 h-48 my-24  border-4  rounded-full border-blue-700 bg-dark-blue-300">
+                            <img className="w-32" src={pokemon?.getSmallImage()} alt={pokemon?.getName()} />
+                        </div>
+                    )}
                 </div>
-
             </div>
         </div>
     );

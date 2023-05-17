@@ -5,6 +5,8 @@ import { ReactElement } from 'react';
 import LeaderBoardPage from '../pages/developer/LeaderboardPage';
 import ProfileDetailedPage from '../pages/developer/ProfileDetailedPage';
 import DeveloperPage from '../pages/developer/DeveloperPage';
+import DeveloperAvatar from '../pages/developer/DeveloperAvatar';
+import RequirementValidatedPage from '../pages/developer/RequirementValidatedPage';
 
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {
@@ -26,6 +28,8 @@ const DeveloperRoutes = [
         <Route path='/leaderboard' element={<LeaderBoardPage />} />
         <Route path="/profiles/:id" element={<ProfileDetailedPage />} />
         <Route path='/developer' element={<DeveloperPage />} />
+        <Route path='/avatar' element={<DeveloperAvatar />} />
+        <Route path='requirements/validated' element={<RequirementValidatedPage />} />
     </Route>
 ];
 
