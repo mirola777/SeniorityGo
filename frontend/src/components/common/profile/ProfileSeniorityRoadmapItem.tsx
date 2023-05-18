@@ -29,8 +29,8 @@ function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSen
     }
 
     return (
-        <div className="flex sm:flex-row flex-col w-full justify-center space-x-4 lg:space-x-8 ">
-            <div className="sm:sticky sm:top-0  sm:w-1/4 mb-8  flex flex-col bg-white items-center justify-center h-full transition ease-in-out hover:bg-indigo-500 duration-150 rounded-2xl bg-gradient-to-r from-fuchsia-700 to-blue-600 p-0.5 shadow-2xl">
+        <div className="flex sm:flex-row flex-col w-full justify-center space-x-0 lg:space-x-8 ">
+            <div className="sm:sticky sm:top-0 w-full sm:w-1/4 mb-8 flex flex-col bg-white items-center justify-center h-full transition  hover:bg-indigo-500 duration-150 rounded-2xl bg-gradient-to-r from-fuchsia-700 to-blue-600 p-0.5 shadow-2xl">
                 <div className="h-full flex flex-col text-center space-y-8 w-full  transition items-center rounded-xl hover:bg-gray-800/50 duration-150 bg-gray-800/80 p-4">
                     <strong className="font-medium text-xl lg:text-3xl text-white">{seniority?.getName() + " (" + t('level') + " " + seniority?.getLevel() + ")"}</strong>
                     <img className="w-2/3 p-4" src={pokemon?.getImage()} alt={pokemon?.getName()} />
@@ -38,12 +38,12 @@ function ProfileSeniorityRoadmapItem({ developer, profileseniority }: ProfileSen
                 </div>
             </div>
 
-            <div className="sm:w-3/4 mx-auto ">
+            <div className="sm:w-3/4 mx-auto">
                 <div className="relative">
                     <div
                         className="absolute block w-[4px] h-full transform -translate-x-1/2 rounded-2xl bg-blue-700 left-1/2">
                     </div>
-                    <div className="space-y-2 lg:space-y-4">
+                    <div className="space-y-0 lg:space-y-4">
                         {requirements.map((requirement, index) => (
                             <RequirementRoadmapItem developer={developer} index={index} requirement={requirement} />
                         ))}

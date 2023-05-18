@@ -58,9 +58,9 @@ function ProfileDetailedPage() {
 
     return (
         <div className='p-4 lg:p-8 mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
-            <div className=' rounded-lg space-y-8 '>
+            <div className='lg:space-y-8 '>
                 <div className='flex flex-col my-14 lg:my-40 items-center text-center justify-between space-y-8'>
-                    <h2 className="text-4xl lg:text-7xl dark:text-white">{profile?.getName()}</h2>
+                    <h2 className="text-4xl lg:text-7xl text-white">{profile?.getName()}</h2>
                     <h2 className="text-base lg:text-xl max-w-3xl text-gray-400">{profile?.getDescription()}</h2>
                     {user instanceof Developer && !isUserInProfile && (
                         <div className='pt-4 lg:pt-20 space-y-8'>

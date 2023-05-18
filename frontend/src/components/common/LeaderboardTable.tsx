@@ -19,8 +19,8 @@ function LeaderBoardTable() {
     }, []);
 
     return (
-        <table className="w-full text-sm text-left bg-gradient-to-r from-gray-800 to-dark-blue-800 text-gray-500 dark:text-gray-400">
-            <thead className="text-xs uppercase from-gray-800 to-dark-blue-800 dark:text-gray-400">
+        <table className="w-full text-sm text-left bg-gradient-to-r from-gray-800 to-dark-blue-800  text-gray-400">
+            <thead className="text-xs uppercase from-gray-800 to-dark-blue-800 text-gray-400">
                 <tr>
                     <th scope="col" className="p-4">
                         

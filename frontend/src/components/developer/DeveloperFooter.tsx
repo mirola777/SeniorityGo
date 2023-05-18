@@ -7,7 +7,7 @@ function DeveloperFooter() {
     const { t } = useTranslation();
 
     return (
-        <div className="bg-gradient-to-r border-t border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
+        <div className="hidden lg:block bg-gradient-to-r border-t border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
             <div className="w-full mx-auto max-w-screen-2xl px-8 py-4 flex justify-between">
                 <div className="flex justify-center items-center space-x-4">
                     <AppLogo className="w-10 h-8" />
