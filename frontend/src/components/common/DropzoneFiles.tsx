@@ -38,7 +38,7 @@ function DropzoneFiles({ id, onChange }: DropzoneFilesProps) {
 
     return (
         <div className="space-y-2 w-full">
-            <div {...getRootProps()}>
+            <div {...getRootProps()} onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-center w-full">
                     <label htmlFor={id ? id : "files"} className="flex flex-col items-center justify-center w-full h-78 border-2 border-dashed rounded-lg cursor-pointer hover:bg-bray-800 bg-gray-700  border-gray-600 hover:border-gray-500 hover:bg-gray-600">
                         <div className="flex w-full flex-col items-center justify-center px-4 pt-5 pb-6">
