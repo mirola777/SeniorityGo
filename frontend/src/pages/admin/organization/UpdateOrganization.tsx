@@ -36,9 +36,9 @@ function UpdateOrganization() {
                 <div className='flex space-x-8'>
                     <div className='w-full flex flex-col rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
                         <div className='flex items-center justify-center'>
-                            <h2 className="text-3xl font-extrabold dark:text-white">{t('update_organization')}</h2>
+                            <h2 className="text-3xl font-extrabold text-white">{t('update_organization')}</h2>
                         </div>
-                        <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+                        <hr className="h-px my-8 border-0 bg-gray-700" />
                         <OrganizationUpdateForm organization={organization} onUpdateOrganization={handleUpdateOrganization} />
                     </div>
 

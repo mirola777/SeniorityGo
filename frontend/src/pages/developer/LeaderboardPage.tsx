@@ -7,13 +7,13 @@ function LeaderBoardPage() {
 
 
     return (
-        <div className='p-8 max-w-screen-2xl mx-auto w-full overflow-y-auto scrollbar-none'>
-            <div className='rounded-lg  space-y-8'>
+        <div className='p-4 lg:p-8 max-w-screen-2xl mx-auto w-full overflow-x-auto overflow-y-auto scrollbar-none'>
+            <div className='rounded-lg  space-y-4 lg:space-y-8'>
                 <div className='flex items-center justify-between'>
-                    <h2 className="text-5xl font-extrabold dark:text-white">{t('leaderboard')}</h2>
+                    <h2 className="text-3xl lg:text-5xl font-extrabold text-white">{t('leaderboard')}</h2>
                 </div>
 
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="relative overflow-x-auto scrollbar-none shadow-md rounded-lg">
                     <LeaderBoardTable />
                 </div>
             </div>

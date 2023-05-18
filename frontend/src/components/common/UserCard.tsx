@@ -10,7 +10,7 @@ interface UserCardProps {
 function UserCard({ user }: UserCardProps) {
     return (
         <div className='p-4'>
-            <div className='rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
+            <div className='rounded-lg lg:p-8 p-4 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-4 lg:space-y-8'>
                 <div className='flex flex-col space-y-4 items-center'>
                     {user instanceof Developer && (<img src={user.getAvatar()} alt="Avatar" className="h-28 w-28 rounded-full object-cover"></img>)}
                     <h2 className="text-3xl font-extrabold text-white">{user?.getUser().getUsername()}</h2>

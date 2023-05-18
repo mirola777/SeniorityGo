@@ -154,7 +154,7 @@ function RegisterForm() {
                             </select>
                         </div>
 
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-0 sm:space-x-4 sm:space-y-0 space-y-2 flex-col sm:flex-row">
                             <div className="w-full">
                                 <label htmlFor="first_name" className="block mb-2 text-sm font-medium  text-white">{t('first_name')}*</label>
                                 <input
@@ -181,7 +181,7 @@ function RegisterForm() {
                             </div>
                         </div>
 
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-0 sm:space-x-4 sm:space-y-0 space-y-2 flex-col sm:flex-row">
                             <div className="w-full">
                                 <div>
                                     <label htmlFor="last_name" className="block mb-2 text-sm font-medium  text-white">{t('last_name')}*</label>
@@ -223,7 +223,7 @@ function RegisterForm() {
                             />
                         </div>
 
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-0 sm:space-x-4 sm:space-y-0 space-y-2 flex-col sm:flex-row">
                             <div className="w-full">
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium  text-white">{t('password')}*</label>
                                 <input
