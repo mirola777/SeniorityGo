@@ -48,7 +48,7 @@ function LoginForm() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-full lg:py-0">
             <div className="w-full rounded-lg border md:mt-0 sm:max-w-md xl:p-0 bg-gradient-to-r border-b border-blue-800 from-gray-800 to-dark-blue-800 shadow-2xl">
                 <div className="flex flex-col items-center p-6 space-y-4 md:space-y-6 sm:p-8">
                     <Link to="/">

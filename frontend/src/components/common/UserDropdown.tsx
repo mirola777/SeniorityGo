@@ -31,13 +31,13 @@ function UserDropdown({ user }: UserDropdownProps) {
             />
             {isOpen && (
                 <div className="dropdown-menu absolute right-0 mt-2 p-4 rounded-lg shadow-2xl divide-y  w-54  border border-blue-800  bg-dark-blue-800 divide-blue-800">
-                    <div className="flex flex-col items-center px-4 py-3 text-gray-900 dark:text-white">
+                    <div className="flex flex-col items-center px-4 py-3  text-white">
                         {user instanceof Developer && (<img src={user.getAvatar()} alt="Avatar" className="h-24 w-24 rounded-full object-cover"></img>)}
                         <div className='text-xl my-4'>{user.getUser().getUsername()}</div>
                         {user instanceof Developer && (<div className='text-base text-gray-400'>{user.getFirstName() + " " + user.getLastName()}</div>)}
                         <div className="text-base text-gray-400 truncate">{user.getUser().getEmail()}</div>
                     </div>
-                    <ul className="py-2 text-base text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+                    <ul className="py-2 text-base  text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                         {user /*&& user instanceof Admin*/ && (
                             <li className="w-full">
                                 <Link to="/admin" className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('admin_panel')}</Link>

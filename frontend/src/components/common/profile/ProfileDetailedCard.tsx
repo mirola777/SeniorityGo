@@ -13,14 +13,14 @@ function ProfileDetailedCard({ developer, profile }: ProfileDetailedCardProps) {
     const isDeveloperInProfile = developer?.getDeveloperProfiles().some((developerProfile) => developerProfile.getProfile().getId() === profile.getId());
 
     return (
-        <div className='rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 h-full shadow-2xl'>
+        <div className='rounded-lg p-4 lg:p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 h-full shadow-2xl'>
             <div className="container text-white space-y-8">
                 <section className="text-center  w-full">
-                    <h2 className="text-4xl font-bold mb-2">
+                    <h2 className="text-2xl lg:text-4xl font-bold mb-2">
                         {profile.getName()}
                     </h2>
 
-                    <p className="text-gray-400">
+                    <p className="text-sm lg:text-base text-gray-400">
                         {profile.getDescription()}
                     </p>
                     {isDeveloperInProfile ? (

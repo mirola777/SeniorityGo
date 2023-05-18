@@ -34,7 +34,7 @@ function OrganizationPage() {
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center space-x-4'>
                             <img className=" h-12 object-cover" src={organization.getImage()} alt="Logo" />
-                            <h2 className="text-5xl font-extrabold dark:text-white">{organization.getName()}</h2>
+                            <h2 className="text-5xl font-extrabold text-white">{organization.getName()}</h2>
                         </div>
 
                         <Link to="update" className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
@@ -49,8 +49,8 @@ function OrganizationPage() {
                 <div className='flex space-x-8'>
 
                     <div className='w-full max-w-2xl rounded-lg p-8 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-8'>
-                        <h2 className="text-3xl font-extrabold  text-center dark:text-white">{t('organization_stats')}</h2>
-                        <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+                        <h2 className="text-3xl font-extrabold  text-center text-white">{t('organization_stats')}</h2>
+                        <hr className="h-px my-8 border-0 bg-gray-700" />
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <li>
                                 <StatsCard label={t('stat_seniortiy_number')} number={3} />

@@ -57,18 +57,18 @@ function ProfileDetailedPage() {
 
 
     return (
-        <div className='p-8 mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
-            <div className=' rounded-lg space-y-8 '>
-                <div className='flex flex-col my-40 items-center text-center justify-between space-y-8'>
-                    <h2 className="text-7xl dark:text-white">{profile?.getName()}</h2>
-                    <h2 className="text-xl max-w-3xl text-gray-400">{profile?.getDescription()}</h2>
+        <div className='p-4 lg:p-8 mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
+            <div className='lg:space-y-8 '>
+                <div className='flex flex-col my-14 lg:my-40 items-center text-center justify-between space-y-8'>
+                    <h2 className="text-4xl lg:text-7xl text-white">{profile?.getName()}</h2>
+                    <h2 className="text-base lg:text-xl max-w-3xl text-gray-400">{profile?.getDescription()}</h2>
                     {user instanceof Developer && !isUserInProfile && (
-                        <div className='pt-20 space-y-8'>
-                            <h2 className="text-4xl max-w-3xl text-gray-200">{t('profile_join')}</h2>
+                        <div className='pt-4 lg:pt-20 space-y-8'>
+                            <h2 className="text-xl lg:text-4xl max-w-3xl text-gray-200">{t('profile_join')}</h2>
                             <button onClick={handleJoinProfile}
                                 className="inline-block rounded-full bg-gradient-to-r from-fuchsia-700 to-blue-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
                                 <span
-                                    className="block rounded-full bg-dark-blue-800/60 px-48 py-4 text-2xl font-medium hover:bg-dark-blue-800/40">
+                                    className="block rounded-full bg-dark-blue-800/60 px-20 lg:px-48 py-4 text-lg lg:text-2xl font-medium hover:bg-dark-blue-800/40">
                                     {t('profile_join_button')}
                                 </span>
                             </button>
@@ -76,7 +76,7 @@ function ProfileDetailedPage() {
                     )}
                 </div>
 
-                <section className=''>
+                <section>
                     {profile?.getProfilesSeniorities().map((profileseniority) => (
                         <ProfileSeniorityRoadmapItem developer={user instanceof Developer ? user : undefined} profileseniority={profileseniority} />
                     ))}

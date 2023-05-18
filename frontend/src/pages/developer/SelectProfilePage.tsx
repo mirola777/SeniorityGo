@@ -46,14 +46,14 @@ function SelectProfilePage() {
     }, []);
 
     return (
-        <div className='p-8 mx-auto w-full items-center max-w-4xl overflow-y-auto scrollbar-none space-y-8'>
+        <div className='p-4 lg:p-8 mx-auto w-full items-center max-w-4xl overflow-y-auto scrollbar-none space-y-8'>
             {isLoading && <LoadingScreen />}
             <div className="flex items-center justify-between">
-                <h2 className="text-5xl font-extrabold text-white">{t('profiles')}</h2>
-                {organization && (<img className=" h-24" src={organization.getImage()} alt="Organization logo" />)}
+                <h2 className="text-2xl lg:text-5xl font-extrabold text-white">{t('profiles')}</h2>
+                {organization && (<img className="h-16 lg:h-24" src={organization.getImage()} alt="Organization logo" />)}
             </div>
 
-            <h3 className="text-xl font-extrabold text-gray-400">{t('select_profile_description')}</h3>
+            <h3 className="text-base lg:text-xl font-extrabold text-gray-400">{t('select_profile_description')}</h3>
 
             {profiles.length > 0 && (
                 <ul className="grid grid-cols-1 gap-4">
