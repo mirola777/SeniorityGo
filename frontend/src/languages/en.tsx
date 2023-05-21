@@ -128,6 +128,13 @@ function English() {
             seniority_go_explanation: "SeniorityGo is a platform that allows you to advance in your Seniority Level in your organization. You can see the requirements you need to complete to advance in your Seniority Level, and you can also see the profiles of your organization and the Seniority Level of each one. You can also see the profiles of other organizations and their Seniority Levels. SeniorityGo allows you to see the Leaderboard of your organization.",
             validated_requirement_page: "Your request has been sent to the administrator of the organization, you will receive a notification when the administrator validates your requirement",
             congratulations: "Congratulations!",
+            home_step_one: "Look at the organizations that are in SeniorityGo, look at their profiles and their Seniority Levels and choose the one you like the most",
+            home_step_two: "Register yourself in the organization you have chosen and type your information",
+            home_step_three: "Check all the profiles of the organization, the Seniority Levels of each one and the pokemons that represent them",
+            home_step_four: "Check the requirements of the profile you want to advance in and join it",
+            home_step_five: "Check your user profile page and see the requirements you need to complete to advance in your Seniority Level, you can also see the requirements you have already completed, the pokemons you have and your personal information",
+            home_step_six: "Select a requirement you want to complete and upload the files you need to complete it",
+            home_step_seven: "Check the Leaderboard of your organization and see the users of the organization who have completed the most requirements",
         },
     };
 }
