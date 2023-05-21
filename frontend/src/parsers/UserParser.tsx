@@ -37,6 +37,7 @@ function JsonToUser(json: any): Admin | Developer | null {
     } else if (json.role === 'admin') {
         const admin = new Admin(
             user,
+            json.avatar ? BACKEND_URL + json.avatar : null,
         );
 
         return admin;

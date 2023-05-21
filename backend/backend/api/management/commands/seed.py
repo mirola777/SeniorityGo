@@ -281,11 +281,11 @@ class Command(BaseCommand):
                     
             if not is_my_organization:
                 user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
-                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                admin = Admin.objects.create(user=user, organization=organization)
                 is_my_organization = True
                 organization_developers.append(developer)
                 self.stdout.write(
-                    f"Creating your user... {options['username'][0]}")
+                    f"Creating your user admin... {options['username'][0]}")
 
 
             

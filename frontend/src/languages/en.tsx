@@ -135,6 +135,8 @@ function English() {
             home_step_five: "Check your user profile page and see the requirements you need to complete to advance in your Seniority Level, you can also see the requirements you have already completed, the pokemons you have and your personal information",
             home_step_six: "Select a requirement you want to complete and upload the files you need to complete it",
             home_step_seven: "Check the Leaderboard of your organization and see the users of the organization who have completed the most requirements",
+            developer: "Developer",
+            administrator: "Administrator",
         },
     };
 }
