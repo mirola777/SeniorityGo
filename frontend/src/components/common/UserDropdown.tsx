@@ -40,11 +40,11 @@ function UserDropdown({ user }: UserDropdownProps) {
                     <ul className="py-2 text-base  text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                         {user /*&& user instanceof Admin*/ && (
                             <li className="w-full">
-                                <Link to="/admin" className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('admin_panel')}</Link>
+                                <Link to="/admin" onClick={toggleDropdown} className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('admin_panel')}</Link>
                             </li>
                         )}
                         <li className="w-full">
-                            <Link to="/developer" className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('your_page')}</Link>
+                            <Link to="/developer" onClick={toggleDropdown} className="block rounded-lg px-4 py-2 hover:bg-gray-600 text-white">{t('your_page')}</Link>
                         </li>
                     </ul>
                     <div className="py-2">
