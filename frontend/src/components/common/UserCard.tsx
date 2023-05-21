@@ -1,5 +1,6 @@
 import { Developer } from '../../models/Developer';
 import { Admin } from '../../models/Admin';
+import { useTranslation } from 'react-i18next';
 
 
 interface UserCardProps {
@@ -8,6 +9,8 @@ interface UserCardProps {
 
 
 function UserCard({ user }: UserCardProps) {
+    const { t } = useTranslation();
+
     return (
         <div className='p-4'>
             <div className='rounded-lg lg:p-8 p-4 bg-gradient-to-r from-gray-800 to-dark-blue-800 shadow-2xl space-y-4 lg:space-y-8'>
@@ -15,6 +18,7 @@ function UserCard({ user }: UserCardProps) {
                     {user instanceof Developer && (<img src={user.getAvatar()} alt="Avatar" className="h-28 w-28 rounded-full object-cover"></img>)}
                     <h2 className="text-3xl font-extrabold text-white">{user?.getUser().getUsername()}</h2>
                     <h2 className="text-lg font-extrabold text-gray-400">{user?.getUser().getEmail()}</h2>
+                    {user instanceof Developer && ( <h2 className="text-2xl font-extrabold text-white">{user?.getScore() + " " + t('points')}</h2>)}
                 </div>
 
                 <hr className="h-px my-8  border-0 bg-gray-700" />

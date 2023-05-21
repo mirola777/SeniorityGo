@@ -52,7 +52,7 @@ function DeveloperHeader() {
                 <DeveloperSidebar></DeveloperSidebar>
 
                 <div className="flex items-center gap-4">
-                    <ul className="items-center hidden sm:flex  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
+                    <ul className="items-center hidden lg:flex  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
                         <li className="w-full">
                             <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                         </li>
