@@ -53,7 +53,7 @@ function DropzoneFiles({ id, onChange }: DropzoneFilesProps) {
             </div>
             <div className="flex flex-wrap w-full max-h-72 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-thumb-full scrollbar-track-gray-600  scrollbar-track-rounded-full">
                 {files.map(file =>
-                    <div className="flex w-1/2 h-10 p-0.5">
+                    <div className="flex w-full lg:w-1/2 h-10 p-0.5">
                         <div className="flex px-2 py-1 w-full space-x-2 border-2 border-gray-500 rounded-lg">
                             <DocumentIcon className="w-6 h-6 text-gray-400" />
                             <h1 className="text-base text-start  truncate  w-full text-gray-400">{file.name}</h1>
