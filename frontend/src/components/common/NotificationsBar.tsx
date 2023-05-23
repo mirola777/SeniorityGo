@@ -13,7 +13,7 @@ function NotificationBar() {
         }
 
         setNotifications((prevNotifications) => [...prevNotifications, notification]);
-        setTimeout(() => removeNotification(notification), 30000);
+        setTimeout(() => removeNotification(notification), 10000);
     };
 
     const removeNotification = (notification: NotificationBase) => {

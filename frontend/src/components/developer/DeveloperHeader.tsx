@@ -57,6 +57,9 @@ function DeveloperHeader() {
                         <li className="w-full">
                             <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                         </li>
+                        <li className="w-full">
+                            <Link to="/pokemons" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('pokemons')}</Link>
+                        </li>
                         {user && (<li className="w-full">
                             <Link to="/profiles" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('profiles')}</Link>
                         </li>)}
