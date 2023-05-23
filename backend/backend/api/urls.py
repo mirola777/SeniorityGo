@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, developer_views, authentication_views
+from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, developer_views, authentication_views, notification_views
 from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
@@ -57,5 +57,9 @@ urlpatterns = [
     path("developer/get/<int:pk>/", developer_views.get),
     path("developer/update/<int:pk>/", developer_views.update),
     path("developer/delete/<int:pk>/", developer_views.delete),
+    
+    # Notification urls
+    path("notification/all/", notification_views.getAll),
+    path("notification/notseen/", notification_views.getNotSeen),
 
 ]

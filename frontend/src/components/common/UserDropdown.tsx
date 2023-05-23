@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Developer } from '../../models/Developer';
 import { Admin } from '../../models/Admin';
 import { logout } from '../../services/AuthService';
@@ -17,12 +17,28 @@ function UserDropdown({ user }: UserDropdownProps) {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
 
     return (
-        <div className="dropdown relative">
+        <div ref={dropdownRef} className=" dropdown relative">
             <img
                 alt="Avatar"
                 src={user.getAvatar()}

@@ -5,6 +5,7 @@ import { useState } from "react";
 import LoadingScreen from "./LoadingScreen";
 import { validateRequirement } from "../../services/RequirementService";
 import FormOutputMessage from "./FormOutputMessage";
+import { Navigate } from "react-router-dom";
 
 
 interface ValidateRequirementModalProps {
@@ -28,8 +29,7 @@ function ValidateRequirementModal({ requirement, closeModal }: ValidateRequireme
         validateRequirement(validateDict).then(() => {
             setErrors([]);
             setIsLoading(false);
-            closeModal();
-            window.location.replace('/requirements/validated');
+            setSuccess(t('validated'));
         }).catch((error) => {
             setIsLoading(false);
             setErrors([]);
@@ -49,6 +49,7 @@ function ValidateRequirementModal({ requirement, closeModal }: ValidateRequireme
 
     return (
         <div>
+            {success !== null && (<Navigate to='/requirements/validated'  replace={true}/>)}
             {isLoading && (<LoadingScreen />)}
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto scrollbar-none fixed inset-0 z-40 outline-none focus:outline-none">
                 <div className="relative p-4 lg:w-3/4 mx-auto max-w-7xl ">

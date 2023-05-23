@@ -1,16 +1,20 @@
 from rest_framework.validators import ValidationError
 from rest_framework import serializers
 from api.models.developer import Developer
-from api.serializers.developerprofile_serializer import DeveloperProfileSerializer
+from api.serializers.developerprofile_list_serializer import DeveloperProfileListSerializer
 from api.serializers.developerrequirement_serializer import DeveloperRequirementSerializer
+from api.serializers.developerpokemon_serializer import DeveloperPokemonSerializer
 from api.serializers.user_serializer import UserSerializer
 from django.db import transaction
+from api.serializers.fields.pokemon_field import PokemonField
+from api.models.pokemon import Pokemon
 
 
 class DeveloperSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
-    profiles = DeveloperProfileSerializer(source='developerprofile_set', many=True, read_only=True)
+    profiles = DeveloperProfileListSerializer(source='developerprofile_set', many=True, read_only=True)
     requirements = DeveloperRequirementSerializer(source='developerrequirement_set', read_only=True, many=True)
+    pokemons = DeveloperPokemonSerializer(many=True, source='developerpokemon_set', read_only=True)
     avatar = serializers.ImageField(required=False)
     second_name = serializers.CharField(required=False)
     first_name = serializers.CharField(required=True)
@@ -34,7 +38,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
         model = Developer
         fields = ['user', 'organization', 'role', 'first_name', 'second_name', 
                   'last_name', 'birthday', 'avatar', 'phone_number', 
-                  'is_activated', 'profiles', 'requirements', 'score']
+                  'is_activated', 'profiles', 'requirements', 'score', 'pokemons']
         
         
     def create(self, validated_data):

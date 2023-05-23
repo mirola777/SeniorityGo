@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import PokemonSad from '../../assests/images/PokemonSad.png';
 
 function RequirementValidatedPage() {
     // Translation component

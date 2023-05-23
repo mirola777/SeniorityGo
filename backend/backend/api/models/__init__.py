@@ -7,4 +7,11 @@ from .profile import Profile
 from .profileseniority import ProfileSeniority
 from .profileseniorityrequirement import ProfileSeniorityRequirement
 from .requirement import Requirement
+from .developerpokemon import DeveloperPokemon
 from .seniority import Seniority
+from .notification import BaseNotification
+from .notification_requirement_validated import NotificationRequirementValidated
+from .notification_advance_profile import NotificationAdvanceProfile
+from .notification_join_profile import NotificationJoinProfile
+from .notification_admin_advance_profile import NotificationAdminAdvanceProfile
+from .notification_new_pokemon import NotificationNewPokemon

@@ -60,7 +60,7 @@ function DeveloperSidebar() {
 
                 <div className="h-full flex flex-col items-center text-gray-300  bg-gradient-to-t from-gray-800 to-dark-blue-800 shadow-2xl overflow-y-auto scrollbar-none ">
                     <div className="w-full px-2">
-                        <Link to="/" className="flex items-center mx-auto w-full justify-center gap-2 pt-16 pb-4">
+                        <Link to="/" onClick={toggleSidebar} className="flex items-center mx-auto w-full justify-center gap-2 pt-16 pb-4">
                             {user && organization && organization.getImage() !== null ? (
                                 <img src={organization.getImage()} alt="Organization Logo" className="w-1/3 object-cover"></img>
                             ) : (<AppLogo className="w-1/3"></AppLogo>)}
@@ -69,20 +69,20 @@ function DeveloperSidebar() {
 
                             {user && (
                                 <div className="flex flex-col items-center w-full">
-                                    <Link to="/profiles" className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                                    <Link to="/profiles" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                                         <span className="ml-2 text-lg font-medium">{t('profiles')}</span>
                                     </Link>
-                                    <Link to="/leaderboard" className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                                    <Link to="/leaderboard" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
 
                                         <span className="ml-2 text-lg font-medium">{t('leaderboard')}</span>
                                     </Link>
                                 </div>
                             )}
 
-                            <Link to="/organizations" className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <Link to="/organizations" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                                 <span className="ml-2 text-lg font-medium">{t('organizations')}</span>
                             </Link>
-                            <Link to="/about" className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <Link to="/about" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                                 <span className="ml-2 text-lg font-medium">{t('about')}</span>
                             </Link>
                         </div>

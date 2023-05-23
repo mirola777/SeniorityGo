@@ -163,6 +163,7 @@ async function getUserSessionFromBack(): Promise<any | null> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/auth/session/');
         const json = response.data;
+        console.log(json);
         if (json === null || json === undefined) return null;
 
         return json;
