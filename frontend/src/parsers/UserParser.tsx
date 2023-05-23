@@ -1,6 +1,7 @@
 import { Admin } from "../models/Admin";
 import { Developer } from "../models/Developer";
 import { User } from "../models/User";
+import JsonToDeveloperPokemon from "./DeveloperPokemonParser";
 import JsonToDeveloperProfile from "./DeveloperProfileParser";
 import JsonToDeveloperRequirement from "./DeveloperRequirementParser";
 
@@ -30,6 +31,7 @@ function JsonToUser(json: any): Admin | Developer | null {
             json.score,
             json.profiles ? json.profiles.map((developerprofile: any) => {  return JsonToDeveloperProfile(developerprofile)}) : [],
             json.requirements ? json.requirements.map((developerrequirement: any) => {  return JsonToDeveloperRequirement(developerrequirement)}) : [],
+            json.pokemons ? json.pokemons.map((developerpokemon: any) => {  return JsonToDeveloperPokemon(developerpokemon)}) : [],
         );
     
         return developer;
@@ -37,6 +39,7 @@ function JsonToUser(json: any): Admin | Developer | null {
     } else if (json.role === 'admin') {
         const admin = new Admin(
             user,
+            json.avatar ? BACKEND_URL + json.avatar : null,
         );
 
         return admin;

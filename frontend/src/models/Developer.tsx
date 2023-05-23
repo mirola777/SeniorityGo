@@ -1,6 +1,7 @@
 import { User } from './User';
 import { DeveloperProfile } from './DeveloperProfile';
 import { DeveloperRequirement } from './DeveloperRequirements';
+import { DeveloperPokemon } from './DeveloperPokemon';
 
 export class Developer {
     private _birthday: Date;
@@ -13,9 +14,10 @@ export class Developer {
     private _user: User;
     private _profiles: DeveloperProfile[];
     private _requirements: DeveloperRequirement[];
+    private _pokemons: DeveloperPokemon[];
     private _score: number;
 
-    constructor(user: User, first_name: string, second_name: string, last_name: string, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, score: number, profiles: DeveloperProfile[], requirements: DeveloperRequirement[]) {
+    constructor(user: User, first_name: string, second_name: string, last_name: string, birthday: Date, avatar: string, phone_number: string, is_activated: boolean, score: number, profiles: DeveloperProfile[], requirements: DeveloperRequirement[], pokemons: DeveloperPokemon[]) {
         this._user = user;
         this._birthday = birthday;
         this._avatar = avatar;
@@ -27,6 +29,7 @@ export class Developer {
         this._second_name = second_name;
         this._last_name = last_name;
         this._score = score;
+        this._pokemons = pokemons;
     }
 
     public getScore(): number {
@@ -103,5 +106,9 @@ export class Developer {
 
     public getDeveloperRequirements(): DeveloperRequirement[] {
         return this._requirements;
+    }
+
+    public getDeveloperPokemons(): DeveloperPokemon[] {
+        return this._pokemons;
     }
 }

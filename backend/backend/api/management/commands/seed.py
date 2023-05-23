@@ -78,74 +78,7 @@ class Command(BaseCommand):
         "Front-end framework familiarity (e.g., React, Vue)",
         "Back-end framework expertise (e.g., Django, Flask)",
         "Knowledge of SQL databases",
-        "NoSQL database experience (e.g., MongoDB)",
-        "Experience with cloud services",
-        "Security best practices knowledge",
-        "API design and documentation",
-        "UI/UX design understanding",
-        "Data analysis and visualization",
-        "Deployment and scaling expertise",
-        "Performance optimization skills",
-        "Linux system administration capabilities",
-        "Networking and infrastructure knowledge",
-        "Collaborative coding using Git",
-        "Debugging and troubleshooting proficiency",
-        "Unit testing and QA skills",
-        "Understanding of software architecture",
-        "Web scraping and automation",
-        "Version control with Git",
-        "Data structures and algorithms",
-        "Machine learning model implementation",
-        "Natural language processing expertise",
-        "Knowledge of statistical analysis",
-        "Deployment in cloud environments",
-        "Continuous integration with Jenkins",
-        "Scripting and automation abilities",
-        "Front-end responsive design skills",
-        "Backend API development proficiency",
-        "Understanding of UX/UI principles",
-        "Knowledge of virtualization technologies",
-        "Experience with container orchestration",
-        "Understanding of distributed systems",
-        "Familiarity with caching mechanisms",
-        "Experience with message queuing systems",
-        "Experience with GraphQL APIs",
-        "Knowledge of cybersecurity principles",
-        "Understanding of Big Data concepts",
-        "Experience with ETL processes",
-        "Experience with serverless computing",
-        "Understanding of software scalability",
-        "Experience with data streaming platforms",
-        "Knowledge of data privacy regulations",
-        "Experience with IoT technologies",
-        "Knowledge of blockchain fundamentals",
-        "Experience with cloud deployment tools",
-        "Knowledge of computer vision techniques",
-        "Understanding of recommendation systems",
-        "Experience with automated testing frameworks",
-        "Experience with AI/ML frameworks (e.g., TensorFlow, PyTorch)",
-        "Knowledge of container networking",
-        "Experience with data warehousing",
-        "Experience with data governance",
-        "Experience with NoSQL data modeling",
-        "Knowledge of time series analysis",
-        "Experience with graph databases",
-        "Understanding of code optimization",
-        "Experience with geospatial data",
-        "Experience with sentiment analysis",
-        "Knowledge of A/B testing methodologies",
-        "Experience with log analysis",
-        "Understanding of cloud-native development",
-        "Experience with event-driven architectures",
-        "Knowledge of natural language generation",
-        "Experience with recommendation algorithms",
-        "Experience with anomaly detection",
-        "Understanding of software design patterns",
-        "Experience with sentiment analysis",
-        "Experience with parallel computing",
-        "Knowledge of explainable AI",
-        "Experience with reinforcement learning",
-        "Understanding of neural networks"
+        "NoSQL database experience (e.g., MongoDB)"
     ]
 
     profiles = [
@@ -194,6 +127,7 @@ class Command(BaseCommand):
 
         # Create organizations
         for org in random.sample(self.organizations, 4):
+            pokemons = []
             self.stdout.write(f"Creating organization {org}...")
             organization = Organization.objects.create(name=org)
 
@@ -230,7 +164,15 @@ class Command(BaseCommand):
                 profilerequirements = organization_requirements.copy()
                 self.stdout.write(f"Assinging seniorities to profile...")
                 for seniority in organization_seniorities:
-                    pokemon, _ = Pokemon.objects.get_or_create(pk=random.randint(1, 152))
+                    pokemonid = random.randint(1, 350)
+                    
+                    while pokemonid in pokemons:
+                        pokemonid = random.randint(1, 350)
+                    
+                    pokemons.append(pokemonid)
+                        
+                        
+                    pokemon, _ = Pokemon.objects.get_or_create(pk=pokemonid)
                     profileseniority = ProfileSeniority.objects.create(profile=profile, seniority=seniority, pokemon=pokemon)
                     organization_profileseniorities.append(profileseniority)
                     
@@ -262,7 +204,7 @@ class Command(BaseCommand):
                     last_name=faker.last_name(),
                     phone_number=faker.phone_number(),
                     birthday="2002-11-25", 
-                    score=random.randint(500, 10000))
+                    score=random.randint(500, 100000))
                 organization_developers.append(developer)
 
             self.stdout.write(f"Assinging profiles to developers...")
@@ -281,11 +223,11 @@ class Command(BaseCommand):
                     
             if not is_my_organization:
                 user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
-                developer = Developer.objects.create(user=user, organization=organization, first_name=faker.first_name(), last_name=faker.last_name(), phone_number=faker.phone_number(), birthday="2002-11-25")
+                admin = Admin.objects.create(user=user, organization=organization)
                 is_my_organization = True
                 organization_developers.append(developer)
                 self.stdout.write(
-                    f"Creating your user... {options['username'][0]}")
+                    f"Creating your user admin... {options['username'][0]}")
 
 
             

@@ -12,7 +12,12 @@ from api.models.developerrequirement import DeveloperRequirement
 from api.models.requirement import Requirement
 from api.models.profileseniority import ProfileSeniority
 from api.models.profileseniorityrequirement import ProfileSeniorityRequirement
+from api.models.developerpokemon import DeveloperPokemon
+from api.models.notification_advance_profile import NotificationAdvanceProfile
+from api.models.notification_admin_advance_profile import NotificationAdminAdvanceProfile
+from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
+from api.models.notification_join_profile import NotificationJoinProfile
 
 
 @api_view(['GET'])
@@ -102,12 +107,33 @@ def addDeveloperToProfile(request):
                             for requirement in requirements:
                                 DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement) 
                                 
+                            # Notifying the developer
+                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                                
                             return Response({}, status=status.HTTP_200_OK)  
                         
                         if is_completed and indexprofileseniority == len(profileseniorities) - 1:
                             # Creating the developer profile relation
                             DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=profileseniority.seniority)
+                            
+                            # Notifying the developer
+                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                            
                             return Response({}, status=status.HTTP_200_OK)
+                        
+                        # So, lets give a new pokemon to the developer
+                        if not DeveloperPokemon.objects.filter(developer=developer, pokemon=profileseniority.pokemon).exists():
+                            DeveloperPokemon.objects.create(developer=developer, pokemon=profileseniority.pokemon)
+                            NotificationNewPokemon.objects.create(user=developer.user, pokemon=profileseniority.pokemon, message='new_pokemon')
+                        
+                        # Notification to the developer
+                        NotificationAdvanceProfile.objects.create(user=developer.user, profile=profile, seniority=profileseniority.seniority, message='advance_profile')
+                                
+                        # Notification to the organization admins
+                        organization_admins = Admin.objects.filter(organization=developer.organization)
+                        for organization_admin in organization_admins:
+                            NotificationAdminAdvanceProfile.objects.create(user=organization_admin.user, seniority=profileseniority.seniority, profile=profile, message='admin_advance_profile', developer=developer)
+                        
                 else:
                     # Developer does not have requirements
                     profileseniority = ProfileSeniority.objects.filter(profile=profile).order_by('seniority__level').first()
@@ -119,6 +145,10 @@ def addDeveloperToProfile(request):
                     requirements = Requirement.objects.filter(profileseniorityrequirement__profile_seniority=profileseniority).distinct()
                     for requirement in requirements:
                         DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement)
+                        
+                # Notifying the developer
+                NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:
                 print(e)

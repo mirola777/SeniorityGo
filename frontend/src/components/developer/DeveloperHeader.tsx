@@ -10,6 +10,7 @@ import { getOrganization } from "../../services/OrganizationService";
 import { Organization } from "../../models/Organization";
 import UserDropdown from "../common/UserDropdown";
 import DeveloperSidebar from "./DeveloperSidebar";
+import UserNotificationsDropdown from "../common/UserNotificationsDropdown";
 
 
 
@@ -52,7 +53,7 @@ function DeveloperHeader() {
                 <DeveloperSidebar></DeveloperSidebar>
 
                 <div className="flex items-center gap-4">
-                    <ul className="items-center hidden sm:flex  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
+                    <ul className="items-center hidden lg:flex  flex-col w-full font-medium sm:flex-row sm:space-x-8 ">
                         <li className="w-full">
                             <Link to="/organizations" className="block text-white rounded whitespace-nowrap" aria-current="page">{t('organizations')}</Link>
                         </li>
@@ -69,13 +70,7 @@ function DeveloperHeader() {
                 <div className="flex items-center w-full mx-auto justify-end gap-2">
                     {user ? (
                         <div className="flex items-center w-full mx-auto justify-end gap-2">
-                            <div className="flex items-center gap-4">
-                                <button className="block shrink-0 rounded-full bg-dark-blue-900 p-1.5 text-gray-400 shadow-sm hover:bg-dark-blue-300 hover:text-gray-100">
-                                    <span className="sr-only">{t('notifications')}</span>
-                                    <NotificationIcon className="h-5 w-5"></NotificationIcon>
-                                </button>
-                            </div>
-
+                            <UserNotificationsDropdown></UserNotificationsDropdown>
                             <UserDropdown user={user}></UserDropdown>
                         </div>
                     ) : (

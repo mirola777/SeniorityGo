@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import PokemonSad from '../../assests/images/PokemonSad.png';
 
 function RequirementValidatedPage() {
     // Translation component
@@ -8,8 +7,8 @@ function RequirementValidatedPage() {
 
     return (
         <div className='flex py-8 w-full h-full items-center flex-col space-y-8 text-center overflow-y-auto scrollbar-none'>
-            <h1 className="font-black text-gray-100 text-7xl">{t('congratulations')}</h1>
-            <p className="text-5xl max-w-5xl font-bold tracking-tight text-gray-500 sm:text-5xl">
+            <h1 className="font-black text-gray-100 text-3xl lg:text-7xl">{t('congratulations')}</h1>
+            <p className="text-xl lg:text-5xl max-w-5xl font-bold tracking-tight text-gray-500 sm:text-5xl">
                 {t('validated_requirement_page')}
             </p>
             <div className="flex flex-col items-center space-y-24">

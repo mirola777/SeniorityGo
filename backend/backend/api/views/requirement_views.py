@@ -11,6 +11,11 @@ from api.models.developerrequirement import DeveloperRequirement
 from api.models.developerprofile import DeveloperProfile
 from api.models.profileseniority import ProfileSeniority
 from api.models.profileseniorityrequirement import ProfileSeniorityRequirement
+from api.models.notification_requirement_validated import NotificationRequirementValidated
+from api.models.notification_admin_advance_profile import NotificationAdminAdvanceProfile
+from api.models.notification_advance_profile import NotificationAdvanceProfile
+from api.models.developerpokemon import DeveloperPokemon
+from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
 
 
@@ -108,6 +113,7 @@ def validateRequirement(request):
                 # Add points to the developer
                 developer.score = developer.score + requirement.points
                 developer.save()
+            
                 
                 # Let's check if all the requirements are completed
                 developerprofiles = DeveloperProfile.objects.filter(developer=developer)
@@ -136,7 +142,31 @@ def validateRequirement(request):
                                 profileseniorityrequirements = ProfileSeniorityRequirement.objects.filter(profile_seniority=profileseniorities[indexprofileseniority + 1])
                                 for profileseniorityrequirement in profileseniorityrequirements:
                                     DeveloperRequirement.objects.get_or_create(developer=developer, requirement=profileseniorityrequirement.requirement)
+                                    
+                                # Giving new pokemon to the developer
+                                if not DeveloperPokemon.objects.filter(developer=developer, pokemon=profileseniorities[indexprofileseniority].pokemon).exists():
+                                    DeveloperPokemon.objects.create(developer=developer, pokemon=profileseniorities[indexprofileseniority].pokemon)
+                                    NotificationNewPokemon.objects.create(user=developer.user, pokemon=profileseniorities[indexprofileseniority].pokemon, message='new_pokemon')
+                            
+                                # Notification to the developer
+                                NotificationAdvanceProfile.objects.create(user=developer.user, profile=profile, seniority=developerprofile.seniority, message='advance_profile')
+                                
+                                # Notification to the organization admins
+                                organization_admins = Admin.objects.filter(organization=developer.organization)
+    
+                                for organization_admin in organization_admins:
+                                    NotificationAdminAdvanceProfile.objects.create(user=organization_admin.user, seniority=developerprofile.seniority, profile=profile, message='admin_advance_profile', developer=developer)
+                                    
+                            if indexprofileseniority + 1 == len(profileseniorities):
+                                if not DeveloperPokemon.objects.filter(developer=developer, pokemon=profileseniorities[indexprofileseniority].pokemon).exists():
+                                    DeveloperPokemon.objects.create(developer=developer, pokemon=profileseniorities[indexprofileseniority].pokemon)
+                                    NotificationNewPokemon.objects.create(user=developer.user, pokemon=profileseniorities[indexprofileseniority].pokemon, message='new_pokemon')
+                                
                     developerprofile.save()
+                    
+                    
+                # Creating notification
+                NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validated')
                 
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:
