@@ -96,7 +96,22 @@ class Command(BaseCommand):
         "Architect",
         "Product Manager",
         "UI/UX Designer",
-        "Data Scientist"
+        "Data Scientist",
+        "Security Engineer",
+        "Network Engineer",
+        "Database Administrator",
+        "Embedded Systems Engineer",
+        "Game Developer",
+        "Blockchain Developer",
+        "System Administrator",
+        "IT Project Manager",
+        "Business Analyst",
+        "Network Administrator",
+        "Artificial Intelligence Engineer",
+        "Computer Vision Engineer",
+        "Natural Language Processing Engineer",
+        "Software Engineer",
+        "IT Consultant"
     ]
 
     def add_arguments(self, parser):
@@ -136,7 +151,9 @@ class Command(BaseCommand):
             # Create requirements
             organization_requirements = []
             for req in random.sample(self.requirements, len(self.requirements)):
-                requirement = Requirement.objects.create(description=faker.text(), name=req, points=random.randint(50, 1500), organization=organization)
+                requirement = Requirement.objects.create(description=faker.text(
+                ), name=req, points=random.randint(50, 1500), organization=organization)
+                
                 organization_requirements.append(requirement)
 
             self.stdout.write(f"Creating organization seniorities...")
@@ -145,7 +162,8 @@ class Command(BaseCommand):
             organization_seniorities = []
             level = 1
             for sen in self.seniorities:
-                seniority = Seniority.objects.create(name=sen, organization=organization, level=level)
+                seniority = Seniority.objects.create(
+                    name=sen, organization=organization, level=level)
                 organization_seniorities.append(seniority)
                 level += 1
 
@@ -154,36 +172,35 @@ class Command(BaseCommand):
             # Create profiles
             organization_profiles = []
             for prof in random.sample(self.profiles, random.randint(1, len(self.profiles))):
-                profile = Profile.objects.create(name=prof, description=faker.text(), organization=organization)
+                profile = Profile.objects.create(
+                    name=prof, description=faker.text(), organization=organization)
                 organization_profiles.append(profile)
-
-      
 
             organization_profileseniorities = []
             for profile in organization_profiles:
                 profilerequirements = organization_requirements.copy()
                 self.stdout.write(f"Assinging seniorities to profile...")
                 for seniority in organization_seniorities:
-                    pokemonid = random.randint(1, 350)
-                    
+                    pokemonid = random.randint(1, 151)
+
                     while pokemonid in pokemons:
-                        pokemonid = random.randint(1, 350)
-                    
+                        pokemonid = random.randint(1, 151)
+
                     pokemons.append(pokemonid)
-                        
-                        
+
                     pokemon, _ = Pokemon.objects.get_or_create(pk=pokemonid)
-                    profileseniority = ProfileSeniority.objects.create(profile=profile, seniority=seniority, pokemon=pokemon)
+                    profileseniority = ProfileSeniority.objects.create(
+                        profile=profile, seniority=seniority, pokemon=pokemon)
                     organization_profileseniorities.append(profileseniority)
-                    
+
                     self.stdout.write(
                         f"Assinging requirements to profilesseniority...")
-                    
+
                     # Adding requirements to profileseniorities
                     for requirement in random.sample(profilerequirements, len(profilerequirements)//len(organization_seniorities)):
-                        ProfileSeniorityRequirement.objects.create(profile_seniority=profileseniority, requirement=requirement)
+                        ProfileSeniorityRequirement.objects.create(
+                            profile_seniority=profileseniority, requirement=requirement)
                         profilerequirements.remove(requirement)
-
 
             self.stdout.write(f"Creating organization developers...")
 
@@ -196,38 +213,38 @@ class Command(BaseCommand):
 
                 usernames.append(username)
 
-                user = User.objects.create_user(username=username, password=faker.password(), email=faker.email())
+                user = User.objects.create_user(
+                    username=username, password=faker.password(), email=faker.email())
                 developer = Developer.objects.create(
                     user=user,
-                    organization=organization, 
-                    first_name=faker.first_name(), 
+                    organization=organization,
+                    first_name=faker.first_name(),
                     last_name=faker.last_name(),
                     phone_number=faker.phone_number(),
-                    birthday="2002-11-25", 
+                    birthday="2002-11-25",
                     score=random.randint(500, 100000))
                 organization_developers.append(developer)
 
             self.stdout.write(f"Assinging profiles to developers...")
-            
-            
 
             organization_developerprofiles = []
             for developer in organization_developers:
-                n = len(organization_profiles) if len(organization_profiles) <= 4 else 4
+                n = len(organization_profiles) if len(
+                    organization_profiles) <= 4 else 4
                 for profile in random.sample(organization_profiles, random.randint(1, n)):
                     seniority = random.choice(organization_seniorities)
 
                     # CREATE DEVELOPER PROFILE
-                    developer_profile = DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=seniority)
+                    developer_profile = DeveloperProfile.objects.create(
+                        developer=developer, profile=profile, seniority=seniority)
                     organization_developerprofiles.append(developer_profile)
-                    
+
             if not is_my_organization:
-                user = User.objects.create_user(username=options["username"][0], password=options["password"][0], email=faker.email())
-                admin = Admin.objects.create(user=user, organization=organization)
+                user = User.objects.create_user(
+                    username=options["username"][0], password=options["password"][0], email=faker.email())
+                admin = Admin.objects.create(
+                    user=user, organization=organization)
                 is_my_organization = True
                 organization_developers.append(developer)
                 self.stdout.write(
                     f"Creating your user admin... {options['username'][0]}")
-
-
-            

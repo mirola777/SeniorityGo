@@ -82,6 +82,9 @@ function DeveloperSidebar() {
                             <Link to="/organizations" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                                 <span className="ml-2 text-lg font-medium">{t('organizations')}</span>
                             </Link>
+                            <Link to="/pokemons" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                                <span className="ml-2 text-lg font-medium">{t('pokemons')}</span>
+                            </Link>
                             <Link to="/about" onClick={toggleSidebar} className="flex items-center w-full h-8 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                                 <span className="ml-2 text-lg font-medium">{t('about')}</span>
                             </Link>
