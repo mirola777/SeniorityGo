@@ -21,7 +21,7 @@ function DeveloperPage() {
     return (
         user === null ? <LoadingScreen /> :
         <div className='mx-auto max-w-screen-2xl w-full overflow-y-auto scrollbar-none'>
-            <h2 className="text-5xl sm:text-8xl text-center p-8 font-extrabold text-white">{user?.getUser().getUsername()}</h2>
+            <h2 className="text-5xl hidden lg:block sm:text-8xl text-center p-8 font-extrabold text-white">{user?.getUser().getUsername()}</h2>
 
             <div className='flex flex-wrap'>
                 <div className='flex flex-col w-full sm:w-1/3 sm:flex-wrap'>

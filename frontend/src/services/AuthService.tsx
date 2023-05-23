@@ -7,6 +7,7 @@ import JsonToUser from "../parsers/UserParser";
 
 const USER_STORAGE_KEY = 'user';
 const USER_STORAGE_USER_TIME = 'user_time';
+const USER_ROLE = 'role';
 const USER_STORAGE_EXPIRE = 60 * 10 * 1000; // 10 minutes
 const TOKEN_ACCESS = 'access_token';
 const TOKEN_REFRESH = 'refresh_token';
@@ -46,10 +47,12 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         });
 
         localStorage.clear();
+       
         localStorage.setItem(TOKEN_ACCESS, data.data.access);
         localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
         const user = await getUserSession();
+        localStorage.setItem(USER_ROLE, user instanceof Developer ? 'developer' : 'admin');
         if(user instanceof Developer && user.getAvatar() === BACKEND_URL + '/media/assets/user_default.png') {
             window.location.replace('/avatar');
         } else {
@@ -160,6 +163,7 @@ async function getUserSessionFromBack(): Promise<any | null> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/auth/session/');
         const json = response.data;
+        console.log(json);
         if (json === null || json === undefined) return null;
 
         return json;

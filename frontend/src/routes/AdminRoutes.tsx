@@ -19,6 +19,10 @@ const ProtectedRoute = ({ children }: { children: ReactElement }) => {
     if (localStorage.getItem('access_token') === null) {
         return <Navigate to="/login" replace />;
     }
+    
+    if (localStorage.getItem('role') !== 'admin') {
+        return <Navigate to="/" replace />;
+    }
 
     return children;
 };

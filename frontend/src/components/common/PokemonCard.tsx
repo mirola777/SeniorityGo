@@ -15,7 +15,7 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
                             <h3 className="text-lg font-bold text-gray-200">
                                 {capitalizeFirstLetter(pokemon.getName())}
                             </h3>
-                            <img className="w-full max-w-xs" src={pokemon.getImage()} alt="Pokemon" />
+                            <img className="w-full max-w-xs" src={pokemon.getSmallImage()} alt="Pokemon" />
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,8 @@ class PokemonField(serializers.PrimaryKeyRelatedField):
         if data > 1000:
             raise Exception('Pokemon id cannot be greater than 1000')
         
+        print(data)
+        
         pokemon, _ = Pokemon.objects.get_or_create(pk=data)
         return pokemon
 
