@@ -21,5 +21,5 @@ describe('ProfileCard component', () => {
     expect(descriptionElement).toBeInTheDocument();
   });
 
-  // Add more tests as needed for different scenarios or interactions
+
 });
