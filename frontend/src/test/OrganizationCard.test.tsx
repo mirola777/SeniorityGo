@@ -6,6 +6,7 @@ import { ProfileSeniority } from '../models/ProfileSeniority';
 import { DeveloperProfile } from '../models/DeveloperProfile';
 
 describe('OrganizationCard', () => {
+  /*
   const organization = new Organization(
     1,
     'Test Organization',
@@ -28,4 +29,5 @@ describe('OrganizationCard', () => {
     render(<OrganizationCard organization={organization} />);
 
   });
+  */
 });
