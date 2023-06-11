@@ -5,6 +5,8 @@ import { ReactComponent as SenioritiesIcon } from "../../assests/icons/CodeBrack
 import { ReactComponent as OrganizationIcon } from "../../assests/icons/BuildingOffice.svg"
 import { ReactComponent as RequirementsIcon } from "../../assests/icons/Req.svg"
 import { ReactComponent as UsersIcon } from "../../assests/icons/Users.svg"
+import { ReactComponent as RequirementRequestIcon } from "../../assests/icons/Clipboard.svg"
+import { ReactComponent as ProfileRequestIcon } from "../../assests/icons/ExclamationCircle.svg"
 import { useTranslation } from 'react-i18next';
 import { getUserSession, logout } from "../../services/AuthService";
 import { useEffect, useState } from "react";
@@ -58,6 +60,14 @@ function AdminSideBar() {
                         <Link to="/admin/users" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
                             <UsersIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             <span className="ml-2 text-sm font-medium">{t('users')}</span>
+                        </Link>
+                        <Link to="/admin/requests/requirements" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <RequirementRequestIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('requirement_requests')}</span>
+                        </Link>
+                        <Link to="/admin/requests/profiles" className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300">
+                            <ProfileRequestIcon className="w-6 h-6 stroke-current" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                            <span className="ml-2 text-sm font-medium">{t('profile_requests')}</span>
                         </Link>
                     </div>
                 </div>

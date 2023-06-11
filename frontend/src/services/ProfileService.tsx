@@ -12,6 +12,10 @@ export async function getAllProfiles(): Promise<Profile[]> {
         return JsonToProfile(json);
     });
 
+    if (profiles.length > 0) {
+        await getUserSession(true);
+    }
+
     return profiles;
 }
 
@@ -22,6 +26,10 @@ export async function getOrganizationProfiles(): Promise<Profile[]> {
     const profiles: Profile[] = (await response).data.map((json: any) => {
         return JsonToProfile(json);
     });
+
+    if (profiles.length > 0) {
+        await getUserSession(true);
+    }
 
     return profiles;
 }
@@ -34,6 +42,10 @@ export async function getOrganizationProfilesDetailed(): Promise<Profile[]> {
         
         return JsonToProfile(json);
     });
+
+    if (profiles.length > 0) {
+        await getUserSession(true);
+    }
 
     return profiles;
 }
@@ -55,6 +67,34 @@ export async function addDeveloperToProfile(profile_id: number): Promise<void> {
     try {
         await axios.post(BACKEND_URL +  '/api/profile/organization/developer/', {
             profile_id: profile_id
+        });
+        
+        await getUserSession(true);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function rejectDeveloperToProfile(profile_id: number, developer_id: number): Promise<void> {
+    try {
+        await axios.post(BACKEND_URL +  '/api/profile/organization/developer/reject/', {
+            profile_id: profile_id,
+            developer_id: developer_id
+        });
+        
+        await getUserSession(true);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function acceptDeveloperToProfile(profile_id: number, developer_id: number): Promise<void> {
+    try {
+        await axios.post(BACKEND_URL +  '/api/profile/organization/developer/accept/', {
+            profile_id: profile_id,
+            developer_id: developer_id
         });
         
         await getUserSession(true);

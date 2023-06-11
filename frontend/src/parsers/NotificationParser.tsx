@@ -12,7 +12,8 @@ import JsonToUser from "./UserParser";
 
 
 function JsonToNotification(json: any): NotificationBase | null {
-    if (json.message === 'join_profile') {
+    console.log(json);
+    if (json.message === 'join_profile' || json.message === 'join_profile_accepted' || json.message === 'join_profile_rejected') {
         const notification = new NotificationJoinProfile(
             json.id,
             json.message,

@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, developer_views, authentication_views, notification_views
+from api.views import profile_views, pokemon_views, organization_views, seniority_views, requirement_views, developer_views, authentication_views, notification_views, request_views
 from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
@@ -18,6 +18,8 @@ urlpatterns = [
     path("profile/organization/", profile_views.getOrganizationProfiles),
     path("profile/organization/detailed/", profile_views.getOrganizationProfilesDetailed),
     path("profile/organization/developer/", profile_views.addDeveloperToProfile),
+    path("profile/organization/developer/accept/", profile_views.acceptDeveloperToProfile),
+    path("profile/organization/developer/reject/", profile_views.rejectDeveloperToProfile),
     path("profile/create/", profile_views.create),
     path("profile/get/<int:pk>/", profile_views.get),
     path("profile/update/<int:pk>/", profile_views.update),
@@ -61,5 +63,12 @@ urlpatterns = [
     # Notification urls
     path("notification/all/", notification_views.getAll),
     path("notification/notseen/", notification_views.getNotSeen),
+    
+    # Request urls
+    path("request/joinprofile/all/", request_views.getAllRequestsJoinProfile),
+    path("request/joinprofile/", request_views.getRequestsJoinProfile),
+    path("request/joinprofile/isrequesting/<int:profile_pk>/", request_views.isUserRequestingJoinProfile),
+    path("request/validaterequirement/", request_views.getRequestsValidateRequirement),
+    path("request/validaterequirement/isrequesting/<int:requirement_pk>/", request_views.isUserRequestingValidateRequirement),
 
 ]

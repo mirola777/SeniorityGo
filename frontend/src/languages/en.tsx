@@ -139,7 +139,7 @@ function English() {
             administrator: "Administrator",
             new_notification: "New notification",
             requirement_validated: "Your requirement has been validated",
-            join_profile: "You have joined the profile",
+            join_profile: "You have requested to join the profile",
             advance_profile: "You have advanced in the profile",
             admin_advance_profile: "The user has advanced in the profile",
             new_pokemon: "You have a new pokemon!",
@@ -153,6 +153,13 @@ function English() {
             days_ago: "{{count}} days ago",
             capydev: "CapyDev",
             capydev_explanation: "CapyDev is a software development group that was born in 2023. We have been working with SoftServe to develop SeniorityGo. We are a group of 5 students who are passionate about software development and we are always looking for new challenges.",
+            requirement_requests: "Requirement requests",
+            profile_requests: "Profile requests",
+            profile_join_requesting: "You are requesting to join this profile",
+            reject: "Reject",
+            accept: "Accept",
+            join_profile_rejected: "Your request to join the profile has been rejected",
+            join_profile_accepted: "Your request to join the profile has been accepted",
         },
     };
 }
