@@ -19,3 +19,5 @@ from .request_validate_requirement import RequestValidateRequirement
 from .request_join_profile import RequestJoinProfile
 from .request import BaseRequest
 from .validate_file import ValidateFile
+from .notification_new_user import NotificationNewUser
+from .notification_request import NotificationRequest

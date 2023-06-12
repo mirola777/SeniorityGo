@@ -8,7 +8,7 @@ from api.serializers.developer_serializer import DeveloperSerializer
 from api.serializers.developer_list_serializer import DeveloperListSerializer
 from api.serializers.developer_update_avatar_serializer import DeveloperUpdateAvatarSerializer
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
+from api.models.notification_new_user import NotificationNewUser
 
 
 
@@ -56,9 +56,22 @@ def create(request):
     serializer = DeveloperSerializer(data=request.data)
     
     if serializer.is_valid():
-        serializer.save()
+        developer = serializer.save()
+        
+        # Notification to the users
+        organization_admins = Admin.objects.filter(organization=developer.organization)
+        organization_developers = Developer.objects.filter(organization=developer.organization)
+        
+        
+        for organization_admin in organization_admins:
+            NotificationNewUser.objects.create(user=organization_admin.user, message='new_user', developer=developer)
+            
+        for organization_developer in organization_developers:
+            if organization_developer.user.id != developer.user.id:
+                NotificationNewUser.objects.create(user=organization_developer.user, message='new_user', developer=developer)
+          
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+    
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

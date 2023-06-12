@@ -3,6 +3,8 @@ import { NotificationAdminAdvanceProfile } from "../models/NotificationAdminAdva
 import { NotificationAdvanceProfile } from "../models/NotificationAdvanceProfile";
 import { NotificationJoinProfile } from '../models/NotificationJoinProfile';
 import { NotificationNewPokemon } from "../models/NotificationNewPokemon";
+import { NotificationNewUser } from "../models/NotificationNewUser";
+import { NotificationRequest } from "../models/NotificationRequest";
 import { NotificationRequirementValidated } from "../models/NotificationRequirementValidated";
 import JsonToPokemon from "./PokemonParser";
 import JsonToProfile from "./ProfileParser";
@@ -59,8 +61,6 @@ function JsonToNotification(json: any): NotificationBase | null {
             json.developer ? JsonToUser(json.developer) : null,
         );
 
-        console.log(notification);
-
         return notification;
     } else if (json.message === 'new_pokemon') {
         const notification = new NotificationNewPokemon(
@@ -72,7 +72,27 @@ function JsonToNotification(json: any): NotificationBase | null {
             json.pokemon ? JsonToPokemon(json.pokemon) : null,
         );
 
-        console.log(notification);
+        return notification;
+    } else if (json.message === 'new_user') {
+        const notification = new NotificationNewUser(
+            json.id,
+            json.message,
+            json.user,
+            json.created_at,
+            json.seen,
+            json.developer ? JsonToUser(json.developer) : null,
+        );
+
+        return notification;
+    } else if (json.message === 'admin_validate_requirement_request' || json.message === 'admin_join_profile_request') {
+        const notification = new NotificationRequest(
+            json.id,
+            json.message,
+            json.user,
+            json.created_at,
+            json.seen,
+            json.developer ? JsonToUser(json.developer) : null,
+        );
 
         return notification;
     }

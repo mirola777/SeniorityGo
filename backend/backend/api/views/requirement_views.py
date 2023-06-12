@@ -19,7 +19,7 @@ from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
 from api.models.request_validate_requirement import RequestValidateRequirement
 from api.models.validate_file import ValidateFile
-from api.serializers.validate_file_serializer import ValidateFileSerializer
+from api.models.notification_request import NotificationRequest
 
 
 @api_view(['GET'])
@@ -236,6 +236,9 @@ def validateRequirement(request):
                 
                 # Creating notification
                 NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validate_requested')
+                organization_admins = Admin.objects.filter(organization=developer.organization)
+                for organization_admin in organization_admins:
+                    NotificationRequest.objects.create(user=organization_admin.user, message='admin_validate_requirement_request', developer=developer)
                 
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:

@@ -19,6 +19,7 @@ from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
 from api.models.notification_join_profile import NotificationJoinProfile
 from api.models.request_join_profile import RequestJoinProfile
+from api.models.notification_request import NotificationRequest
 
 
 @api_view(['GET'])
@@ -89,6 +90,10 @@ def addDeveloperToProfile(request):
                 
                 RequestJoinProfile.objects.create(developer=developer, profile=profile, organization=developer.organization)
                 NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                
+                organization_admins = Admin.objects.filter(organization=developer.organization)
+                for organization_admin in organization_admins:
+                    NotificationRequest.objects.create(user=organization_admin.user, message='admin_join_profile_request', developer=developer)
                 
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:

@@ -167,6 +167,9 @@ function English() {
             view_files: "View files",
             close: "Close",
             files: "Files",
+            new_user: "There's a new user in your organization!",
+            admin_validate_requirement_request: "There's a user requesting to validate a requirement!",
+            admin_join_profile_request: "There's a user requesting to join in a technical profile!"
         },
     };
 }
