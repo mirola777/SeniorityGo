@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from api.models.request import BaseRequest
-from api.serializers.developer_list_serializer import DeveloperListSerializer
+from api.serializers.developer_small_serializer import DeveloperSmallSerializer
 
 
 class BaseRequestSerializer(serializers.ModelSerializer):
-    developer = DeveloperListSerializer(read_only=True)
+    developer = DeveloperSmallSerializer(read_only=True)
     
     class Meta:
         model = BaseRequest

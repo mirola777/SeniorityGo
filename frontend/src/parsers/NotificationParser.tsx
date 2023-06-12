@@ -12,7 +12,6 @@ import JsonToUser from "./UserParser";
 
 
 function JsonToNotification(json: any): NotificationBase | null {
-    console.log(json);
     if (json.message === 'join_profile' || json.message === 'join_profile_accepted' || json.message === 'join_profile_rejected') {
         const notification = new NotificationJoinProfile(
             json.id,
@@ -25,7 +24,7 @@ function JsonToNotification(json: any): NotificationBase | null {
     
         return notification;
 
-    } else if (json.message === 'requirement_validated') {
+    } else if (json.message === 'requirement_validate_requested' || json.message === 'requirement_validate_accepted' || json.message === 'requirement_validate_rejected') {
         const notification = new NotificationRequirementValidated(
             json.id,
             json.message,

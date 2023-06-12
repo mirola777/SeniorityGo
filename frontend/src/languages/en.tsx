@@ -160,6 +160,13 @@ function English() {
             accept: "Accept",
             join_profile_rejected: "Your request to join the profile has been rejected",
             join_profile_accepted: "Your request to join the profile has been accepted",
+            requested: "Requested",
+            requirement_validate_requested: "You have requested to validate the requirement",
+            requirement_validate_accepted: "Your request to validate the requirement has been accepted",
+            requirement_validate_rejected: "Your request to validate the requirement has been rejected",
+            view_files: "View files",
+            close: "Close",
+            files: "Files",
         },
     };
 }

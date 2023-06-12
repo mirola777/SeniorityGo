@@ -1,6 +1,7 @@
 import axios from "axios";
 import { RequestJoinProfile } from "../models/RequestJoinProfile";
 import JsonToRequest from "../parsers/RequestParser";
+import { RequestValidateRequirement } from "../models/RequestValidateRequirement";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -30,3 +31,17 @@ export async function isUserRequestingJoinProfile(profile_id: number): Promise<b
     }
 }
 
+
+export async function getRequestsValidateRequirement(): Promise<RequestValidateRequirement[]> {
+    try {
+        const response = await axios.get(BACKEND_URL + '/api/request/validaterequirement/');
+
+        const requests: RequestValidateRequirement[] = response.data.map((json: any) => {
+            return JsonToRequest(json);
+        });
+        
+        return requests;
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}

@@ -46,6 +46,13 @@ def getAllRequestsJoinProfile(request):
 
 
 @api_view(['GET'])
+def getAllRequestsValidateRequirement(request):
+    requests = RequestValidateRequirement.objects.all().order_by('created_at')
+    serializer = RequestValidateRequirementSerializer(requests, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getRequestsValidateRequirement(request):        
     if Admin.objects.filter(user=request.user.id).exists():

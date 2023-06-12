@@ -49,6 +49,8 @@ urlpatterns = [
     path("requirement/validate/", requirement_views.validateRequirement),
     path("requirement/update/<int:pk>/", requirement_views.update),
     path("requirement/delete/<int:pk>/", requirement_views.delete),
+    path("requirement/validate/accept/", requirement_views.acceptValidateRequirement),
+    path("requirement/validate/reject/", requirement_views.rejectValidateRequirement),
 
     # Developers urls
     path("developer/all/", developer_views.getAll),
@@ -68,6 +70,7 @@ urlpatterns = [
     path("request/joinprofile/all/", request_views.getAllRequestsJoinProfile),
     path("request/joinprofile/", request_views.getRequestsJoinProfile),
     path("request/joinprofile/isrequesting/<int:profile_pk>/", request_views.isUserRequestingJoinProfile),
+    path("request/validaterequirement/all/", request_views.getAllRequestsValidateRequirement),
     path("request/validaterequirement/", request_views.getRequestsValidateRequirement),
     path("request/validaterequirement/isrequesting/<int:requirement_pk>/", request_views.isUserRequestingValidateRequirement),
 

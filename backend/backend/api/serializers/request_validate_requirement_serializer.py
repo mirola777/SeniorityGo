@@ -6,8 +6,8 @@ from api.serializers.requirement_serializer import RequirementSerializer
 
 class RequestValidateRequirementSerializer(BaseRequestSerializer):
     requirement = RequirementSerializer(read_only=True)
-    files = ValidateFileSerializer(many=True, read_only=True)
+    files = ValidateFileSerializer(source='validatefile_set', many=True, read_only=True)
     
     class Meta(BaseRequestSerializer.Meta):
         model = RequestValidateRequirement
-        fields = '__all__'
+        fields = ['id', 'requirement', 'files', 'developer', 'created_at', 'organization']
