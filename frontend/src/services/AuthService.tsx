@@ -47,18 +47,18 @@ export async function login(credentials: LoginCredentials): Promise<void> {
         });
 
         localStorage.clear();
-       
+
         localStorage.setItem(TOKEN_ACCESS, data.data.access);
         localStorage.setItem(TOKEN_REFRESH, data.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access}`;
         const user = await getUserSession();
         localStorage.setItem(USER_ROLE, user instanceof Developer ? 'developer' : 'admin');
-        if(user instanceof Developer && user.getAvatar() === BACKEND_URL + '/media/assets/user_default.png') {
+        if (user instanceof Developer && user.getAvatar() === BACKEND_URL + '/media/assets/user_default.png') {
             window.location.replace('/avatar');
         } else {
             window.location.reload();
         }
-        
+
     } catch (error: any) {
         const err = new Error(JSON.stringify({ 'errors': ['credentials_wrong'] }));
         throw err;
@@ -163,13 +163,19 @@ async function getUserSessionFromBack(): Promise<any | null> {
     try {
         const response = await axios.get(BACKEND_URL + '/api/auth/session/');
         const json = response.data;
-        console.log(json);
         if (json === null || json === undefined) return null;
 
         return json;
 
     } catch (error: any) {
-        throw error.response.data;
+        if (error.request.status === 401) {
+            axios.defaults.headers.common['Authorization'] = null;
+            localStorage.removeItem(USER_STORAGE_KEY);
+            localStorage.removeItem(TOKEN_ACCESS);
+            localStorage.removeItem(TOKEN_REFRESH);
+        } else {
+            throw error.response.data;
+        }
     }
 }
 
@@ -183,7 +189,7 @@ export async function getUserSession(refresh: boolean = false): Promise<Develope
         localStorage.removeItem(USER_STORAGE_KEY);
         localStorage.removeItem(USER_STORAGE_USER_TIME);
     }
-    
+
     let user = localStorage.getItem(USER_STORAGE_KEY);
     let time = localStorage.getItem(USER_STORAGE_USER_TIME) as unknown as number;
     if (!time) {

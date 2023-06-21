@@ -16,6 +16,7 @@ class ProfileSenioritySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProfileSeniority
+        """
         validators = [
             UniqueTogetherValidator(
                 queryset=ProfileSeniority.objects.all(),
@@ -33,4 +34,6 @@ class ProfileSenioritySerializer(serializers.ModelSerializer):
                 fields=('profile', 'seniority')
             )
         ]
+        """
+        
         fields = ['seniority', 'pokemon', 'requirements']

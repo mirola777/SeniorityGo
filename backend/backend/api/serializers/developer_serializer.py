@@ -6,8 +6,6 @@ from api.serializers.developerrequirement_serializer import DeveloperRequirement
 from api.serializers.developerpokemon_serializer import DeveloperPokemonSerializer
 from api.serializers.user_serializer import UserSerializer
 from django.db import transaction
-from api.serializers.fields.pokemon_field import PokemonField
-from api.models.pokemon import Pokemon
 
 
 class DeveloperSerializer(serializers.ModelSerializer):

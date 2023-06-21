@@ -6,6 +6,7 @@ function JsonToDeveloperRequirement(json: any): DeveloperRequirement {
     const developerrequirement = new DeveloperRequirement(
         JsonToRequirement(json.requirement),
         json.is_completed,
+        json.is_requested,
         []
     );
 

@@ -17,6 +17,9 @@ from api.models.notification_advance_profile import NotificationAdvanceProfile
 from api.models.developerpokemon import DeveloperPokemon
 from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
+from api.models.request_validate_requirement import RequestValidateRequirement
+from api.models.validate_file import ValidateFile
+from api.models.notification_request import NotificationRequest
 
 
 @api_view(['GET'])
@@ -98,21 +101,24 @@ def update(request, pk):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser, FormParser])
-def validateRequirement(request):
-    if Developer.objects.filter(user=request.user.id).exists() and Requirement.objects.filter(pk=request.data['requirement_id']).exists():
+def acceptValidateRequirement(request):
+    if Developer.objects.filter(user=request.data['developer_id']).exists() and Requirement.objects.filter(pk=request.data['requirement_id']).exists():
         with transaction.atomic():
             try:
-                developer = Developer.objects.get(user=request.user.id)
+                developer = Developer.objects.get(user=request.data['developer_id'])
                 requirement = Requirement.objects.get(pk=request.data['requirement_id'])
-                # Here is missing the uploading of the documents
+
                 developerrequirement = DeveloperRequirement.objects.get(developer_id=developer, requirement=requirement)
                 developerrequirement.is_completed = True
+                developerrequirement.is_requested = False
                 developerrequirement.save()
                 
                 # Add points to the developer
                 developer.score = developer.score + requirement.points
                 developer.save()
+                
+                requestvalidaterequirement = RequestValidateRequirement.objects.get(developer=developer, requirement=requirement, organization=developer.organization)
+                requestvalidaterequirement.delete()
             
                 
                 # Let's check if all the requirements are completed
@@ -166,7 +172,73 @@ def validateRequirement(request):
                     
                     
                 # Creating notification
-                NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validated')
+                NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validate_accepted')
+                
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                error = {'errors': [str(e)]}
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def rejectValidateRequirement(request):
+    if Developer.objects.filter(user=request.data['developer_id']).exists() and Requirement.objects.filter(pk=request.data['requirement_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.data['developer_id'])
+                requirement = Requirement.objects.get(pk=request.data['requirement_id'])
+                
+                developerrequirement = DeveloperRequirement.objects.get(developer_id=developer, requirement=requirement)
+                developerrequirement.is_requested = False
+                developerrequirement.save()
+                
+                requestjoinprofile = RequestValidateRequirement.objects.get(developer=developer, requirement=requirement, organization=developer.organization)
+                requestjoinprofile.delete()
+                
+                NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validate_rejected')
+                
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                error = {'errors': [str(e)]}
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
+def validateRequirement(request):
+    
+
+    if Developer.objects.filter(user=request.user.id).exists() and Requirement.objects.filter(pk=request.data['requirement_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.user.id)
+                requirement = Requirement.objects.get(pk=request.data['requirement_id'])
+                
+                developerrequirement = DeveloperRequirement.objects.get(developer_id=developer, requirement=requirement)
+                developerrequirement.is_requested = True
+                developerrequirement.save()
+                
+                if RequestValidateRequirement.objects.filter(developer=developer, requirement=requirement, organization=developer.organization).exists():
+                    return Response({}, status=status.HTTP_200_OK)
+                
+                validaterequirementrequest = RequestValidateRequirement.objects.create(developer=developer, requirement=requirement, organization=developer.organization)
+                
+                for document in request.FILES.getlist('files[]'):
+                    ValidateFile.objects.create(request=validaterequirementrequest, file=document)          
+                
+                # Creating notification
+                NotificationRequirementValidated.objects.create(user=developer.user, requirement=requirement, message='requirement_validate_requested')
+                organization_admins = Admin.objects.filter(organization=developer.organization)
+                for organization_admin in organization_admins:
+                    NotificationRequest.objects.create(user=organization_admin.user, message='admin_validate_requirement_request', developer=developer)
                 
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:

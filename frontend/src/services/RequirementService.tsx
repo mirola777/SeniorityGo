@@ -112,3 +112,31 @@ export async function validateRequirement(validateDict: ValidateRequirement): Pr
         throw error.response.data;
     }
 }
+
+
+export async function rejectValidateRequirement(requirement_id: number, developer_id: number): Promise<void> {
+    try {
+        await axios.post(BACKEND_URL +  '/api/requirement/validate/reject/', {
+            requirement_id: requirement_id,
+            developer_id: developer_id
+        });
+        
+        await getUserSession(true);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function acceptValidateRequirement(requirement_id: number, developer_id: number): Promise<void> {
+    try {
+        await axios.post(BACKEND_URL +  '/api/requirement/validate/accept/', {
+            requirement_id: requirement_id,
+            developer_id: developer_id
+        });
+        
+        await getUserSession(true);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}

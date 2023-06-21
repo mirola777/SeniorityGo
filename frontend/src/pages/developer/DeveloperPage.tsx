@@ -12,7 +12,7 @@ function DeveloperPage() {
     const [user, setUser] = useState<Developer | Admin | null>(null);
 
     useEffect(() => {
-        getUserSession().then((user) => {
+        getUserSession(true).then((user) => {
             setUser(user);
         });
 
