@@ -70,7 +70,7 @@ def create(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     except Exception as e:
-        error = {'error': str(e)}
+        error = {'error': [str(e)]}
         return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

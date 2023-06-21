@@ -5,6 +5,41 @@ import { getUserSession } from "./AuthService";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+
+export async function createProfile(profileDict: object): Promise<Profile> {
+    try {
+        const response = await axios.post(BACKEND_URL + '/api/profile/create/', profileDict);
+
+        const json = response.data;
+        return JsonToProfile(json);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+export async function updateProfile(id: number, profileDict: object): Promise<Profile> {
+    try {
+        const response = await axios.put(BACKEND_URL + '/api/profile/update/' + id + '/', profileDict);
+        const json = response.data;
+        return JsonToProfile(json);
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+
+export async function deleteProfile(id: number): Promise<void> {
+    try {
+        await axios.delete(BACKEND_URL + '/api/profile/delete/' + id + '/');
+    } catch (error: any) {
+        throw error.response.data;
+    }
+}
+
+
+
 export async function getAllProfiles(): Promise<Profile[]> {
     const response = axios.get(BACKEND_URL +  '/api/profile/all/');
 

@@ -13,7 +13,6 @@ interface RequestValidateRequirementCardProps {
 
 function RequestValidateRequirementCard({ request, deleteRequest }: RequestValidateRequirementCardProps) {
     const { t } = useTranslation();
-    console.log(request);
 
     const rejectRequest = () => {
         const requirementID = request.getRequirement()?.getId() ?? 0;

@@ -23,6 +23,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'organization', 'seniorities']
 
     def create(self, validated_data):
+        print(validated_data, "UEUWUWUWUWWUWUWUWUWWU")
         with transaction.atomic():
             try:
                 # It's to check if a requirement is repeated in another profileseniority of the same profile

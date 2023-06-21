@@ -15,6 +15,8 @@ import { ReactElement } from 'react';
 import Users from '../pages/admin/user/Users';
 import ValidateRequirementRequestsPage from '../pages/admin/request/ValidateRequirementRequestsPage';
 import JoinProfileRequestsPage from '../pages/admin/request/JoinProfileRequestsPage';
+import CreateProfile from '../pages/admin/profile/CreateProfile';
+import ProfilePage from '../pages/admin/profile/ProfilePage';
 
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {
@@ -38,6 +40,8 @@ const AdminRoutes = [
     }>
         <Route path="/admin/" element={<AdminHome />} />
         <Route path="/admin/profiles" element={<Profiles />} />
+        <Route path="/admin/profiles/create" element={<CreateProfile />} />
+        <Route path="/admin/profiles/:id" element={<ProfilePage />} />
         <Route path="/admin/seniorities" element={<Seniorities />} />
         <Route path="/admin/seniorities/create" element={<CreateSeniorty />} />
         <Route path="/admin/seniorities/:id" element={<SeniorityPage />} />
