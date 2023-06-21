@@ -8,6 +8,7 @@ import { Admin } from '../../models/Admin';
 import { Developer } from '../../models/Developer';
 import { useTranslation } from 'react-i18next';
 import LoadingScreen from '../../components/common/LoadingScreen';
+import { isUserRequestingJoinProfile } from '../../services/RequestService';
 
 function ProfileDetailedPage() {
     const { t } = useTranslation();
@@ -19,7 +20,10 @@ function ProfileDetailedPage() {
     const [user, setUser] = useState<Admin | Developer | null>(null);
 
     // Is the user in the profile
-    const [isUserInProfile, setIsUserInProfile] = useState<boolean>(true);
+    const [isUserInProfile, setIsUserInProfile] = useState<boolean>(false);
+
+    // Is the user requesting to join the profile
+    const [isUserRequestingToJoinProfile, setIsUserRequestingToJoinProfile] = useState<boolean>(false);
 
     // Is loading
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,7 +36,7 @@ function ProfileDetailedPage() {
         if (user instanceof Developer) {
             setIsLoading(true);
             addDeveloperToProfile(idInt).then(() => {
-                setIsUserInProfile(true);
+                setIsUserRequestingToJoinProfile(true);
                 setIsLoading(false);
             }).catch(() => {
                 setIsLoading(false);
@@ -45,6 +49,9 @@ function ProfileDetailedPage() {
             setUser(user);
             if (user instanceof Developer) {
                 setIsUserInProfile(user.getDeveloperProfiles().some((profile) => profile.getProfile().getId() === idInt))
+                isUserRequestingJoinProfile(idInt).then((isRequesting) => {
+                    setIsUserRequestingToJoinProfile(isRequesting);
+                });
             }
         });
 
@@ -62,7 +69,7 @@ function ProfileDetailedPage() {
                 <div className='flex flex-col my-14 lg:my-40 items-center text-center justify-between space-y-8'>
                     <h2 className="text-4xl lg:text-7xl text-white">{profile?.getName()}</h2>
                     <h2 className="text-base lg:text-xl max-w-3xl text-gray-400">{profile?.getDescription()}</h2>
-                    {user instanceof Developer && !isUserInProfile && (
+                    {user instanceof Developer && !isUserInProfile && !isLoading && !isUserRequestingToJoinProfile && (
                         <div className='pt-4 lg:pt-20 space-y-8'>
                             <h2 className="text-xl lg:text-4xl max-w-3xl text-gray-200">{t('profile_join')}</h2>
                             <button onClick={handleJoinProfile}
@@ -72,6 +79,12 @@ function ProfileDetailedPage() {
                                     {t('profile_join_button')}
                                 </span>
                             </button>
+                        </div>
+                    )}
+
+                    {user instanceof Developer && !isUserInProfile && !isLoading && isUserRequestingToJoinProfile && (
+                        <div className='pt-4 lg:pt-20 space-y-8'>
+                            <h2 className="text-xl lg:text-4xl max-w-3xl text-gray-200">{t('profile_join_requesting')}</h2>
                         </div>
                     )}
                 </div>

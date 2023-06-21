@@ -6,6 +6,8 @@ import { NotificationAdvanceProfile } from '../../models/NotificationAdvanceProf
 import { NotificationAdminAdvanceProfile } from '../../models/NotificationAdminAdvanceProfile';
 import { NotificationNewPokemon } from '../../models/NotificationNewPokemon';
 import { formatDateTimeNotification } from '../../util/DateFormat';
+import { NotificationNewUser } from '../../models/NotificationNewUser';
+import { NotificationRequest } from '../../models/NotificationRequest';
 
 
 interface UserNotificationDropdownItemProps {
@@ -21,12 +23,16 @@ function UserNotificationDropdownItem({ notification }: UserNotificationDropdown
             <div key={notification.getId() + notification.getMessage()} className={"w-full py-2 text-gray-300"}>
                 <div className="flex w-full items-start">
                     <div className="relative inline-block shrink-0">
+                        {notification instanceof NotificationRequest && (<img className="w-10 h-10 mr-2 rounded-full" src={notification.getDeveloper()?.getAvatar()} alt="Avatar" />)}
                         {notification instanceof NotificationRequirementValidated && (<img className="w-10 h-10 mr-2" src={notification.getRequirement()?.getImage()} alt="Requirement" />)}
+                        {notification instanceof NotificationNewUser && (<img className="w-10 h-10 mr-2 rounded-full" src={notification.getNewUser()?.getAvatar()} alt="Avatar" />)}
                         {notification instanceof NotificationAdminAdvanceProfile && (<img className="w-10 h-10 mr-2 rounded-full" src={notification.getDeveloper()?.getAvatar()} alt="Avatar" />)}
                         {notification instanceof NotificationNewPokemon && (<img className="w-10 h-10 mr-2 rounded-full" src={notification.getPokemon()?.getSmallImage()} alt="Avatar" />)}
                     </div>
                     <div className="text-sm font-normal">
                         <div className="text-sm font-semibold text-white">{t(notification.getMessage())}</div>
+                        {notification instanceof NotificationRequest && (<span className="text-sm font-medium text-blue-500">{notification.getDeveloper()?.getUser().getUsername()}</span>)}
+                        {notification instanceof NotificationNewUser && (<span className="text-sm font-medium text-blue-500">{notification.getNewUser()?.getUser().getUsername()}</span>)}
                         {notification instanceof NotificationRequirementValidated && (<span className="text-sm font-medium text-blue-500">{notification.getRequirement()?.getName()}</span>)}
                         {notification instanceof NotificationJoinProfile && (<span className="text-sm font-medium text-blue-500">{notification.getProfile()?.getName()}</span>)}
                         {notification instanceof NotificationAdvanceProfile && (<span className="text-sm font-medium text-blue-500">{notification.getProfile()?.getName() + ' (' + notification.getSeniority()?.getName() + ')'}</span>)}

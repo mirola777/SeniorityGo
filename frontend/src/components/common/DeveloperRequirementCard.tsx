@@ -22,7 +22,9 @@ function DeveloperRequirementCard({ developerrequirement }: DeveloperRequirement
 
     const requirement = developerrequirement.getRequirement();
     const isCompleted = developerrequirement.getIsCompleted();
-    const cardColor = isCompleted ? "hover:bg-green-500 from-cyan-700 to-green-600" : "hover:bg-indigo-500 from-fuchsia-700 to-blue-600";
+    const isRequested = developerrequirement.getIsRequested();
+    var cardColor = isCompleted ? "hover:bg-green-500 from-cyan-700 to-green-600" : "hover:bg-indigo-500 from-fuchsia-700 to-blue-600";
+    cardColor = isRequested ? "hover:bg-yellow-500 from-yellow-700 to-yellow-600" : cardColor;
 
     return (
         <div className={"transition ease-in-out h-full  duration-150 rounded-2xl bg-gradient-to-r p-0.5 shadow-2xl " + cardColor}>
@@ -33,6 +35,11 @@ function DeveloperRequirementCard({ developerrequirement }: DeveloperRequirement
                         <span className="inline-flex items-center bg-green-900 text-green-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ">
                             <span className="w-2 h-2 mr-1 bg-green-500 rounded-full"></span>
                             {t('completed')}
+                        </span>
+                    ) : isRequested ? (
+                        <span className="inline-flex items-center bg-yellow-900 text-yellow-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ">
+                            <span className="w-2 h-2 mr-1 bg-yellow-500 rounded-full"></span>
+                            {t('requested')}
                         </span>
                     ) : (
                         <span className="inline-flex items-center bg-cyan-900 text-cyan-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ">
@@ -48,7 +55,7 @@ function DeveloperRequirementCard({ developerrequirement }: DeveloperRequirement
                         {t('points') + " " + requirement.getPoints()}
                     </p>
 
-                    {!isCompleted && (
+                    {!isCompleted && !isRequested && (
                         <button onClick={openModal} className="inline-block rounded-full bg-gradient-to-r from-cyan-700 to-green-600 p-[4px] text-white focus:outline-none focus:ring active:text-opacity-75">
                             <span
                                 className="block rounded-full bg-dark-blue-800/60 px-8 py-2 text-sm font-medium hover:bg-dark-blue-800/40">

@@ -10,6 +10,10 @@ from api.serializers.notification_admin_advance_profile_serializer import Notifi
 from api.models.notification_admin_advance_profile import NotificationAdminAdvanceProfile
 from api.models.notification_new_pokemon import NotificationNewPokemon
 from api.serializers.notification_new_pokemon_serializer import NotificationNewPokemonSerializer
+from api.serializers.notification_new_user_serializer import NotificationNewUserSerializer
+from api.models.notification_new_user import NotificationNewUser
+from api.models.notification_request import NotificationRequest
+from api.serializers.notification_request_serializer import NotificationRequestSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -24,6 +28,8 @@ def getAll(request):
     notifications += list(NotificationAdvanceProfile.objects.filter(user=request.user.id))
     notifications += list(NotificationAdminAdvanceProfile.objects.filter(user=request.user.id))
     notifications += list(NotificationNewPokemon.objects.filter(user=request.user.id))
+    notifications += list(NotificationNewUser.objects.filter(user=request.user.id))
+    notifications += list(NotificationRequest.objects.filter(user=request.user.id))
 
     sorted_notifications = sorted(notifications, key=lambda x: x.created_at, reverse=True)
 
@@ -40,6 +46,10 @@ def getAll(request):
             serialized_data.append(NotificationAdminAdvanceProfileSerializer(notification).data)
         elif isinstance(notification, NotificationNewPokemon):
             serialized_data.append(NotificationNewPokemonSerializer(notification).data)
+        elif isinstance(notification, NotificationNewUser):
+            serialized_data.append(NotificationNewUserSerializer(notification).data)
+        elif isinstance(notification, NotificationRequest):
+            serialized_data.append(NotificationRequestSerializer(notification).data)
             
     serialized_data = serialized_data[:100]
 
@@ -68,5 +78,13 @@ def getNotSeen(request):
     notifications = NotificationNewPokemon.objects.filter(seen=False, user=request.user.id)
     serialized_data += NotificationNewPokemonSerializer(notifications, many=True).data
     NotificationNewPokemon.objects.filter(seen=False).update(seen=True)
+    
+    notifications = NotificationNewUser.objects.filter(seen=False, user=request.user.id)
+    serialized_data += NotificationNewUserSerializer(notifications, many=True).data
+    NotificationNewUser.objects.filter(seen=False).update(seen=True)
+    
+    notifications = NotificationRequest.objects.filter(seen=False, user=request.user.id)
+    serialized_data += NotificationRequestSerializer(notifications, many=True).data
+    NotificationRequest.objects.filter(seen=False).update(seen=True)
     
     return Response(serialized_data)

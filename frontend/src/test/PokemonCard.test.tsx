@@ -23,7 +23,7 @@ describe('PokemonCard', () => {
   test('renders with user-specific styling if user has the Pokemon', () => {
     const pokemon = new Pokemon(1, 'Pikachu', 'pokemon-image.jpg', 'pokemon-small-image.jpg');
     const user = new User(1, 'john_doe', 'john@example.com', 1);
-    const developerPokemon = new DeveloperPokemon(pokemon, 1);
+    const developerPokemon = new DeveloperPokemon(pokemon/*, 1*/);
     const developer = new Developer(user, 'John', 'Doe', 'Smith', new Date(), 'avatar.jpg', '1234567890', true, 100, [], [], [developerPokemon]);
     
     render(<PokemonCard pokemon={pokemon} developer={developer} />);

@@ -21,7 +21,7 @@ export function formatDateTimeNotification(date: Date, t: any): string {
         return minutes === 1 ?  t('a_minute_ago') : t('minutes_ago', { count: minutes });
     } else if (diff < 86400) {
         const hours = Math.floor(diff / 3600);
-        return hours === 1 ?  t('a_hour_ago') : t('hours_ago', { count: hours });
+        return hours === 1 ?  t('an_hour_ago') : t('hours_ago', { count: hours });
     } else if (diff < 2592000) {
         const days = Math.floor(diff / 86400);
         return days === 1 ?  t('a_day_ago') : t('days_ago', { count: days });

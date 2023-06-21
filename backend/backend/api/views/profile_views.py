@@ -18,6 +18,8 @@ from api.models.notification_admin_advance_profile import NotificationAdminAdvan
 from api.models.notification_new_pokemon import NotificationNewPokemon
 from django.db import transaction
 from api.models.notification_join_profile import NotificationJoinProfile
+from api.models.request_join_profile import RequestJoinProfile
+from api.models.notification_request import NotificationRequest
 
 
 @api_view(['GET'])
@@ -68,7 +70,7 @@ def create(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     except Exception as e:
-        error = {'error': str(e)}
+        error = {'error': [str(e)]}
         return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -82,7 +84,60 @@ def addDeveloperToProfile(request):
             try:
                 developer = Developer.objects.get(user=request.user.id)
                 profile = Profile.objects.get(pk=request.data['profile_id'])
-                  
+                
+                if RequestJoinProfile.objects.filter(developer=developer, profile=profile, organization=developer.organization).exists():
+                    return Response({}, status=status.HTTP_200_OK)
+                
+                RequestJoinProfile.objects.create(developer=developer, profile=profile, organization=developer.organization)
+                NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                
+                organization_admins = Admin.objects.filter(organization=developer.organization)
+                for organization_admin in organization_admins:
+                    NotificationRequest.objects.create(user=organization_admin.user, message='admin_join_profile_request', developer=developer)
+                
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                error = {'errors': [str(e)]}
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def rejectDeveloperToProfile(request):
+    if Developer.objects.filter(user=request.data['developer_id']).exists() and Profile.objects.filter(pk=request.data['profile_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.data['developer_id'])
+                profile = Profile.objects.get(pk=request.data['profile_id'])
+                
+                requestjoinprofile = RequestJoinProfile.objects.get(developer=developer, profile=profile, organization=developer.organization)
+                requestjoinprofile.delete()
+                NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile_rejected')
+                
+                return Response({}, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)
+                error = {'errors': [str(e)]}
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def acceptDeveloperToProfile(request):
+    if Developer.objects.filter(user=request.data['developer_id']).exists() and Profile.objects.filter(pk=request.data['profile_id']).exists():
+        with transaction.atomic():
+            try:
+                developer = Developer.objects.get(user=request.data['developer_id'])
+                profile = Profile.objects.get(pk=request.data['profile_id'])
+
+                requestjoinprofile = RequestJoinProfile.objects.filter(developer=developer, profile=profile, organization=developer.organization).first()
+                requestjoinprofile.delete()
+ 
                 profileseniorities = ProfileSeniority.objects.filter(profile=profile).order_by('seniority__level')
                 if DeveloperRequirement.objects.filter(developer=developer).exists():
                     # Developer already has requirements
@@ -108,7 +163,7 @@ def addDeveloperToProfile(request):
                                 DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement) 
                                 
                             # Notifying the developer
-                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile_accepted')
                                 
                             return Response({}, status=status.HTTP_200_OK)  
                         
@@ -117,7 +172,7 @@ def addDeveloperToProfile(request):
                             DeveloperProfile.objects.create(developer=developer, profile=profile, seniority=profileseniority.seniority)
                             
                             # Notifying the developer
-                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                            NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile_accepted')
                             
                             return Response({}, status=status.HTTP_200_OK)
                         
@@ -147,7 +202,7 @@ def addDeveloperToProfile(request):
                         DeveloperRequirement.objects.get_or_create(developer=developer, requirement=requirement)
                         
                 # Notifying the developer
-                NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile')
+                NotificationJoinProfile.objects.create(user=developer.user, profile=profile, message='join_profile_accepted')
                 
                 return Response({}, status=status.HTTP_200_OK)
             except Exception as e:

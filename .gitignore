@@ -1,4 +1,5 @@
 data
 backend/venv/
 backend/mediafiles/images/
+backend/mediafiles/files/
 **/__pycache__/
